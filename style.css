@@ -1561,3 +1561,285 @@ body.loading {
     align-items: flex-start;
   }
 }
+
+/* =========================================================
+   AJUSTES DE RESPONSIVIDADE GERAL - v13
+========================================================= */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.topbar {
+  min-height: 64px;
+}
+
+.nav {
+  gap: clamp(6px, 0.9vw, 14px);
+}
+
+.nav a {
+  font-size: clamp(9px, 0.72vw, 12px);
+}
+
+.hero {
+  min-height: 100svh;
+  padding-top: clamp(105px, 13vh, 145px);
+  padding-bottom: clamp(60px, 8vh, 110px);
+}
+
+.status-badge {
+  max-width: min(100%, 620px);
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.eyebrow {
+  margin-top: clamp(22px, 4vh, 34px);
+  font-size: clamp(11px, 1.1vw, 13px);
+  line-height: 1.8;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 8.8vw, 120px);
+  letter-spacing: clamp(2px, 0.55vw, 6px);
+}
+
+.terminal-line {
+  margin-top: clamp(18px, 3vh, 28px);
+  font-size: clamp(21px, 4.2vw, 58px);
+  line-height: 1.15;
+}
+
+.hero-description {
+  width: min(820px, 100%);
+  margin-top: clamp(18px, 3vh, 24px);
+  font-size: clamp(13px, 1.05vw, 16px);
+}
+
+.hero-actions {
+  margin-top: clamp(28px, 4vh, 38px);
+}
+
+.btn {
+  min-height: 52px;
+}
+
+.hero-panels {
+  margin-top: clamp(34px, 5vh, 58px);
+}
+
+@media (max-width: 1400px), (max-height: 820px) {
+  .section {
+    width: min(1180px, calc(100% - 40px));
+  }
+
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 70px;
+  }
+
+  .status-badge {
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+
+  .eyebrow {
+    margin-top: 26px;
+  }
+
+  .hero h1 {
+    margin-top: 18px;
+    font-size: clamp(54px, 8vw, 108px);
+  }
+
+  .terminal-line {
+    margin-top: 18px;
+    font-size: clamp(26px, 4.3vw, 54px);
+  }
+
+  .hero-description {
+    max-width: 760px;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    margin-top: 30px;
+  }
+
+  .hero-panels {
+    margin-top: 38px;
+  }
+}
+
+.skill-panel,
+.lab-card,
+.cert-card,
+.tool-categories article,
+.contact-terminal,
+.contact-links-vertical a,
+.hero-panels article {
+  clip-path: none !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+  .hero h1 {
+    font-size: clamp(48px, 11vw, 92px);
+  }
+
+  .terminal-line {
+    font-size: clamp(24px, 6vw, 46px);
+  }
+
+  .hero-description {
+    max-width: 720px;
+  }
+
+  .hero-actions {
+    width: min(100%, 620px);
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 180px;
+  }
+
+  .hero-panels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section h2 {
+    font-size: clamp(34px, 8vw, 64px);
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    width: min(100% - 28px, var(--max));
+    padding: 82px 0;
+  }
+
+  .hero {
+    align-items: flex-start;
+    text-align: left;
+    padding-top: 112px;
+    min-height: auto;
+  }
+
+  .status-badge {
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 15vw, 72px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+  }
+
+  .terminal-line {
+    font-size: clamp(24px, 10vw, 40px);
+    min-height: auto;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-panels {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .training-profiles {
+    justify-content: flex-start;
+  }
+
+  .training-profiles a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section h2 {
+    font-size: clamp(34px, 13vw, 54px);
+    line-height: 1;
+    word-break: break-word;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+  }
+
+  .about-content,
+  .contact-layout,
+  .grid.two,
+  .skill-grid,
+  .lab-grid,
+  .cert-grid,
+  .tool-categories {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-links-vertical a {
+    word-break: break-word;
+    padding-right: 42px;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar {
+    padding: 0 14px;
+  }
+
+  .brand {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 15vw, 58px);
+  }
+
+  .terminal-line {
+    font-size: clamp(22px, 9vw, 34px);
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .section h2 {
+    font-size: clamp(30px, 12vw, 46px);
+  }
+
+  .project-card,
+  .skill-panel,
+  .lab-card,
+  .cert-card,
+  .tool-categories article,
+  .study-list article {
+    padding: 22px;
+  }
+}
