@@ -101,13 +101,8 @@ function drawNetwork() {
     p.x += p.vx;
     p.y += p.vy;
 
-    if (p.x < 0 || p.x > width) {
-      p.vx *= -1;
-    }
-
-    if (p.y < 0 || p.y > height) {
-      p.vy *= -1;
-    }
+    if (p.x < 0 || p.x > width) p.vx *= -1;
+    if (p.y < 0 || p.y > height) p.vy *= -1;
 
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -119,7 +114,6 @@ function drawNetwork() {
     for (let j = i + 1; j < particles.length; j++) {
       const a = particles[i];
       const b = particles[j];
-
       const dx = a.x - b.x;
       const dy = a.y - b.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -139,6 +133,49 @@ function drawNetwork() {
 }
 
 window.addEventListener("resize", resizeCanvas);
-
 resizeCanvas();
 drawNetwork();
+
+const preloader = document.getElementById("preloader");
+const preloaderBar = document.getElementById("preloaderBar");
+const preloaderPercent = document.getElementById("preloaderPercent");
+const preloaderStatus = document.getElementById("preloaderStatus");
+
+const loadMessages = [
+  "Validando identidade...",
+  "Carregando módulos de interface...",
+  "Estabelecendo canal seguro...",
+  "Sincronizando portfólio...",
+  "Acesso autorizado."
+];
+
+function runPreloader() {
+  let value = 0;
+  let msgIndex = 0;
+
+  const tick = setInterval(() => {
+    value += Math.floor(Math.random() * 9) + 4;
+    if (value > 100) value = 100;
+
+    preloaderBar.style.width = value + "%";
+    preloaderPercent.textContent = value + "%";
+
+    const bucket = Math.min(loadMessages.length - 1, Math.floor((value / 100) * loadMessages.length));
+    if (bucket !== msgIndex || value === 100) {
+      msgIndex = bucket;
+      preloaderStatus.textContent = loadMessages[msgIndex];
+    }
+
+    if (value >= 100) {
+      clearInterval(tick);
+      setTimeout(() => {
+        preloader.classList.add("hide");
+        document.body.classList.remove("loading");
+      }, 420);
+    }
+  }, 130);
+}
+
+window.addEventListener("load", () => {
+  setTimeout(runPreloader, 180);
+});
