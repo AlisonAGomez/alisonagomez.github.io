@@ -1,11 +1,11 @@
 const typing = document.getElementById("typing");
 
 const phrases = [
-  "Cybersecurity Operations",
-  "DevSecOps Automation",
-  "Cloud & Infrastructure",
-  "Threat Monitoring",
-  "AI-Powered Security"
+  "Estudos e labs de cibersegurança",
+  "Automações e scripts",
+  "Desenvolvimentos e projetos",
+  "Ferramentas e soluções",
+  "Inteligencia Artificial como apoio"
 ];
 
 let phraseIndex = 0;
@@ -93,7 +93,7 @@ function drawNetwork() {
 
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(166, 77, 255, 0.75)";
+    ctx.fillStyle = "rgba(0, 170, 255, 0.75)";
     ctx.fill();
   }
 
@@ -110,7 +110,7 @@ function drawNetwork() {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(166, 77, 255, ${0.16 * (1 - dist / 120)})`;
+        ctx.strokeStyle = `rgba(0, 170, 255, ${0.16 * (1 - dist / 120)})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
