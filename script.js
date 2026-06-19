@@ -1,11 +1,13 @@
 const typing = document.getElementById("typing");
 
 const phrases = [
-  "Estudos e labs de cibersegurança",
-  "Automações e scripts",
-  "Desenvolvimentos e projetos",
-  "Ferramentas e soluções",
-  "Inteligencia Artificial como apoio"
+  "Suporte N1/N2/N3 • Infraestrutura • Segurança",
+  "Monitoramento com Zabbix e Grafana",
+  "Firewalls • VPNs • Redes • pfSense",
+  "Automação com Python, APIs e PowerShell",
+  "Proxmox • Linux • Windows Server",
+  "Blue Team • Logs • Phishing • Hardening",
+  "Sinalyx: análise de logs com IA"
 ];
 
 let phraseIndex = 0;
