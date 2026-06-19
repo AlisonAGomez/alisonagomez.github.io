@@ -1,13 +1,13 @@
 const typing = document.getElementById("typing");
 
 const phrases = [
-  "Suporte N1/N2/N3 • Infraestrutura • Segurança",
-  "Monitoramento com Zabbix e Grafana",
-  "Firewalls • VPNs • Redes • pfSense",
-  "Automação com Python, APIs e PowerShell",
-  "Proxmox • Linux • Windows Server",
+  "Suporte • Infraestrutura • Segurança",
+  "Monitoramento de sistemas",
+  "Firewalls • VPNs • Redes",
+  "Automação com Python e APIs",
+  "Servidores • Linux • Windows Server",
   "Blue Team • Logs • Phishing • Hardening",
-  "Sinalyx: análise de logs com IA"
+  "Resolução de problemas e análise de incidentes",
 ];
 
 let phraseIndex = 0;
