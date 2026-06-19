@@ -105,7 +105,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 24px;
   border-bottom: 1px solid rgba(166, 77, 255, 0.22);
   background: rgba(3, 3, 10, 0.78);
   backdrop-filter: blur(16px);
@@ -125,13 +125,16 @@ ul {
 .nav {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: clamp(12px, 2vw, 26px);
+  max-width: 75%;
+  overflow: hidden;
 }
 
 .nav a {
   color: var(--muted);
-  font-size: 13px;
+  font-size: clamp(11px, 0.95vw, 13px);
   letter-spacing: 1px;
+  white-space: nowrap;
   transition: 0.25s ease;
 }
 
