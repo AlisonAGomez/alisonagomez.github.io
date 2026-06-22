@@ -98,7 +98,7 @@
       ],
       "result": "O resultado foi uma solução de auditoria operacional capaz de consolidar múltiplos clientes e ambientes em relatórios de fácil leitura, aumentando a confiabilidade, rastreabilidade e eficiência da rotina de backup."
     },
-    "repositoryLabel": "Ver GitHub",
+    "repositoryLabel": "GitHub",
     "gallery": [
       {
         "title": "Menu principal do auditor",
@@ -117,12 +117,12 @@
   {
     "id": "pendrivao-toolkit-defensivo",
     "title": "Pendrivão Toolkit Defensivo",
-    "subtitle": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, DevSecOps e evidências GRC.",
-    "category": "Toolkit Técnico / Blue Team",
+    "subtitle": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, Infraestrutura / DevOpsSecOps e evidências GRC.",
+    "category": "Toolkit Técnico / Blue Team / Suporte",
     "language": "Python",
     "status": "Case Técnico",
     "date": "2026",
-    "summary": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, DevSecOps, backup, Linux e evidências GRC.",
+    "summary": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, Infraestrutura / DevOpsSecOps, backup, Linux e evidências GRC.",
     "tags": [
       "Python",
       "PowerShell",
@@ -130,7 +130,7 @@
       "Windows",
       "Linux",
       "Blue Team",
-      "DevSecOps",
+      "Infraestrutura / DevOpsSecOps",
       "GRC",
       "Automação"
     ],
@@ -140,7 +140,7 @@
       "Módulos para inventário, saúde do Windows, softwares instalados, limpeza controlada, reparo, reset de rede e baseline de segurança.",
       "Rotinas de rede para discovery autorizado, portscan defensivo, conexões ativas, matriz de conectividade, DNS, web check e headers de segurança.",
       "Módulos de resposta a incidente para coleta de evidências, timeline, autoruns, serviços suspeitos e busca de IOCs.",
-      "DevSecOps com auditoria de repositórios, dependências e scanner de segredos com mascaramento.",
+      "Infraestrutura / DevOpsSecOps com auditoria de repositórios, dependências e scanner de segredos com mascaramento.",
       "Backup e retenção com validação de caminhos, idade de arquivos, tamanho, manifestos e quarentena para ações reversíveis.",
       "Integrações com Zabbix e Proxmox para relatórios de problemas críticos, storage, tasks e backups.",
       "Pacote de evidências GRC e relatório consolidado para documentação técnica e auditoria.",
@@ -181,7 +181,7 @@
           "items": [
             "Scripts principais e launchers para execução portátil em Windows.",
             "Núcleo reutilizável com configuração, logs, caminhos, permissões, relatórios, runner seguro e utilidades.",
-            "Módulos operacionais para Windows, redes, auditoria, resposta a incidentes, DevSecOps, backup, Linux, integrações e GRC.",
+            "Módulos operacionais para Windows, redes, auditoria, resposta a incidentes, Infraestrutura / DevOpsSecOps, backup, Linux, integrações e GRC.",
             "Scripts PowerShell independentes para AD, Exchange, Microsoft 365, serviços, impressoras, domínio e conectividade.",
             "Scripts Bash para healthcheck Linux, falhas de autenticação e retenção segura.",
             "Testes automatizados para validar parsers, relatórios, execução segura, scanners, baseline, portscan e entrypoints."
@@ -194,7 +194,7 @@
             "Infraestrutura Windows: Defender, firewall, patches, serviços, contas sensíveis, eventos, RDP, SMBv1 e hardening.",
             "Redes: descoberta autorizada, portas abertas, conexões ativas, matriz de conectividade, DNS e checagem web.",
             "Segurança defensiva e SOC: triagem de eventos, IOCs, autoruns, serviços suspeitos, reputação de IP/URL e análise de headers.",
-            "DevSecOps: auditoria de repositórios, dependências e segredos com mascaramento de achados.",
+            "Infraestrutura / DevOpsSecOps: auditoria de repositórios, dependências e segredos com mascaramento de achados.",
             "Backup e continuidade: validação de backups, idade de arquivos, tamanho, manifestos e retenção com quarentena.",
             "GRC e compliance: pacote de evidências, relatórios consolidados e documentação para auditorias.",
             "Linux Sysadmin: healthcheck, journal, disco, serviços systemd e falhas de autenticação."
@@ -267,7 +267,7 @@
         }
       ]
     },
-    "repositoryLabel": "Ver GitHub",
+    "repositoryLabel": "GitHub",
     "gallery": [
       {
         "title": "Menu principal do toolkit",
@@ -277,7 +277,7 @@
       },
       {
         "title": "Módulos avançados",
-        "description": "Rotinas de rede, auditoria, segurança, resposta a incidentes, DevSecOps, compliance, backup, Linux e relatórios.",
+        "description": "Rotinas de rede, auditoria, segurança, resposta a incidentes, Infraestrutura / DevOpsSecOps, compliance, backup, Linux e relatórios.",
         "src": "assets/img/cases/pendrivao/pendrivao-modulos-seguranca.png",
         "alt": "Módulos avançados do Pendrivão Toolkit Defensivo"
       }
@@ -315,7 +315,7 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/cloud-files-audit.png",
-    "repositoryLabel": "Ver GitHub"
+    "repositoryLabel": "GitHub"
   },
   {
     "id": "organizador-zabbix",
@@ -348,7 +348,7 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/zabbix-organizer.png",
-    "repositoryLabel": "Ver GitHub"
+    "repositoryLabel": "GitHub"
   },
   {
     "id": "triagem-incidente-windows",
@@ -382,6 +382,6 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/windows-ir-triage.png",
-    "repositoryLabel": "Ver GitHub"
+    "repositoryLabel": "GitHub"
   }
 ]

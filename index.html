@@ -4,20 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Alison Gomez | Infraestrutura, Cibersegurança & Dev</title>
+  <title>Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps</title>
 
   <meta
     name="description"
-    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, suporte técnico, redes, Blue Team, automação, monitoramento e DevOps."
   />
 
   <meta name="author" content="Alison Gomez" />
   <meta name="theme-color" content="#020712" />
 
-  <meta property="og:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Dev" />
+  <meta property="og:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps" />
   <meta
     property="og:description"
-    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, suporte técnico, redes, Blue Team, automação, monitoramento e DevOps."
   />
   <meta property="og:image" content="https://alisonagomez.github.io/assets/img/preview.png" />
   <meta property="og:url" content="https://alisonagomez.github.io" />
@@ -25,10 +25,10 @@
   <meta property="og:locale" content="pt_BR" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Dev" />
+  <meta name="twitter:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps" />
   <meta
     name="twitter:description"
-    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, suporte técnico, redes, Blue Team, automação, monitoramento e DevOps."
   />
   <meta name="twitter:image" content="https://alisonagomez.github.io/assets/img/preview.png" />
 
@@ -111,7 +111,7 @@
 
       <p class="hero-description reveal">
         Profissional de TI com atuação em suporte técnico, infraestrutura,
-        redes, monitoramento, servidores, automação, desenvolvimento e
+        redes, monitoramento, servidores, automação, DevOps e
         segurança defensiva. Foco em ambientes reais, troubleshooting,
         análise de logs, firewalls, backups e melhoria contínua de processos.
       </p>
@@ -283,7 +283,7 @@
         </article>
 
         <article class="skill-panel reveal">
-          <div class="skill-title"><span>04</span><h3>Dev & Automação</h3></div>
+          <div class="skill-title"><span>04</span><h3>Redes & DevOps & Automação</h3></div>
           <div class="skill-item"><div><span>Python / pandas</span><em>Intermediário</em></div><b style="--level: 78%"></b></div>
           <div class="skill-item"><div><span>PowerShell / Bash</span><em>Operacional</em></div><b style="--level: 80%"></b></div>
           <div class="skill-item"><div><span>APIs REST/JSON</span><em>Intermediário</em></div><b style="--level: 76%"></b></div>
@@ -308,43 +308,104 @@
         <span class="section-tag">// ARQUIVO_004</span>
         <h2>Projetos</h2>
         <p class="section-subtitle">Projetos técnicos, acadêmicos e automações práticas.</p>
+
         <div class="section-actions">
           <a href="projects/" class="mini-action">Ver catálogo de projetos</a>
         </div>
       </div>
 
-      <div class="grid two">
-        <article class="project-card featured-project reveal">
+      <div class="grid two project-grid-fixed">
+        <article class="project-card standard-card featured-project reveal">
           <div class="project-index">01</div>
-          <h3>Sinalyx — Análise de Logs de Firewall com IA</h3>
-          <p>Projeto autoral/TCC em desenvolvimento para melhorar o fluxo de análise de logs de firewall de forma organizada e automática, apoiando analistas de redes e segurança na detecção de anomalias e priorização de eventos.</p>
-          <p>Arquitetura com API REST, parser de logs, agregação por janelas, features, modelos de IA/ML, dashboard e base de estudo com logs reais do pfSense.</p>
-          <div class="tags"><span>Python</span><span>pandas</span><span>Vue.js</span><span>PostgreSQL</span><span>TensorFlow</span><span>pfSense</span></div>
-          <div class="project-links"><a href="project/?id=sinalyx">Ver detalhes</a><a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a></div>
+
+          <div class="card-main">
+            <h3>Sinalyx — Análise de Logs de Firewall com IA</h3>
+            <p>Projeto autoral/TCC em desenvolvimento para melhorar o fluxo de análise de logs de firewall, apoiando analistas de redes e segurança na detecção de anomalias e priorização de eventos.</p>
+            <p>Arquitetura com API REST, parser de logs, agregação por janelas, features, modelos de IA/ML, dashboard e base de estudo com logs reais do pfSense.</p>
+          </div>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>pandas</span>
+            <span>Vue.js</span>
+            <span>PostgreSQL</span>
+            <span>TensorFlow</span>
+            <span>pfSense</span>
+          </div>
+
+          <div class="project-links">
+            <a href="project/?id=sinalyx">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card standard-card reveal">
           <div class="project-index">02</div>
-          <h3>Automação de Auditoria de Backups</h3>
-          <p>Automação em Python para verificação de backups em Dropbox e Proxmox, aplicada em ambiente multiempresa, com foco em reduzir tempo de auditoria, identificar pendências e apoiar rotinas operacionais.</p>
-          <div class="tags"><span>Python</span><span>APIs</span><span>Proxmox</span><span>Dropbox</span><span>Backup</span><span>Automação</span></div>
-          <div class="project-links"><a href="automation/?id=auditoria-backups-proxmox-dropbox">Ver detalhes</a><a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a></div>
+
+          <div class="card-main">
+            <h3>Automação de Auditoria de Backups</h3>
+            <p>Automação em Python para verificação de backups em Dropbox e Proxmox, aplicada em ambiente multiempresa, com foco em reduzir tempo de auditoria, identificar pendências e apoiar rotinas operacionais.</p>
+          </div>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>APIs</span>
+            <span>Proxmox</span>
+            <span>Dropbox</span>
+            <span>Backup</span>
+            <span>Automação</span>
+          </div>
+
+          <div class="project-links">
+            <a href="automation/?id=auditoria-backups-proxmox-dropbox">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card standard-card reveal">
           <div class="project-index">03</div>
-          <h3>BeeWatts — Aplicação Web para Energia Solar</h3>
-          <p>Participação como desenvolvedor front-end em aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span><span>Django</span><span>PostgreSQL</span></div>
-          <div class="project-links"><a href="project/?id=beewatts">Ver detalhes</a><a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a></div>
+
+          <div class="card-main">
+            <h3>BeeWatts — Aplicação Web para Energia Solar</h3>
+            <p>Participação como responsável por front-end em aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.</p>
+          </div>
+
+          <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Bootstrap</span>
+            <span>JavaScript</span>
+            <span>Django</span>
+            <span>PostgreSQL</span>
+          </div>
+
+          <div class="project-links">
+            <a href="project/?id=beewatts">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </article>
 
-        <article class="project-card reveal">
+        <article class="project-card standard-card reveal">
           <div class="project-index">04</div>
-          <h3>VeoNyx — Aplicativo Mobile para Comunidades</h3>
-          <p>Aplicativo mobile-first para comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética, moderação e QA local.</p>
-          <div class="tags"><span>Flutter</span><span>Dart</span><span>NestJS</span><span>PostgreSQL</span><span>Prisma</span><span>Redis</span></div>
-          <div class="project-links"><a href="project/?id=veonyx">Ver detalhes</a><a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a></div>
+
+          <div class="card-main">
+            <h3>VeoNyx — Aplicativo Mobile para Comunidades</h3>
+            <p>Aplicativo mobile-first para comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética, moderação comunitária e QA local.</p>
+          </div>
+
+          <div class="tags">
+            <span>Flutter</span>
+            <span>Dart</span>
+            <span>NestJS</span>
+            <span>PostgreSQL</span>
+            <span>Prisma</span>
+            <span>Redis</span>
+          </div>
+
+          <div class="project-links">
+            <a href="project/?id=veonyx">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </article>
       </div>
     </section>
@@ -393,8 +454,8 @@
           </div>
 
           <div class="project-links">
-            <a href="report/?id=extensao-maliciosa-chrome">Ver estudo de caso</a>
-            <a href="reports/">Ver todos os estudos</a>
+            <a href="report/?id=extensao-maliciosa-chrome">Ver detalhes</a>
+            <a href="reports/">Ver catálogo</a>
           </div>
         </article>
 
@@ -440,18 +501,17 @@
       </div>
 
       <div class="automation-home-grid automation-home-grid-v23">
-        <article class="automation-featured-card reveal">
+        <article class="automation-featured-card standard-card reveal">
           <div class="report-featured-meta">
             <span>PYTHON</span>
             <span>APIs</span>
             <span>BACKUP AUDIT</span>
           </div>
 
-          <h3>Auditoria de Backups Dropbox e Proxmox</h3>
-
-          <p>
-            Sistema de auditoria para validar backups locais, uploads em nuvem, uso de storage, uploads incompletos e pendências críticas em ambiente multiempresa.
-          </p>
+          <div class="card-main">
+            <h3>Auditoria de Backups Dropbox e Proxmox</h3>
+            <p>Sistema de auditoria para validar backups locais, uploads em nuvem, uso de storage, uploads incompletos e pendências críticas em ambiente multiempresa.</p>
+          </div>
 
           <div class="report-featured-points">
             <span>Dropbox API</span>
@@ -466,18 +526,17 @@
           </div>
         </article>
 
-        <article class="automation-featured-card reveal">
+        <article class="automation-featured-card standard-card reveal">
           <div class="report-featured-meta">
             <span>PYTHON</span>
             <span>POWERSHELL</span>
             <span>BLUE TEAM</span>
           </div>
 
-          <h3>Pendrivão Toolkit Defensivo</h3>
-
-          <p>
-            Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, DevSecOps e evidências GRC.
-          </p>
+          <div class="card-main">
+            <h3>Pendrivão Toolkit Defensivo</h3>
+            <p>Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, Redes & DevOpsSecOps e evidências GRC.</p>
+          </div>
 
           <div class="report-featured-points">
             <span>Menu / CLI</span>
@@ -519,7 +578,7 @@
         <article class="reveal"><h3><span>03</span> Monitoramento</h3><div><span>Zabbix</span><span>Grafana</span><span>Dashboards</span><span>Triggers</span><span>Alertas</span><span>SNMP</span><span>Logs</span><span>Uptime</span><span>Métricas</span></div></article>
         <article class="reveal"><h3><span>04</span> Segurança</h3><div><span>Wireshark</span><span>Nmap</span><span>Firewall</span><span>Hardening</span><span>SIEM</span><span>IDS/IPS</span><span>OpenVPN</span><span>LGPD</span><span>Backup 3-2-1</span></div></article>
         <article class="reveal"><h3><span>05</span> Automação</h3><div><span>Python</span><span>PowerShell</span><span>Bash</span><span>Git</span><span>APIs REST/JSON</span><span>Postman</span><span>Webhooks</span><span>Scripts</span><span>Tasks</span></div></article>
-        <article class="reveal"><h3><span>06</span> Dev & Dados</h3><div><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Vue.js</span><span>React.js</span><span>Django</span><span>FastAPI</span><span>PostgreSQL</span><span>MySQL</span><span>GitHub</span></div></article>
+        <article class="reveal"><h3><span>06</span> Redes & DevOps & Dados</h3><div><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Vue.js</span><span>React.js</span><span>Django</span><span>FastAPI</span><span>PostgreSQL</span><span>MySQL</span><span>GitHub</span></div></article>
       </div>
     </section>
 
@@ -587,14 +646,14 @@
       </div>
 
       <div class="contact-footer reveal">
-        <div><strong>AG</strong><p>ALISON GOMEZ</p><span>INFRAESTRUTURA | SEGURANÇA | DEVOPS</span></div>
+        <div><strong>AG</strong><p>ALISON GOMEZ</p><span>INFRAESTRUTURA | REDES | SEGURANÇA | DEVOPS</span></div>
         <div><p><span class="ok-dot"></span> Disponível para novos desafios</p><p>Brasil • Remoto • UTC-3</p></div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>ALISON GOMEZ © <span id="year"></span> // Infraestrutura • Segurança • Dev</p>
+    <p>ALISON GOMEZ © <span id="year"></span> // Infraestrutura • Redes • Segurança • DevOps</p>
   </footer>
 
   <script src="script.js"></script>

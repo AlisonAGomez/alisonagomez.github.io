@@ -45,7 +45,8 @@
         "Aplicação de IA/ML em contexto de segurança defensiva.",
         "Organização de projeto acadêmico com aplicação prática."
       ]
-    }
+    },
+    "detailUrl": "project/?id=sinalyx"
   },
   {
     "id": "auditoria-backups",
@@ -93,10 +94,10 @@
     "id": "beewatts",
     "title": "BeeWatts — Aplicação Web para Energia Solar",
     "subtitle": "Aplicação web para estimativa de necessidade de painéis solares com base no consumo mensal.",
-    "category": "Web Development",
+    "category": "Web / Projeto Técnico",
     "status": "Projeto acadêmico",
     "date": "2025",
-    "summary": "Participação como desenvolvedor front-end em aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.",
+    "summary": "Participação técnica no front-end de uma aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.",
     "tags": [
       "HTML",
       "CSS",
@@ -121,20 +122,21 @@
         "Integração com backend e banco de dados."
       ],
       "learning": [
-        "Desenvolvimento front-end com HTML, CSS, Bootstrap e JavaScript.",
+        "Construção de interface web com HTML, CSS, Bootstrap e JavaScript.",
         "Integração com Django e PostgreSQL.",
         "Organização de interface para projeto acadêmico."
       ]
-    }
+    },
+    "detailUrl": "project/?id=beewatts"
   },
   {
     "id": "veonyx",
     "title": "VeoNyx — Aplicativo Mobile para Comunidades",
     "subtitle": "Projeto mobile-first de comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética e moderação comunitária.",
-    "category": "Mobile / Full-stack",
+    "category": "Mobile / Infra & Produto",
     "status": "Em desenvolvimento",
     "date": "2026",
-    "summary": "VeoNyx é um aplicativo mobile-first voltado para comunidades digitais de anime, RPG, games, fandoms, arte e grupos criativos. O objetivo do projeto é demonstrar arquitetura full-stack, evolução de produto, modelagem de domínio social, QA incremental e decisões técnicas.",
+    "summary": "VeoNyx é um aplicativo mobile-first voltado para comunidades digitais de anime, RPG, games, fandoms, arte e grupos criativos. O objetivo do projeto é demonstrar arquitetura técnica, evolução de produto, modelagem de domínio social, QA incremental e decisões técnicas.",
     "tags": [
       "Flutter",
       "Dart",
@@ -201,13 +203,14 @@
         "Executar fase futura de segurança, IA, bots, privacidade e Trust & Safety."
       ],
       "learning": [
-        "Arquitetura full-stack com mobile, API, banco, cache e storage.",
+        "Arquitetura técnica com mobile, API, banco, cache e storage.",
         "Modelagem de domínio social com escopo global e local.",
         "Permissões comunitárias e moderação contextual.",
         "Uso de migrations e seeds com Prisma.",
         "QA incremental em aparelho real.",
         "Planejamento de produto inspirado em análise de concorrentes."
       ]
-    }
+    },
+    "detailUrl": "project/?id=veonyx"
   }
 ]

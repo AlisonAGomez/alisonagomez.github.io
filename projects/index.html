@@ -58,15 +58,17 @@
       const detailUrl = project.detailUrl || `project/?id=${project.id}`;
 
       return `
-        <article class="report-list-card project-catalog-card reveal visible">
+        <article class="report-list-card project-catalog-card standard-card reveal visible">
           <div class="report-list-card-content">
             <div class="report-card-meta">
               <span class="report-status">${project.category}</span>
               <span class="report-severity">${project.status}</span>
             </div>
 
-            <h3>${project.title}</h3>
-            <p class="card-summary">${project.summary || project.subtitle}</p>
+            <div class="card-main">
+              <h3>${project.title}</h3>
+              <p class="card-summary">${project.summary || project.subtitle}</p>
+            </div>
 
             <div class="report-tags">${tags}</div>
 

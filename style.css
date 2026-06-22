@@ -4083,3 +4083,182 @@ body {
     min-height: auto !important;
   }
 }
+
+
+/* =========================================================
+   V30 - FIX DEFINITIVO: CARDS, TAGS E BOTÕES
+========================================================= */
+
+/* Todos os grids esticam os cards da mesma linha */
+.grid.two,
+.project-grid-fixed,
+.lab-grid,
+.study-list,
+.reports-grid-page,
+.automation-home-grid,
+.automation-home-grid-v23 {
+  align-items: stretch !important;
+}
+
+/* Card padrão */
+.standard-card,
+.project-card,
+.lab-card,
+.study-list article,
+.automation-featured-card,
+.report-list-card,
+.automation-list-card,
+.project-catalog-card,
+.report-list-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+/* Miolo do card: fica no topo */
+.standard-card .card-main,
+.project-card .card-main,
+.automation-featured-card .card-main,
+.report-list-card-content .card-main {
+  display: block !important;
+}
+
+/* Rodapé lógico: tags sempre empurradas para baixo */
+.standard-card > .tags,
+.project-card > .tags,
+.lab-card > .tags,
+.study-list article > .tags,
+.standard-card > .report-featured-points,
+.automation-featured-card > .report-featured-points,
+.report-list-card-content > .report-tags,
+.project-catalog-card .report-tags,
+.automation-list-card .report-tags {
+  margin-top: auto !important;
+  min-height: 48px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  align-content: flex-start !important;
+  gap: 12px !important;
+}
+
+/* Botões sempre no último bloco do card */
+.standard-card > .project-links,
+.project-card > .project-links,
+.lab-card > .project-links,
+.study-list article > .project-links,
+.automation-featured-card > .project-links,
+.report-list-card-content > .project-links,
+.project-catalog-card .project-links,
+.automation-list-card .project-links {
+  margin-top: 18px !important;
+  min-height: 46px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-end !important;
+  align-content: flex-end !important;
+  gap: 12px !important;
+}
+
+/* Altura mínima por tipo para os rodapés ficarem visualmente alinhados */
+.project-card {
+  min-height: 450px !important;
+}
+
+.project-card.featured-project {
+  min-height: 450px !important;
+}
+
+.automation-featured-card {
+  min-height: 430px !important;
+}
+
+.lab-card,
+.study-list article {
+  min-height: 285px !important;
+}
+
+.report-list-card,
+.project-catalog-card,
+.automation-list-card {
+  min-height: 380px !important;
+}
+
+/* Botões padronizados */
+.project-links a,
+.report-action-stack a,
+.mini-action {
+  min-height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+/* Evita labels quebradas ou grudadas */
+.report-card-meta,
+.report-tags,
+.tags,
+.project-links,
+.report-featured-meta,
+.report-featured-points {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.report-card-meta span,
+.report-tags span,
+.tags span,
+.project-links a,
+.report-featured-meta span,
+.report-featured-points span {
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Resumo dos catálogos: texto controlado, detalhe completo na página */
+.report-list-card-content .card-summary,
+.project-catalog-card .card-summary,
+.automation-list-card .card-summary {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 5 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  line-height: 1.75 !important;
+}
+
+/* Mobile: remove alturas fixas para evitar excesso de espaço */
+@media (max-width: 980px) {
+  .project-card,
+  .project-card.featured-project,
+  .automation-featured-card,
+  .lab-card,
+  .study-list article,
+  .report-list-card,
+  .project-catalog-card,
+  .automation-list-card {
+    min-height: auto !important;
+  }
+
+  .standard-card > .tags,
+  .project-card > .tags,
+  .lab-card > .tags,
+  .study-list article > .tags,
+  .standard-card > .report-featured-points,
+  .automation-featured-card > .report-featured-points,
+  .report-list-card-content > .report-tags {
+    min-height: auto !important;
+  }
+
+  .standard-card > .project-links,
+  .project-card > .project-links,
+  .lab-card > .project-links,
+  .study-list article > .project-links,
+  .automation-featured-card > .project-links,
+  .report-list-card-content > .project-links {
+    min-height: auto !important;
+  }
+}
