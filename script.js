@@ -91,7 +91,7 @@ if ("IntersectionObserver" in window && revealElements.length) {
 /* Canvas otimizado:
    - Home mantém animação mais bonita
    - Páginas internas usam menos partículas para não travar
-   - 30 FPS para reduzir consumo
+   - animação em requestAnimationFrame para maior fluidez
 */
 const canvas = document.getElementById("matrixCanvas");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -130,12 +130,7 @@ if (canvas && !prefersReducedMotion) {
   }
 
   function drawNetwork(timestamp) {
-    if (timestamp - lastFrame < 33) {
-      requestAnimationFrame(drawNetwork);
-      return;
-    }
-
-    lastFrame = timestamp;
+lastFrame = timestamp;
     ctx.clearRect(0, 0, width, height);
 
     for (const p of particles) {

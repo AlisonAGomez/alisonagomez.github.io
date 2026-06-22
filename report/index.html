@@ -85,10 +85,6 @@
               <h1>${report.title}</h1>
               <p>${report.subtitle || report.summary || ""}</p>
 
-              <div class="report-detail-cover-wrap">
-                <img class="report-detail-cover" src="${report.preview}" alt="Preview do relatório ${report.title}" />
-              </div>
-
               <div class="report-card-meta">
                 <span class="report-badge">${report.type || "Estudo Técnico"}</span>
                 <span class="report-severity">${report.severity || "N/A"}</span>
@@ -133,7 +129,7 @@
           <aside>
             <div class="report-aside-card">
               <h3>Relatório</h3>
-              <p>Documento técnico com a investigação, evidências, análise e recomendações do caso.</p>
+              <p>Baixe o documento técnico completo com a investigação, análise e recomendações do caso.</p>
 
               <div class="report-action-stack">
                 <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar relatório</a>

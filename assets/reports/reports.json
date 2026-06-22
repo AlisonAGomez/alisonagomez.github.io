@@ -14,13 +14,13 @@
       "Chrome",
       "Browser Hijacker",
       "Banking Trojan",
-      "Cloud Policy",
+      "Chrome Policy",
       "MITRE ATT&CK"
     ],
     "pdf": "assets/reports/extensao-maliciosa-chrome/relatorio.pdf",
     "preview": "assets/reports/extensao-maliciosa-chrome/preview.png",
     "details": {
-      "overview": "Foi investigado um incidente em endpoint Windows envolvendo sequestro de navegador e reinstalação persistente de uma extensão maliciosa no Google Chrome. A extensão se apresentava como “Receita Federal” e retornava após remoção manual quando o computador era reconectado à rede. A causa técnica foi atribuída a uma política/cloud policy do Chrome no perfil do usuário, contendo o ID da extensão e um update_url externo.",
+      "overview": "Foi investigado um incidente em endpoint Windows envolvendo sequestro de navegador e reinstalação persistente de uma extensão maliciosa no Google Chrome. A extensão se apresentava como “Receita Federal” e retornava após remoção manual quando o computador era reconectado à rede. A causa técnica foi atribuída a uma política do Chrome no perfil do usuário, contendo o ID da extensão e um update_url externo.",
       "methodology": [
         "Coleta controlada e preservação de pastas relevantes, evitando coleta indiscriminada de dados pessoais.",
         "Cálculo de hashes para arquivos suspeitos e artefatos relacionados à extensão.",

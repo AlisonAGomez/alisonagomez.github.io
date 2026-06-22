@@ -14,7 +14,7 @@
   <div class="noise" aria-hidden="true"></div>
 
   <header class="topbar">
-    <a href="index.html#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
+    <a href="./#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
     <nav class="nav" id="nav">
       <a href="./#home">./home</a>
@@ -48,7 +48,7 @@
           <div class="report-list-card-content">
             <div class="report-card-meta">
               <span class="report-status">${item.language}</span>
-              <span class="report-severity">${item.status}</span>
+              <span class="report-severity">${item.status || "Case Técnico"}</span>
             </div>
 
             <h3>${item.title}</h3>
@@ -58,7 +58,7 @@
 
             <div class="project-links">
               <a href="automation/?id=${item.id}">Ver detalhes</a>
-              <a href="${item.repository}" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "GitHub"}</a>
             </div>
           </div>
         </article>

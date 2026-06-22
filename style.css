@@ -3129,3 +3129,50 @@ body {
     max-height: 270px !important;
   }
 }
+
+
+/* =========================================================
+   V19 - RELATÓRIO FINAL E ANIMAÇÃO 60FPS+
+========================================================= */
+
+/* A imagem grande foi removida da página de detalhe.
+   O preview permanece apenas no catálogo, com proporção controlada. */
+
+.report-detail-cover-wrap,
+.report-detail-cover {
+  display: none !important;
+}
+
+.report-thumb {
+  height: 240px !important;
+  padding: 16px !important;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 170, 255, 0.12), transparent 36%),
+    rgba(1, 7, 16, 0.88) !important;
+  overflow: hidden !important;
+}
+
+.report-thumb img,
+.report-list-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border: 0 !important;
+  display: block !important;
+}
+
+.report-aside-card p {
+  line-height: 1.7 !important;
+}
+
+.report-action-stack a {
+  text-align: center !important;
+}
+
+@media (max-width: 720px) {
+  .report-thumb {
+    height: 185px !important;
+    padding: 12px !important;
+  }
+}

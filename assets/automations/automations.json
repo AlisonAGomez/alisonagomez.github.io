@@ -5,7 +5,7 @@
     "subtitle": "Automação para consolidar status de backups de VMs e arquivos em ambiente multiempresa.",
     "category": "Backup Audit",
     "language": "Python",
-    "status": "Documentação em preparação",
+    "status": "Case Técnico",
     "date": "2026",
     "summary": "Script para consultar APIs, validar evidências de backup, identificar atrasos e gerar relatórios operacionais em HTML/CSV/JSON.",
     "tags": [
@@ -31,7 +31,8 @@
     ],
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
-    "preview": "assets/automations/previews/backup-audit.png"
+    "preview": "assets/automations/previews/backup-audit.png",
+    "repositoryLabel": "Ver perfil GitHub"
   },
   {
     "id": "auditoria-arquivos-cloud",
@@ -39,7 +40,7 @@
     "subtitle": "Rotina para verificar atividade, completude e pendências em backups de arquivos.",
     "category": "Cloud Files Audit",
     "language": "Python",
-    "status": "Documentação em preparação",
+    "status": "Case Técnico",
     "date": "2026",
     "summary": "Automação para revisar pastas de backup, detectar ausência de atividade, separar incompletas e consolidar informações para revisão operacional.",
     "tags": [
@@ -64,7 +65,8 @@
     ],
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
-    "preview": "assets/automations/previews/cloud-files-audit.png"
+    "preview": "assets/automations/previews/cloud-files-audit.png",
+    "repositoryLabel": "Ver perfil GitHub"
   },
   {
     "id": "organizador-zabbix",
@@ -72,7 +74,7 @@
     "subtitle": "Ferramenta para auditar, organizar e padronizar hosts, grupos e templates no Zabbix.",
     "category": "Monitoring Automation",
     "language": "Python",
-    "status": "Documentação em preparação",
+    "status": "Case Técnico",
     "date": "2026",
     "summary": "Script de apoio à organização de ambiente Zabbix, análise de grupos, hosts, templates, itens e dashboards.",
     "tags": [
@@ -96,7 +98,8 @@
     ],
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
-    "preview": "assets/automations/previews/zabbix-organizer.png"
+    "preview": "assets/automations/previews/zabbix-organizer.png",
+    "repositoryLabel": "Ver perfil GitHub"
   },
   {
     "id": "triagem-incidente-windows",
@@ -104,7 +107,7 @@
     "subtitle": "Scripts PowerShell para coleta inicial de evidências, artefatos suspeitos e hunting leve.",
     "category": "Incident Response",
     "language": "PowerShell",
-    "status": "Documentação em preparação",
+    "status": "Case Técnico",
     "date": "2026",
     "summary": "Conjunto de comandos e scripts para apoiar triagem inicial em endpoint Windows, com foco em evidências, persistência, extensões e artefatos recentes.",
     "tags": [
@@ -129,6 +132,7 @@
     ],
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
-    "preview": "assets/automations/previews/windows-ir-triage.png"
+    "preview": "assets/automations/previews/windows-ir-triage.png",
+    "repositoryLabel": "Ver perfil GitHub"
   }
 ]
