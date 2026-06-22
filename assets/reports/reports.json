@@ -1,0 +1,69 @@
+[
+  {
+    "id": "extensao-maliciosa-chrome",
+    "title": "Resposta a Incidente: Browser Hijacker / Banking Trojan via Extensão Chrome",
+    "subtitle": "Extensão maliciosa \"Receita Federal\" com persistência por política/cloud policy do Chrome",
+    "type": "Incident Response / Malware Analysis / Browser Security",
+    "severity": "Alta / Crítica",
+    "date": "2026-05-26",
+    "status": "Sanitizado / Uso controlado",
+    "readTime": "16 páginas",
+    "summary": "Investigação de endpoint Windows com sequestro de navegador, extensão maliciosa no Google Chrome e reinfecção após reconexão à rede. O caso evoluiu para a identificação de uma política/cloud policy do Chrome como mecanismo de persistência.",
+    "highlights": [
+      "Identificação de extensão maliciosa mascarada como Receita Federal",
+      "Confirmação de persistência via Machine Level User Cloud Policy",
+      "Análise de Chrome User Data, Secure Preferences, Extensions e Policy",
+      "Plano de contenção, erradicação, recuperação e validação pós-limpeza",
+      "Mapeamento MITRE ATT&CK e lógica de hunting para SOC"
+    ],
+    "tags": [
+      "SOC",
+      "Incident Response",
+      "Chrome",
+      "Malware",
+      "Browser Hijacker",
+      "MITRE ATT&CK",
+      "Blue Team"
+    ],
+    "pdf": "assets/reports/extensao-maliciosa-chrome/relatorio-resposta-incidente-extensao-chrome.pdf",
+    "preview": "assets/reports/extensao-maliciosa-chrome/preview.png",
+    "details": {
+      "overview": "O incidente envolveu uma extensão maliciosa no Chrome que retornava após remoção manual quando o endpoint era reconectado à rede. A análise confirmou que a reinfecção estava relacionada a política/cloud policy persistida no perfil do Chrome.",
+      "scope": "Relatório sanitizado para portfólio. Evidências brutas, dados pessoais, hostnames internos e artefatos sensíveis devem permanecer fora de publicação pública.",
+      "methodology": [
+        "Triagem forense leve com coleta controlada",
+        "Análise de perfil do Chrome e artefatos de User Data",
+        "Comparação entre estado offline e estado após reconexão",
+        "Revisão de Registro, tarefas, strings, hashes e políticas",
+        "Separação entre achados confirmados, suspeitos e observações operacionais"
+      ],
+      "findings": [
+        "Extensão maliciosa no Google Chrome com foco em bancos e webmail",
+        "Uso de permissões sensíveis como cookies, storage, tabs, scripting e activeTab",
+        "Mecanismo de persistência por Machine Level User Cloud Policy",
+        "Risco de captura de sessão, inputs e telas visíveis",
+        "Vetor inicial não confirmado de forma conclusiva"
+      ],
+      "actions": [
+        "Isolamento do endpoint",
+        "Preservação de evidências antes da remoção",
+        "Bloqueio de indicadores em DNS/proxy/firewall/EDR",
+        "Revogação de sessões e troca de credenciais a partir de dispositivo limpo",
+        "Remoção de policy/perfil/extensão ou reinstalação limpa do Windows"
+      ],
+      "mitre": [
+        "T1176 Browser Extensions",
+        "T1036 Masquerading",
+        "T1113 Screen Capture",
+        "T1539 Steal Web Session Cookie",
+        "T1056 Input Capture"
+      ],
+      "lessons": [
+        "Nem toda persistência de extensão aparece no ExtensionInstallForcelist clássico do Registro",
+        "Chrome User Data, Secure Preferences, Extension Settings e Policy devem entrar no playbook de investigação",
+        "Remover a extensão manualmente não resolve quando há política reinstalando o artefato",
+        "Comparar antes/depois da reconexão ajuda a encontrar mecanismos de reinfecção"
+      ]
+    }
+  }
+]

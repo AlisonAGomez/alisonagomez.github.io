@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estudo de Caso | Alison Gomez</title>
+  <meta name="description" content="Detalhes de relatório técnico e estudo de caso de segurança." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="index.html#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="index.html#home">./home</a>
+      <a href="reports.html">./relatórios</a>
+      <a href="index.html#projetos">./projetos</a>
+      <a href="index.html#contato">./contato</a>
+    </nav>
+  </header>
+
+  <main class="section reports-page">
+    <div id="reportRoot"></div>
+  </main>
+
+  <footer class="footer"><p>ALISON GOMEZ © <span id="year"></span> // Estudo de Caso</p></footer>
+
+  <script src="script.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const reportId = params.get("id");
+
+    function list(items) {
+      return `<ul>${(items || []).map(item => `<li>${item}</li>`).join("")}</ul>`;
+    }
+
+    function tags(items) {
+      return `<div class="report-tags">${(items || []).map(item => `<span>${item}</span>`).join("")}</div>`;
+    }
+
+    function renderReport(report) {
+      document.title = `${report.title} | Alison Gomez`;
+      return `
+        <div class="report-detail-layout">
+          <article>
+            <section class="report-detail-panel">
+              <span class="section-tag">// CASE_STUDY</span>
+              <h1>${report.title}</h1>
+              <p>${report.subtitle}</p>
+              <img class="report-detail-cover" src="${report.preview}" alt="Preview do relatório ${report.title}" />
+              <div class="report-card-meta">
+                <span class="report-badge">${report.type}</span>
+                <span class="report-severity">${report.severity}</span>
+                <span class="report-status">${report.status}</span>
+                <span class="report-badge">${report.date}</span>
+              </div>
+              ${tags(report.tags)}
+            </section>
+
+            <section class="report-detail-card">
+              <h2>Visão geral</h2>
+              <p>${report.details.overview}</p>
+            </section>
+
+            <section class="report-detail-card">
+              <h2>Metodologia</h2>
+              ${list(report.details.methodology)}
+            </section>
+
+            <section class="report-detail-card">
+              <h2>Achados principais</h2>
+              ${list(report.details.findings)}
+            </section>
+
+            <section class="report-detail-card">
+              <h2>Ações de resposta</h2>
+              ${list(report.details.actions)}
+            </section>
+
+            <section class="report-detail-card">
+              <h2>MITRE ATT&CK</h2>
+              ${list(report.details.mitre)}
+            </section>
+
+            <section class="report-detail-card">
+              <h2>Lições aprendidas</h2>
+              ${list(report.details.lessons)}
+            </section>
+          </article>
+
+          <aside>
+            <div class="report-aside-card">
+              <h3>Download</h3>
+              <p>Relatório sanitizado para portfólio. Evidências completas devem permanecer em repositório privado.</p>
+              <div class="report-action-stack">
+                <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar PDF sanitizado</a>
+                <a href="reports.html">Voltar ao catálogo</a>
+              </div>
+            </div>
+
+            <div class="report-aside-card">
+              <h3>Resumo</h3>
+              <p><strong>Severidade:</strong> ${report.severity}</p>
+              <p><strong>Status:</strong> ${report.status}</p>
+              <p><strong>Tamanho:</strong> ${report.readTime}</p>
+            </div>
+
+            <div class="report-aside-card">
+              <h3>Escopo público</h3>
+              <p>${report.details.scope}</p>
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    async function loadReport() {
+      const root = document.getElementById("reportRoot");
+      try {
+        const response = await fetch("assets/reports/reports.json");
+        const reports = await response.json();
+        const report = reports.find(item => item.id === reportId) || reports[0];
+        root.innerHTML = renderReport(report);
+      } catch (error) {
+        root.innerHTML = `<div class="report-empty">Não foi possível carregar o relatório. Verifique o arquivo assets/reports/reports.json.</div>`;
+      }
+    }
+
+    loadReport();
+  </script>
+</body>
+</html>

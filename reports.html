@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatórios Técnicos | Alison Gomez</title>
+  <meta name="description" content="Catálogo de relatórios técnicos, resposta a incidentes e estudos de caso de Alison Gomez." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="index.html#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="index.html#home">./home</a>
+      <a href="index.html#relatorios">./relatórios</a>
+      <a href="index.html#projetos">./projetos</a>
+      <a href="index.html#contato">./contato</a>
+    </nav>
+  </header>
+
+  <main class="section reports-page">
+    <div class="section-head reveal visible">
+      <span class="section-tag">// REPORTS_INDEX</span>
+      <h2>Relatórios Técnicos</h2>
+      <p class="section-subtitle">Estudos de caso sanitizados, resposta a incidente, análise técnica e documentação operacional para SOC/Blue Team.</p>
+    </div>
+
+    <div id="reportsGrid" class="reports-grid-page"></div>
+  </main>
+
+  <footer class="footer"><p>ALISON GOMEZ © <span id="year"></span> // Relatórios Técnicos</p></footer>
+
+  <script src="script.js"></script>
+  <script>
+    const fallbackReports = [];
+
+    function reportCard(report) {
+      const tags = (report.tags || []).slice(0, 5).map(tag => `<span>${tag}</span>`).join("");
+      return `
+        <article class="report-list-card">
+          <img src="${report.preview}" alt="Preview do relatório ${report.title}" />
+          <div class="report-list-card-content">
+            <div class="report-card-meta">
+              <span class="report-badge">${report.type}</span>
+              <span class="report-severity">${report.severity}</span>
+            </div>
+            <h3>${report.title}</h3>
+            <p>${report.summary}</p>
+            <div class="report-tags">${tags}</div>
+            <div class="project-links">
+              <a href="report.html?id=${report.id}">Ver detalhes</a>
+              <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar PDF</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    async function loadReports() {
+      const grid = document.getElementById("reportsGrid");
+      try {
+        const response = await fetch("assets/reports/reports.json");
+        const reports = await response.json();
+        grid.innerHTML = reports.map(reportCard).join("");
+      } catch (error) {
+        grid.innerHTML = `<div class="report-empty">Não foi possível carregar os relatórios. Verifique o arquivo assets/reports/reports.json.</div>`;
+      }
+    }
+
+    loadReports();
+  </script>
+</body>
+</html>
