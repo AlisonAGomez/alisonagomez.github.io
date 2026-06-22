@@ -1,0 +1,85 @@
+[
+  {
+    "id": "veonyx",
+    "title": "VeoNyx — Aplicativo Mobile para Comunidades",
+    "subtitle": "Projeto mobile-first de comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética e moderação comunitária.",
+    "category": "Mobile / Full-stack",
+    "status": "Em desenvolvimento",
+    "date": "2026",
+    "summary": "VeoNyx é um aplicativo mobile-first voltado para comunidades digitais de anime, RPG, games, fandoms, arte e grupos criativos. O objetivo do projeto é demonstrar arquitetura full-stack, evolução de produto, modelagem de domínio social, QA incremental e decisões técnicas.",
+    "tags": [
+      "Flutter",
+      "Dart",
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "MinIO"
+    ],
+    "repository": "https://github.com/AlisonAGomez",
+    "documentation": "assets/docs/veonyx/veonyx-relatorio-portfolio.pdf",
+    "details": {
+      "overview": "O VeoNyx é um projeto de aplicativo mobile-first de comunidades digitais criado para fãs de anime, RPG, games, fandoms, arte e grupos criativos. A proposta é oferecer comunidades com identidade própria, perfis locais personalizados, posts, wikis, chats, loja estética e ferramentas de moderação.",
+      "problem": [
+        "Plataformas de comunidade como Amino e Project Z deixaram usuários sem uma alternativa moderna, estável e organizada.",
+        "Apps genéricos como Discord e Reddit nem sempre valorizam identidade visual por comunidade.",
+        "Comunidades de fandom, RPG e criação precisam de perfis locais, posts, wikis, chats e moderação contextual.",
+        "Produtos sociais com público jovem precisam crescer com segurança, QA e regras claras."
+      ],
+      "differentials": [
+        "Perfil global + perfil local: o usuário pode ter uma identidade geral e uma identidade diferente em cada comunidade.",
+        "Tags comunitárias: tags livres e tags de equipe aparecem no perfil local com limites e permissões.",
+        "Comunidade como sub-app: a navegação muda quando o usuário entra em uma comunidade.",
+        "Conteúdo estruturado: posts, comentários, wikis, salvos e denúncias.",
+        "Moderação comunitária: ações de staff, logs, denúncias, banimento e punições temporárias.",
+        "Seed QA: dados de teste para validar comunidades com membros reais no ambiente local."
+      ],
+      "stack": [
+        "Mobile: Flutter / Dart.",
+        "Backend: NestJS / TypeScript.",
+        "Banco de dados: PostgreSQL.",
+        "ORM: Prisma.",
+        "Cache e tempo real: Redis.",
+        "Storage local: MinIO.",
+        "Testes e QA: flutter analyze, flutter test, build APK, seed QA e testes manuais no celular."
+      ],
+      "features": [
+        "Autenticação e sessão com JWT.",
+        "Perfil global com avatar, banner, bio e wallet.",
+        "Criação, edição, entrada e saída de comunidades.",
+        "Perfil local por comunidade com avatar, banner, bio, cargo e tags.",
+        "Posts, comentários, curtidas e salvos.",
+        "Wikis com capa e detalhe.",
+        "Chats públicos por comunidade.",
+        "Notificações internas.",
+        "Loja cosmética inicial.",
+        "Tags livres e tags de equipe com regras de permissão.",
+        "Moderação com denúncias, logs, warn, ban e punições temporárias.",
+        "Seed QA para testar comunidades com membros de exemplo."
+      ],
+      "architecture": [
+        "Fluxo local de desenvolvimento: Flutter App -> NestJS API -> Prisma -> PostgreSQL / Redis / MinIO.",
+        "A separação mais importante do projeto é entre a identidade global do usuário e a identidade local dentro de cada comunidade.",
+        "A arquitetura reforça organização de domínio social, API, persistência, cache, storage e validação incremental."
+      ],
+      "roadmap": [
+        "Validar a última rodada de correções no celular.",
+        "Consolidar loja/cosméticos e economia visual.",
+        "Implementar níveis, XP e check-in privado.",
+        "Criar menu/central da comunidade.",
+        "Evoluir suporte, tutoriais e categorias de conteúdo.",
+        "Planejar RPG/personagens e lojas comunitárias.",
+        "Executar fase futura de segurança, IA, bots, privacidade e Trust & Safety."
+      ],
+      "learning": [
+        "Arquitetura full-stack com mobile, API, banco, cache e storage.",
+        "Modelagem de domínio social com escopo global e local.",
+        "Permissões comunitárias e moderação contextual.",
+        "Uso de migrations e seeds com Prisma.",
+        "QA incremental em aparelho real.",
+        "Planejamento de produto inspirado em análise de concorrentes."
+      ]
+    }
+  }
+]

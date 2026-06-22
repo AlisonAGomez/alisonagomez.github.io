@@ -7,7 +7,7 @@
     "language": "Python",
     "status": "Case Técnico",
     "date": "2026",
-    "summary": "Ferramenta interna para auditar backups de VMs, containers e arquivos, cruzando evidências do Proxmox com atividade no Dropbox. A solução reduz conferência manual, identifica atrasos, uploads incompletos, storages em risco e exceções conhecidas.",
+    "summary": "Auditoria operacional para validar backups locais, uploads em nuvem, uso de storage, arquivos incompletos e pendências críticas em ambiente multiempresa.",
     "tags": [
       "Python",
       "Dropbox API",
@@ -97,7 +97,22 @@
         "Facilidade para outros técnicos analisarem os resultados."
       ],
       "result": "O resultado foi uma solução de auditoria operacional capaz de consolidar múltiplos clientes e ambientes em relatórios de fácil leitura, aumentando a confiabilidade, rastreabilidade e eficiência da rotina de backup."
-    }
+    },
+    "repositoryLabel": "Ver GitHub",
+    "gallery": [
+      {
+        "title": "Menu principal do auditor",
+        "description": "Interface em terminal com opções para auditoria de VMs Dropbox, arquivos, execuções completas, incompletas, Proxmox e resumo operacional.",
+        "src": "assets/img/cases/auditoria-backups/auditoria-menu-principal.png",
+        "alt": "Menu principal do Dropbox Proxmox Backup Auditor"
+      },
+      {
+        "title": "Relatórios gerados",
+        "description": "Saídas em CSV, HTML e JSON para consulta técnica, histórico, análise em planilha e validações futuras.",
+        "src": "assets/img/cases/auditoria-backups/auditoria-relatorios-gerados.png",
+        "alt": "Arquivos de relatórios gerados pelo auditor de backups"
+      }
+    ]
   },
   {
     "id": "pendrivao-toolkit-defensivo",
@@ -107,7 +122,7 @@
     "language": "Python",
     "status": "Case Técnico",
     "date": "2026",
-    "summary": "Projeto modular e portátil criado para padronizar rotinas de suporte, diagnóstico, auditoria e segurança defensiva. O toolkit combina Python, PowerShell e Bash, com CLI, menu interativo, relatórios JSON/CSV/HTML, modo dry-run, validações de escopo e testes automatizados.",
+    "summary": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, DevSecOps, backup, Linux e evidências GRC.",
     "tags": [
       "Python",
       "PowerShell",
@@ -251,7 +266,22 @@
           ]
         }
       ]
-    }
+    },
+    "repositoryLabel": "Ver GitHub",
+    "gallery": [
+      {
+        "title": "Menu principal do toolkit",
+        "description": "Interface principal do Pendrivão com módulos de suporte, manutenção, inventário, rede, auditoria, segurança e resposta a incidente.",
+        "src": "assets/img/cases/pendrivao/pendrivao-menu-principal.png",
+        "alt": "Menu principal do Pendrivão Toolkit Defensivo"
+      },
+      {
+        "title": "Módulos avançados",
+        "description": "Rotinas de rede, auditoria, segurança, resposta a incidentes, DevSecOps, compliance, backup, Linux e relatórios.",
+        "src": "assets/img/cases/pendrivao/pendrivao-modulos-seguranca.png",
+        "alt": "Módulos avançados do Pendrivão Toolkit Defensivo"
+      }
+    ]
   },
   {
     "id": "auditoria-arquivos-cloud",
@@ -285,7 +315,7 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/cloud-files-audit.png",
-    "repositoryLabel": "Ver perfil GitHub"
+    "repositoryLabel": "Ver GitHub"
   },
   {
     "id": "organizador-zabbix",
@@ -318,7 +348,7 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/zabbix-organizer.png",
-    "repositoryLabel": "Ver perfil GitHub"
+    "repositoryLabel": "Ver GitHub"
   },
   {
     "id": "triagem-incidente-windows",
@@ -328,7 +358,7 @@
     "language": "PowerShell",
     "status": "Case Técnico",
     "date": "2026",
-    "summary": "Conjunto de comandos e scripts para apoiar triagem inicial em endpoint Windows, com foco em evidências, persistência, extensões e artefatos recentes.",
+    "summary": "Scripts PowerShell para coleta inicial de evidências, artefatos suspeitos e hunting leve em endpoints Windows.",
     "tags": [
       "PowerShell",
       "IR",
@@ -352,6 +382,6 @@
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
     "preview": "assets/automations/previews/windows-ir-triage.png",
-    "repositoryLabel": "Ver perfil GitHub"
+    "repositoryLabel": "Ver GitHub"
   }
 ]

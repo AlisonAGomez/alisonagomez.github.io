@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base href="../" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Projeto | Alison Gomez</title>
+
+  <meta name="description" content="Detalhes de projeto técnico de Alison Gomez." />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="./#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="./#home">./home</a>
+      <a href="./#projetos">./projetos</a>
+      <a href="./#automacoes">./automações</a>
+      <a href="./#estudos">./estudos</a>
+      <a href="./#contato">./contato</a>
+    </nav>
+  </header>
+
+  <main class="section reports-page">
+    <div id="projectRoot"></div>
+  </main>
+
+  <footer class="footer">
+    <p>ALISON GOMEZ © <span id="year"></span> // Projeto Técnico</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get("id");
+
+    function list(items) {
+      const safeItems = Array.isArray(items) ? items : [];
+      if (!safeItems.length) return `<p>Informações em revisão.</p>`;
+      return `<ul>${safeItems.map(item => `<li>${item}</li>`).join("")}</ul>`;
+    }
+
+    function tags(items) {
+      const safeItems = Array.isArray(items) ? items : [];
+      return `<div class="report-tags">${safeItems.map(item => `<span>${item}</span>`).join("")}</div>`;
+    }
+
+    function section(title, itemsOrText) {
+      if (!itemsOrText) return "";
+      const content = Array.isArray(itemsOrText) ? list(itemsOrText) : `<p>${itemsOrText}</p>`;
+      return `
+        <section class="report-detail-card">
+          <h2>${title}</h2>
+          ${content}
+        </section>
+      `;
+    }
+
+    function renderProject(project) {
+      const details = project.details || {};
+      document.title = `${project.title} | Alison Gomez`;
+
+      return `
+        <div class="report-detail-layout">
+          <article>
+            <section class="report-detail-panel">
+              <span class="section-tag">// PROJECT_DETAIL</span>
+              <h1>${project.title}</h1>
+              <p>${project.subtitle || project.summary || ""}</p>
+
+              <div class="report-card-meta">
+                <span class="report-status">${project.category || "Projeto"}</span>
+                <span class="report-severity">${project.status || "Em desenvolvimento"}</span>
+                <span class="report-badge">${project.date || "2026"}</span>
+              </div>
+
+              ${tags(project.tags)}
+            </section>
+
+            ${section("Visão geral", details.overview || project.summary)}
+            ${section("Problema que o projeto resolve", details.problem)}
+            ${section("Diferenciais do projeto", details.differentials)}
+            ${section("Stack técnica", details.stack)}
+            ${section("Funcionalidades implementadas", details.features)}
+            ${section("Arquitetura simplificada", details.architecture)}
+            ${section("Roadmap", details.roadmap)}
+            ${section("Aprendizados demonstrados", details.learning)}
+          </article>
+
+          <aside>
+            <div class="report-aside-card">
+              <h3>Documentação</h3>
+              <p>Documento técnico com visão de produto, arquitetura, estado atual, roadmap, QA e diretrizes do projeto.</p>
+
+              <div class="report-action-stack">
+                <a href="${project.documentation}" target="_blank" rel="noreferrer">Baixar documentação</a>
+                <a href="${project.repository}" target="_blank" rel="noreferrer">Ver GitHub</a>
+                <a href="./#projetos">Voltar aos projetos</a>
+              </div>
+            </div>
+
+            <div class="report-aside-card">
+              <h3>Resumo</h3>
+              <p><strong>Categoria:</strong> ${project.category}</p>
+              <p><strong>Status:</strong> ${project.status}</p>
+              <p><strong>Ano:</strong> ${project.date}</p>
+              <p><strong>Stack:</strong> Flutter, NestJS, PostgreSQL, Prisma, Redis e MinIO.</p>
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    fetch("assets/projects/projects.json", { cache: "no-store" })
+      .then(response => response.json())
+      .then(projects => {
+        const project = projects.find(entry => entry.id === projectId) || projects[0];
+        document.getElementById("projectRoot").innerHTML = renderProject(project);
+      })
+      .catch(() => {
+        document.getElementById("projectRoot").innerHTML = `
+          <div class="report-empty">Não foi possível carregar este projeto. Verifique o arquivo assets/projects/projects.json.</div>
+        `;
+      });
+  </script>
+</body>
+</html>

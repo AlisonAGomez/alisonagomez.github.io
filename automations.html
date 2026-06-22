@@ -41,7 +41,8 @@
   <script src="script.js"></script>
   <script>
     function automationCard(item) {
-      const tags = (item.tags || []).slice(0, 6).map(tag => `<span>${tag}</span>`).join("");
+      const tags = (item.tags || []).slice(0, 5).map(tag => `<span>${tag}</span>`).join("");
+      const repoLabel = item.repositoryLabel || "GitHub";
 
       return `
         <article class="report-list-card automation-list-card automation-clean-card">
@@ -52,13 +53,13 @@
             </div>
 
             <h3>${item.title}</h3>
-            <p>${item.summary}</p>
+            <p class="card-summary">${item.summary}</p>
 
             <div class="report-tags">${tags}</div>
 
             <div class="project-links">
               <a href="automation/?id=${item.id}">Ver detalhes</a>
-              <a href="${item.repository}" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="${item.repository}" target="_blank" rel="noreferrer">${repoLabel}</a>
             </div>
           </div>
         </article>

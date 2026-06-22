@@ -3366,3 +3366,564 @@ body {
     letter-spacing: 2px !important;
   }
 }
+
+
+/* =========================================================
+   V25 - CORREÇÃO FINAL DE LAYOUT DAS PÁGINAS INTERNAS
+========================================================= */
+
+/* O menu é fixo. As páginas internas precisam de mais respiro no topo. */
+.reports-page {
+  padding-top: clamp(168px, 15vh, 210px) !important;
+}
+
+/* Evita que o título encoste ou fique escondido atrás da barra superior. */
+.reports-page .section-head {
+  position: relative !important;
+  z-index: 3 !important;
+  margin-bottom: 42px !important;
+}
+
+.reports-page .section-tag {
+  display: inline-block !important;
+  margin-bottom: 12px !important;
+}
+
+.reports-page .section h2,
+.reports-page h2 {
+  line-height: 1 !important;
+}
+
+/* Catálogos mais organizados e com cards consistentes. */
+.reports-grid-page {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)) !important;
+  gap: 28px !important;
+  align-items: stretch !important;
+}
+
+.report-list-card,
+.automation-list-card,
+.report-clean-card,
+.automation-clean-card {
+  min-height: 0 !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* Mantém o conteúdo do card legível e evita "corte visual" no final da tela. */
+.report-list-card-content {
+  min-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  padding: 28px !important;
+}
+
+.report-list-card-content h3 {
+  min-height: 54px !important;
+  line-height: 1.35 !important;
+}
+
+/* Resumo dos cards limitado de forma elegante; o detalhe completo fica no "Ver detalhes". */
+.report-list-card-content .card-summary,
+.report-list-card-content > p {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 5 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  line-height: 1.7 !important;
+}
+
+/* Botões sempre no final do card. */
+.report-list-card-content .project-links {
+  margin-top: auto !important;
+  padding-top: 10px !important;
+}
+
+/* Badges com espaçamento consistente. */
+.report-card-meta,
+.report-tags,
+.tags,
+.project-links,
+.report-featured-meta,
+.report-featured-points {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.report-card-meta span,
+.report-tags span,
+.tags span,
+.project-links a,
+.report-featured-meta span,
+.report-featured-points span {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Detalhes: melhor largura e leitura. */
+.report-detail-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px) !important;
+  gap: 30px !important;
+}
+
+.report-detail-panel h1 {
+  font-size: clamp(38px, 5vw, 64px) !important;
+  line-height: 1.06 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.report-detail-panel,
+.report-detail-card,
+.report-aside-card {
+  overflow: hidden !important;
+}
+
+.report-detail-card li,
+.report-detail-card p,
+.report-aside-card li,
+.report-aside-card p {
+  line-height: 1.82 !important;
+}
+
+/* Em telas médias, a lateral desce para evitar aperto. */
+@media (max-width: 1180px) {
+  .reports-page {
+    padding-top: 148px !important;
+  }
+
+  .report-detail-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .report-aside-card {
+    position: static !important;
+  }
+}
+
+/* Celular */
+@media (max-width: 720px) {
+  .reports-page {
+    width: min(100% - 28px, var(--max)) !important;
+    padding-top: 126px !important;
+  }
+
+  .reports-page .section-head {
+    margin-bottom: 30px !important;
+  }
+
+  .reports-page h2,
+  .section h2 {
+    font-size: clamp(34px, 12vw, 56px) !important;
+    letter-spacing: 2px !important;
+  }
+
+  .reports-grid-page {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .report-list-card-content {
+    padding: 22px !important;
+  }
+
+  .report-list-card-content h3 {
+    min-height: auto !important;
+  }
+
+  .report-list-card-content .card-summary,
+  .report-list-card-content > p {
+    -webkit-line-clamp: 6 !important;
+  }
+
+  .report-detail-panel h1 {
+    font-size: clamp(34px, 11vw, 50px) !important;
+  }
+
+  .report-card-meta,
+  .report-tags,
+  .tags,
+  .project-links,
+  .report-featured-meta,
+  .report-featured-points {
+    gap: 10px !important;
+  }
+}
+
+/* Telas baixas de notebook: evita título grudado na barra. */
+@media (max-height: 760px) and (min-width: 721px) {
+  .reports-page {
+    padding-top: 150px !important;
+  }
+}
+
+
+/* =========================================================
+   V26 - GALERIA DE PRINTS DOS CASES
+========================================================= */
+
+.case-gallery-section {
+  overflow: visible !important;
+}
+
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.case-gallery-item {
+  margin: 0;
+  border: 1px solid rgba(0, 170, 255, 0.28);
+  border-radius: var(--radius);
+  background: rgba(1, 7, 16, 0.72);
+  overflow: hidden;
+}
+
+.case-gallery-item a {
+  display: block;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.case-gallery-item img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+}
+
+.case-gallery-item figcaption {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border-top: 1px solid rgba(0, 170, 255, 0.22);
+}
+
+.case-gallery-item figcaption strong {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.case-gallery-item figcaption span {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.case-gallery-item:hover {
+  border-color: rgba(0, 229, 255, 0.62);
+  box-shadow: 0 0 28px rgba(0, 170, 255, 0.16);
+}
+
+@media (max-width: 720px) {
+  .case-gallery {
+    gap: 18px;
+  }
+
+  .case-gallery-item figcaption {
+    padding: 14px;
+  }
+}
+
+
+/* =========================================================
+   V27 - CARDS PADRONIZADOS: TAGS E BOTÕES FIXOS
+========================================================= */
+
+/* Grids devem esticar os cards na mesma linha */
+.grid.two,
+.lab-grid,
+.study-list,
+.reports-grid-page {
+  align-items: stretch !important;
+}
+
+/* Cards principais em coluna: conteúdo em cima, tags/botões no rodapé */
+.project-card,
+.lab-card,
+.study-list article,
+.automation-featured-card,
+.report-list-card,
+.automation-list-card,
+.report-clean-card,
+.automation-clean-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+/* Altura mínima por tipo para padronizar layout visual */
+.project-card {
+  min-height: 420px !important;
+}
+
+.lab-card {
+  min-height: 280px !important;
+}
+
+.profile-lab {
+  min-height: 280px !important;
+}
+
+.study-list article {
+  min-height: 280px !important;
+}
+
+.automation-featured-card {
+  min-height: 420px !important;
+}
+
+/* Títulos mais estáveis */
+.project-card h3,
+.lab-card h3,
+.study-list article h3,
+.automation-featured-card h3,
+.report-list-card-content h3 {
+  line-height: 1.35 !important;
+}
+
+/* Textos dos cards podem variar, mas não empurram o layout de forma quebrada */
+.project-card p,
+.lab-card p,
+.study-list article p,
+.automation-featured-card p,
+.report-list-card-content p {
+  line-height: 1.75 !important;
+}
+
+/* Em cards de projeto, limita excesso de texto visualmente.
+   O conteúdo completo fica nos detalhes/cases. */
+.project-card p {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.project-card:not(.featured-project) p {
+  -webkit-line-clamp: 5 !important;
+}
+
+.project-card.featured-project p {
+  -webkit-line-clamp: 4 !important;
+}
+
+/* Rodapé visual do card: tags sempre alinhadas antes dos botões */
+.project-card .tags,
+.lab-card .tags,
+.study-list article .tags,
+.report-tags,
+.report-featured-points {
+  margin-top: auto !important;
+  min-height: 44px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  align-content: flex-start !important;
+  gap: 12px !important;
+}
+
+/* Cards CTF não têm tags, então o botão vai para o rodapé */
+.profile-lab .project-links {
+  margin-top: auto !important;
+}
+
+/* Botões sempre no mesmo bloco inferior */
+.project-card .project-links,
+.study-list article .project-links,
+.automation-featured-card .project-links,
+.report-list-card-content .project-links {
+  margin-top: 18px !important;
+  min-height: 46px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-end !important;
+  align-content: flex-end !important;
+  gap: 12px !important;
+}
+
+/* Em automações da home: tags ficam no rodapé, botões logo abaixo */
+.automation-featured-card .report-featured-points {
+  margin-top: auto !important;
+}
+
+.automation-featured-card .project-links {
+  margin-top: 20px !important;
+}
+
+/* Catálogo de automações e relatórios: conteúdo no topo, botões no final */
+.report-list-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.report-list-card-content .report-tags {
+  margin-top: auto !important;
+}
+
+.report-list-card-content .project-links {
+  margin-top: 18px !important;
+}
+
+/* Badges/tags sem grudar */
+.report-card-meta,
+.report-tags,
+.tags,
+.project-links,
+.report-featured-meta,
+.report-featured-points {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.report-card-meta span,
+.report-tags span,
+.tags span,
+.project-links a,
+.report-featured-meta span,
+.report-featured-points span {
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Botões padronizados */
+.project-links a {
+  min-height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Em telas menores, mantém alinhamento mas reduz altura mínima */
+@media (max-width: 980px) {
+  .project-card,
+  .automation-featured-card {
+    min-height: 360px !important;
+  }
+
+  .lab-card,
+  .profile-lab,
+  .study-list article {
+    min-height: 250px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-card,
+  .lab-card,
+  .profile-lab,
+  .study-list article,
+  .automation-featured-card {
+    min-height: auto !important;
+  }
+
+  .project-card p,
+  .project-card.featured-project p,
+  .project-card:not(.featured-project) p {
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  .project-card .tags,
+  .lab-card .tags,
+  .study-list article .tags,
+  .report-tags,
+  .report-featured-points {
+    min-height: auto !important;
+  }
+
+  .project-card .project-links,
+  .study-list article .project-links,
+  .automation-featured-card .project-links,
+  .report-list-card-content .project-links {
+    min-height: auto !important;
+  }
+}
+
+
+/* =========================================================
+   V28 - VEONYX E CONTATO EM TERMINAL
+========================================================= */
+
+.contact-layout-terminal-only {
+  grid-template-columns: 1fr !important;
+}
+
+.contact-terminal-wide {
+  width: 100%;
+  max-width: 100%;
+  min-height: auto !important;
+}
+
+.terminal-contact-menu {
+  display: grid;
+  gap: 14px;
+}
+
+.terminal-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 14px 0 4px;
+}
+
+.terminal-options a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  align-items: center;
+  border: 1px solid rgba(0, 170, 255, 0.28);
+  background: rgba(0, 170, 255, 0.06);
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.terminal-options a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 229, 255, 0.65);
+  box-shadow: 0 0 26px rgba(0, 170, 255, 0.18);
+}
+
+.terminal-options a span {
+  color: var(--green);
+  font-weight: 900;
+  grid-row: 1 / span 2;
+}
+
+.terminal-options a strong {
+  color: var(--cyan);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.terminal-options a small {
+  color: var(--text);
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+
+.cursor-mini {
+  display: inline-block;
+  width: 9px;
+  height: 16px;
+  margin-left: 6px;
+  background: var(--blue);
+  vertical-align: -2px;
+  animation: blink 0.8s steps(2, start) infinite;
+}
+
+@media (max-width: 820px) {
+  .terminal-options {
+    grid-template-columns: 1fr;
+  }
+}

@@ -65,6 +65,34 @@
       return `<div class="report-tags">${safeItems.map(item => `<span>${item}</span>`).join("")}</div>`;
     }
 
+
+    function gallery(items) {
+      const safeItems = Array.isArray(items) ? items : [];
+
+      if (!safeItems.length) {
+        return "";
+      }
+
+      return `
+        <section class="report-detail-card case-gallery-section">
+          <h2>Imagens do projeto</h2>
+          <div class="case-gallery">
+            ${safeItems.map(image => `
+              <figure class="case-gallery-item">
+                <a href="${image.src}" target="_blank" rel="noreferrer">
+                  <img src="${image.src}" alt="${image.alt || image.title}" loading="lazy" />
+                </a>
+                <figcaption>
+                  <strong>${image.title}</strong>
+                  <span>${image.description || ""}</span>
+                </figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }
+
     function optionalSection(title, itemsOrText) {
       if (!itemsOrText) return "";
 
@@ -135,6 +163,8 @@
               <p>${details.overview || item.summary}</p>
             </section>
 
+            ${gallery(item.gallery)}
+
             ${sections}
 
             <section class="report-detail-card">
@@ -152,7 +182,7 @@
               <p><strong>Ano:</strong> ${item.date}</p>
 
               <div class="report-action-stack">
-                <a href="${item.repository}" target="_blank" rel="noreferrer">Ver perfil GitHub</a>
+                <a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "Ver GitHub"}</a>
                 <a href="automations/">Voltar ao catálogo</a>
               </div>
             </div>
@@ -160,7 +190,7 @@
             <div class="report-aside-card">
               <h3>Impacto técnico</h3>
               <ul>
-                <li>Padronização de rotinas técnicas.</li>
+                <li>Padronização de rotinas operacionais.</li>
                 <li>Redução de tarefas manuais repetitivas.</li>
                 <li>Geração de evidências e relatórios.</li>
                 <li>Apoio a suporte, infraestrutura e segurança defensiva.</li>
