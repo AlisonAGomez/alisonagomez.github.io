@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Estudo Técnico | Alison Gomez</title>
@@ -52,7 +52,7 @@
       const safeItems = Array.isArray(items) ? items : [];
 
       if (!safeItems.length) {
-        return `<p>Informações em revisão para publicação no portfólio.</p>`;
+        return `<p>Informações em revisão.</p>`;
       }
 
       return `<ul>${safeItems.map(item => `<li>${item}</li>`).join("")}</ul>`;
@@ -128,7 +128,7 @@
           <aside>
             <div class="report-aside-card">
               <h3>Relatório</h3>
-              <p>Baixe o documento técnico completo com a investigação, análise e recomendações do caso.</p>
+              <p>Documento técnico com investigação, evidências, análise e recomendações do caso.</p>
 
               <div class="report-action-stack">
                 <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar relatório</a>

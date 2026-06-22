@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Estudos & Relatórios | Alison Gomez</title>
 
-  <meta name="description" content="Catálogo de estudos técnicos, relatórios relatório técnicos e resposta a incidentes de Alison Gomez." />
+  <meta name="description" content="Catálogo de estudos técnicos, resposta a incidentes e documentação operacional de Alison Gomez." />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="style.css" />
@@ -39,7 +39,7 @@
       <span class="section-tag">// STUDIES_INDEX</span>
       <h2>Estudos & Relatórios</h2>
       <p class="section-subtitle">
-        Catálogo de estudos de caso, resposta a incidentes, análise técnica e documentação operacional para SOC/Blue Team.
+        Estudos de caso, resposta a incidentes, análise técnica e documentação operacional para ambientes de infraestrutura, SOC e Blue Team.
       </p>
     </div>
 
@@ -54,17 +54,13 @@
 
   <script>
     function reportCard(report) {
-      const tags = (report.tags || []).slice(0, 5).map(tag => `<span>${tag}</span>`).join("");
+      const tags = (report.tags || []).slice(0, 6).map(tag => `<span>${tag}</span>`).join("");
 
       return `
-        <article class="report-list-card reveal visible">
-          <div class="report-thumb">
-            <img src="${report.preview}" alt="Preview do relatório ${report.title}" loading="lazy" />
-          </div>
-
+        <article class="report-list-card report-clean-card reveal visible">
           <div class="report-list-card-content">
             <div class="report-card-meta">
-              <span class="report-status">${report.status || "Publicado"}</span>
+              <span class="report-status">${report.status || "Relatório Técnico"}</span>
               <span class="report-severity">${report.severity || "N/A"}</span>
             </div>
 
@@ -94,7 +90,7 @@
         const grid = document.getElementById("reportsGrid");
 
         if (!Array.isArray(reports) || reports.length === 0) {
-          grid.innerHTML = `<div class="report-empty">Nenhum estudo cadastrado ainda.</div>`;
+          grid.innerHTML = `<div class="report-empty">Nenhum estudo cadastrado.</div>`;
           return;
         }
 

@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Automação | Alison Gomez</title>
+
   <meta name="description" content="Detalhes de script, automação ou ferramenta técnica." />
+
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
   <div class="scanline" aria-hidden="true"></div>
@@ -15,7 +19,11 @@
 
   <header class="topbar">
     <a href="./#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+
     <nav class="nav" id="nav">
       <a href="./#home">./home</a>
       <a href="./#automacoes">./automações</a>
@@ -30,23 +38,80 @@
     <div id="automationRoot"></div>
   </main>
 
-  <footer class="footer"><p>ALISON GOMEZ © <span id="year"></span> // Automação</p></footer>
+  <footer class="footer">
+    <p>ALISON GOMEZ © <span id="year"></span> // Automação</p>
+  </footer>
 
   <script src="script.js"></script>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const automationId = params.get("id");
 
     function list(items) {
-      return `<ul>${(items || []).map(item => `<li>${item}</li>`).join("")}</ul>`;
+      const safeItems = Array.isArray(items) ? items : [];
+
+      if (!safeItems.length) {
+        return `<p>Informações em revisão.</p>`;
+      }
+
+      return `<ul>${safeItems.map(item => `<li>${item}</li>`).join("")}</ul>`;
     }
 
     function tags(items) {
-      return `<div class="report-tags">${(items || []).map(item => `<span>${item}</span>`).join("")}</div>`;
+      const safeItems = Array.isArray(items) ? items : [];
+
+      return `<div class="report-tags">${safeItems.map(item => `<span>${item}</span>`).join("")}</div>`;
+    }
+
+    function optionalSection(title, itemsOrText) {
+      if (!itemsOrText) return "";
+
+      if (Array.isArray(itemsOrText) && !itemsOrText.length) return "";
+
+      const content = Array.isArray(itemsOrText)
+        ? list(itemsOrText)
+        : `<p>${itemsOrText}</p>`;
+
+      return `
+        <section class="report-detail-card">
+          <h2>${title}</h2>
+          ${content}
+        </section>
+      `;
+    }
+
+    function customSections(sections) {
+      if (!Array.isArray(sections) || !sections.length) {
+        return "";
+      }
+
+      return sections.map(section => optionalSection(section.title, section.items || section.text)).join("");
+    }
+
+    function defaultSections(item) {
+      const details = item.details || {};
+
+      return `
+        ${optionalSection("Problema identificado", details.problem)}
+        ${optionalSection("Arquitetura da solução", details.architecture)}
+        ${optionalSection("Auditoria Dropbox", details.dropbox)}
+        ${optionalSection("Auditoria Proxmox", details.proxmox)}
+        ${optionalSection("Regras e status", details.statusRules)}
+        ${optionalSection("Funcionalidades", item.features)}
+        ${optionalSection("Benefícios do projeto", details.benefits)}
+        ${optionalSection("Resultado final", details.result)}
+      `;
     }
 
     function renderAutomation(item) {
+      const details = item.details || {};
+      const sections = Array.isArray(details.sections) && details.sections.length
+        ? customSections(details.sections)
+        : defaultSections(item);
+
       document.title = `${item.title} | Alison Gomez`;
+
       return `
         <div class="report-detail-layout">
           <article>
@@ -55,11 +120,9 @@
               <h1>${item.title}</h1>
               <p>${item.subtitle}</p>
 
-              <img src="${item.preview}" alt="Preview da automação ${item.title}" class="report-detail-cover" />
-
               <div class="report-card-meta">
                 <span class="report-status">${item.language}</span>
-                <span class="report-severity">${item.status || "Case Técnico"}</span>
+                <span class="report-severity">${item.status}</span>
                 <span class="report-badge">${item.category}</span>
               </div>
 
@@ -67,14 +130,11 @@
             </section>
 
             <section class="report-detail-card">
-              <h2>Resumo</h2>
-              <p>${item.summary}</p>
+              <h2>Visão geral</h2>
+              <p>${details.overview || item.summary}</p>
             </section>
 
-            <section class="report-detail-card">
-              <h2>Funcionalidades</h2>
-              ${list(item.features)}
-            </section>
+            ${sections}
 
             <section class="report-detail-card">
               <h2>Tecnologias usadas</h2>
@@ -87,22 +147,22 @@
               <h3>Dados da automação</h3>
               <p><strong>Categoria:</strong> ${item.category}</p>
               <p><strong>Linguagem:</strong> ${item.language}</p>
-              <p><strong>Status:</strong> ${item.status || "Case Técnico"}</p>
+              <p><strong>Status:</strong> ${item.status}</p>
               <p><strong>Ano:</strong> ${item.date}</p>
 
               <div class="report-action-stack">
-                <a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "Abrir GitHub"}</a>
+                <a href="${item.repository}" target="_blank" rel="noreferrer">Ver perfil GitHub</a>
                 <a href="automations/">Voltar ao catálogo</a>
               </div>
             </div>
 
             <div class="report-aside-card">
-              <h3>Publicação do projeto</h3>
+              <h3>Impacto técnico</h3>
               <ul>
-                <li>Manter o repositório com README, exemplos de uso e histórico de evolução.</li>
-                <li>Atualizar o link do repositório quando o projeto público estiver disponível.</li>
-                <li>Adicionar documentação, requisitos e instruções de execução.</li>
-                <li>Não publicar tokens, URLs internas, credenciais ou dados de clientes.</li>
+                <li>Padronização de rotinas técnicas.</li>
+                <li>Redução de tarefas manuais repetitivas.</li>
+                <li>Geração de evidências e relatórios.</li>
+                <li>Apoio a suporte, infraestrutura e segurança defensiva.</li>
               </ul>
             </div>
           </aside>

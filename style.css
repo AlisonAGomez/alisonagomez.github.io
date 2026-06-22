@@ -3176,3 +3176,193 @@ body {
     padding: 12px !important;
   }
 }
+
+
+/* =========================================================
+   V21 - LIMPEZA FINAL: SEM IMAGENS CORTADAS E SEM TEXTOS INTERNOS
+========================================================= */
+
+/* Páginas internas com respiro para o menu fixo */
+.reports-page {
+  padding-top: 138px !important;
+}
+
+/* Remove previews das páginas públicas de relatórios/automações.
+   Isso elimina cortes de imagem e deixa os cards mais limpos. */
+.report-thumb,
+.report-detail-cover-wrap,
+.report-detail-cover,
+.automation-list-card img,
+.report-list-card > img {
+  display: none !important;
+}
+
+/* Cards de catálogo em formato textual profissional */
+.report-clean-card,
+.automation-clean-card {
+  min-height: 330px !important;
+}
+
+.report-list-card-content {
+  padding: 28px !important;
+  gap: 18px !important;
+}
+
+.report-list-card-content h3 {
+  margin-top: 6px !important;
+  line-height: 1.35 !important;
+}
+
+.report-list-card-content p {
+  line-height: 1.75 !important;
+}
+
+/* Badges com espaçamento correto */
+.report-card-meta,
+.report-tags,
+.tags,
+.project-links {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+.report-card-meta span,
+.report-tags span,
+.tags span,
+.project-links a {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Espaçamento entre blocos grandes */
+.report-detail-card,
+.report-detail-panel,
+.report-aside-card,
+.report-list-card {
+  margin-bottom: 24px !important;
+}
+
+/* Bloco lateral sem cara de instrução interna */
+.report-aside-card ul {
+  margin-top: 14px !important;
+  padding-left: 18px !important;
+}
+
+.report-aside-card li {
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+/* Melhora leitura dos textos longos */
+.report-detail-card li,
+.report-detail-card p {
+  line-height: 1.85 !important;
+}
+
+.report-detail-card ul {
+  padding-left: 20px !important;
+}
+
+/* Responsivo */
+@media (max-width: 720px) {
+  .reports-page {
+    padding-top: 112px !important;
+  }
+
+  .report-clean-card,
+  .automation-clean-card {
+    min-height: auto !important;
+  }
+
+  .report-card-meta,
+  .report-tags,
+  .tags,
+  .project-links {
+    gap: 10px !important;
+  }
+}
+
+
+/* =========================================================
+   V22 - AUTOMAÇÃO BACKUPS DROPBOX E PROXMOX
+========================================================= */
+
+.report-detail-card h2 {
+  word-break: normal !important;
+}
+
+.report-detail-card ul {
+  display: grid;
+  gap: 12px;
+}
+
+.report-detail-card li {
+  line-height: 1.85 !important;
+}
+
+.report-detail-panel h1 {
+  max-width: 100%;
+}
+
+.automation-clean-card .report-tags,
+.report-clean-card .report-tags {
+  margin-top: 8px;
+}
+
+@media (max-width: 720px) {
+  .report-detail-card h2 {
+    letter-spacing: 2px !important;
+  }
+}
+
+
+/* =========================================================
+   V23 - PENDRIVÃO TOOLKIT DEFENSIVO
+========================================================= */
+
+.automation-home-grid-v23 {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(220px, 270px) !important;
+  gap: 28px !important;
+  align-items: stretch !important;
+}
+
+.automation-home-grid-v23 .automation-featured-card {
+  min-height: 100%;
+}
+
+.automation-home-grid-v23 .reports-mini-panel {
+  min-height: 100%;
+}
+
+.report-detail-card h2 {
+  word-break: normal !important;
+}
+
+.report-detail-card ul {
+  display: grid;
+  gap: 12px;
+}
+
+.report-detail-card li {
+  line-height: 1.85 !important;
+}
+
+.report-detail-panel h1 {
+  max-width: 100%;
+}
+
+@media (max-width: 1180px) {
+  .automation-home-grid-v23 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .report-detail-card h2 {
+    letter-spacing: 2px !important;
+  }
+}

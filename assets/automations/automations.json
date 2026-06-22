@@ -1,38 +1,257 @@
 [
   {
     "id": "auditoria-backups-proxmox-dropbox",
-    "title": "Auditoria de Backups Proxmox / Dropbox",
-    "subtitle": "Automação para consolidar status de backups de VMs e arquivos em ambiente multiempresa.",
-    "category": "Backup Audit",
+    "title": "Auditoria de Backups Dropbox e Proxmox",
+    "subtitle": "Sistema de auditoria operacional para validar backups locais, uploads em nuvem, uso de storage e pendências críticas em ambiente multiempresa.",
+    "category": "Backup Audit / Infraestrutura",
     "language": "Python",
     "status": "Case Técnico",
     "date": "2026",
-    "summary": "Script para consultar APIs, validar evidências de backup, identificar atrasos e gerar relatórios operacionais em HTML/CSV/JSON.",
+    "summary": "Ferramenta interna para auditar backups de VMs, containers e arquivos, cruzando evidências do Proxmox com atividade no Dropbox. A solução reduz conferência manual, identifica atrasos, uploads incompletos, storages em risco e exceções conhecidas.",
     "tags": [
       "Python",
-      "Proxmox API",
       "Dropbox API",
+      "Proxmox API",
+      "rclone",
       "Backup",
-      "Relatórios"
+      "Auditoria",
+      "CSV",
+      "JSON",
+      "HTML"
     ],
     "features": [
-      "Validação de último backup e status por cliente.",
-      "Identificação de atrasos e pendências operacionais.",
-      "Geração de relatórios HTML, CSV e JSON.",
-      "Estrutura pensada para auditoria semanal e ambiente multiempresa."
+      "Auditoria de VMs e containers enviados ao Dropbox, com identificação por empresa, VMID, data, status, quantidade de backups e caminho.",
+      "Auditoria de arquivos no Dropbox com modo completo, modo cursor, cache e checkpoint para estruturas grandes.",
+      "Consulta à API do Proxmox para validar VMs, containers, jobs de backup, storages, tasks recentes, backups locais e próximas execuções.",
+      "Separação entre falha de geração local e falha de envio para nuvem, facilitando diagnóstico operacional.",
+      "Detecção de uploads incompletos e arquivos temporários do rclone, evitando que chunks sejam tratados como backups válidos.",
+      "Classificação de status como OK, ATRASADO, IRREGULAR, AMOSTRA_INSUFICIENTE, SEM_MUDANCA_DETECTADA, INCOMPLETO, NAO_EXISTE e SEM_PASTA_VMS.",
+      "Tratamento de exceções para clientes com backup migrado para outros destinos, evitando alertas indevidos.",
+      "Relatórios em HTML, CSV e JSON para leitura técnica, análise em planilha, histórico e integrações futuras."
     ],
     "tech": [
       "Python",
-      "Requests",
-      "JSON",
+      "Dropbox API",
+      "Proxmox VE API",
+      "rclone",
       "CSV",
+      "JSON",
       "HTML",
-      "APIs REST"
+      "YAML",
+      "Windows Batch",
+      "Linux Shell",
+      "Cron"
     ],
     "repository": "https://github.com/AlisonAGomez",
     "download": "",
-    "preview": "assets/automations/previews/backup-audit.png",
-    "repositoryLabel": "Ver perfil GitHub"
+    "preview": "",
+    "details": {
+      "overview": "O projeto foi desenvolvido para apoiar a rotina semanal de verificação de backups em ambiente de infraestrutura gerenciada. A solução centraliza informações de servidores, máquinas virtuais, containers, storages locais, jobs de backup e repositórios Dropbox, permitindo identificar rapidamente quais clientes exigem atenção.",
+      "problem": [
+        "A validação era feita manualmente, exigindo acesso individual a servidores, pastas no Dropbox, nomes de arquivos e logs.",
+        "Backups antigos, falhas de upload, storages cheios e arquivos temporários podiam passar despercebidos.",
+        "Havia risco de confundir chunks ou arquivos temporários do rclone com backups válidos.",
+        "Clientes com periodicidades diferentes exigiam regras flexíveis para evitar falsos positivos.",
+        "A operação precisava de uma visão consolidada por cliente, separando alertas críticos de exceções conhecidas."
+      ],
+      "architecture": [
+        "Auditoria de VMs e containers no Dropbox.",
+        "Auditoria de arquivos no Dropbox.",
+        "Auditoria de ambientes Proxmox via API.",
+        "Arquivos de configuração separados para Dropbox e Proxmox.",
+        "Pastas de logs, cache e relatórios para rastreabilidade operacional."
+      ],
+      "dropbox": [
+        "Localização de arquivos Proxmox nos padrões vzdump-qemu e vzdump-lxc.",
+        "Organização por empresa, VMID, arquivo, data, status, quantidade de backups e caminho.",
+        "Uso da data de modificação/atividade no Dropbox como evidência principal, evitando falsos positivos quando o upload ocorre após a geração local.",
+        "Identificação de arquivos temporários e incompletos, como .rclone_chunk.",
+        "Modo completo para base inicial e modo cursor para auditorias semanais incrementais.",
+        "Cache e checkpoint para continuar varreduras longas sem perder progresso."
+      ],
+      "proxmox": [
+        "Consulta à API Proxmox com token de autenticação.",
+        "Verificação de VMs, containers, storages, jobs de backup e tasks recentes.",
+        "Validação de backups locais antes da conferência do envio para Dropbox.",
+        "Separação entre backup local não gerado e backup local gerado, mas não enviado para nuvem.",
+        "Análise de uso de storage, com destaque para níveis de atenção, crítico e urgente."
+      ],
+      "statusRules": [
+        "OK: há evidência recente de backup ou alteração.",
+        "ATRASADO: o último backup está fora da janela esperada.",
+        "IRREGULAR: a periodicidade encontrada não é consistente ou precisa ser analisada.",
+        "AMOSTRA_INSUFICIENTE: há poucos backups para determinar frequência com segurança.",
+        "SEM_MUDANCA_DETECTADA: o auditor de arquivos não encontrou alteração desde a última execução.",
+        "INCOMPLETO: a auditoria encontrou atividade, mas não conseguiu varrer toda a estrutura.",
+        "NAO_EXISTE: a pasta esperada não foi encontrada.",
+        "SEM_PASTA_VMS: a pasta padrão de backups de VMs não foi localizada no Dropbox."
+      ],
+      "benefits": [
+        "Redução do tempo de conferência manual.",
+        "Maior visibilidade sobre backups críticos.",
+        "Identificação rápida de falhas de upload.",
+        "Separação entre problema local e problema de nuvem.",
+        "Padronização da rotina de auditoria semanal.",
+        "Geração de histórico em CSV, JSON e HTML.",
+        "Redução de falsos positivos por exceções e regras de periodicidade.",
+        "Facilidade para outros técnicos analisarem os resultados."
+      ],
+      "result": "O resultado foi uma solução de auditoria operacional capaz de consolidar múltiplos clientes e ambientes em relatórios de fácil leitura, aumentando a confiabilidade, rastreabilidade e eficiência da rotina de backup."
+    }
+  },
+  {
+    "id": "pendrivao-toolkit-defensivo",
+    "title": "Pendrivão Toolkit Defensivo",
+    "subtitle": "Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, DevSecOps e evidências GRC.",
+    "category": "Toolkit Técnico / Blue Team",
+    "language": "Python",
+    "status": "Case Técnico",
+    "date": "2026",
+    "summary": "Projeto modular e portátil criado para padronizar rotinas de suporte, diagnóstico, auditoria e segurança defensiva. O toolkit combina Python, PowerShell e Bash, com CLI, menu interativo, relatórios JSON/CSV/HTML, modo dry-run, validações de escopo e testes automatizados.",
+    "tags": [
+      "Python",
+      "PowerShell",
+      "Bash",
+      "Windows",
+      "Linux",
+      "Blue Team",
+      "DevSecOps",
+      "GRC",
+      "Automação"
+    ],
+    "features": [
+      "Execução portátil via pendrive, com launcher Windows e suporte a Python local ou embutido.",
+      "CLI modular com argparse e menu interativo para uso em campo por técnicos de suporte.",
+      "Módulos para inventário, saúde do Windows, softwares instalados, limpeza controlada, reparo, reset de rede e baseline de segurança.",
+      "Rotinas de rede para discovery autorizado, portscan defensivo, conexões ativas, matriz de conectividade, DNS, web check e headers de segurança.",
+      "Módulos de resposta a incidente para coleta de evidências, timeline, autoruns, serviços suspeitos e busca de IOCs.",
+      "DevSecOps com auditoria de repositórios, dependências e scanner de segredos com mascaramento.",
+      "Backup e retenção com validação de caminhos, idade de arquivos, tamanho, manifestos e quarentena para ações reversíveis.",
+      "Integrações com Zabbix e Proxmox para relatórios de problemas críticos, storage, tasks e backups.",
+      "Pacote de evidências GRC e relatório consolidado para documentação técnica e auditoria.",
+      "Testes automatizados cobrindo CLI, relatórios, portscan, baseline, secrets scan, runner seguro, limpeza e entrypoints."
+    ],
+    "tech": [
+      "Python",
+      "argparse",
+      "PowerShell",
+      "Bash",
+      "JSON",
+      "CSV",
+      "HTML",
+      "YAML",
+      "Windows Batch",
+      "Zabbix API",
+      "Proxmox API",
+      "pytest"
+    ],
+    "repository": "https://github.com/AlisonAGomez",
+    "download": "",
+    "preview": "",
+    "details": {
+      "overview": "O Pendrivão foi estruturado como uma evolução de scripts legados de suporte para uma ferramenta modular e portátil. A proposta é concentrar rotinas de suporte técnico, infraestrutura, auditoria, segurança defensiva, resposta a incidentes e geração de evidências em um único toolkit operável por menu ou CLI.",
+      "sections": [
+        {
+          "title": "Como o projeto foi criado",
+          "items": [
+            "Python foi usado como camada principal para organizar módulos, CLI e menu interativo.",
+            "argparse foi usado para criar comandos por área técnica, permitindo execução manual ou automatizada.",
+            "PowerShell e Bash foram mantidos para cenários específicos de Windows, Microsoft 365, Active Directory, Linux e retenção.",
+            "A arquitetura inclui uma engine comum de relatórios com exportação em JSON, CSV e HTML.",
+            "A ferramenta foi planejada com dry-run, confirmações, validação de escopo, mascaramento de segredos e quarentena para ações sensíveis."
+          ]
+        },
+        {
+          "title": "Arquitetura do toolkit",
+          "items": [
+            "Scripts principais e launchers para execução portátil em Windows.",
+            "Núcleo reutilizável com configuração, logs, caminhos, permissões, relatórios, runner seguro e utilidades.",
+            "Módulos operacionais para Windows, redes, auditoria, resposta a incidentes, DevSecOps, backup, Linux, integrações e GRC.",
+            "Scripts PowerShell independentes para AD, Exchange, Microsoft 365, serviços, impressoras, domínio e conectividade.",
+            "Scripts Bash para healthcheck Linux, falhas de autenticação e retenção segura.",
+            "Testes automatizados para validar parsers, relatórios, execução segura, scanners, baseline, portscan e entrypoints."
+          ]
+        },
+        {
+          "title": "Áreas atendidas",
+          "items": [
+            "Suporte técnico e field service: inventário, limpeza, reparo, reset de rede, impressoras, domínio e saúde da máquina.",
+            "Infraestrutura Windows: Defender, firewall, patches, serviços, contas sensíveis, eventos, RDP, SMBv1 e hardening.",
+            "Redes: descoberta autorizada, portas abertas, conexões ativas, matriz de conectividade, DNS e checagem web.",
+            "Segurança defensiva e SOC: triagem de eventos, IOCs, autoruns, serviços suspeitos, reputação de IP/URL e análise de headers.",
+            "DevSecOps: auditoria de repositórios, dependências e segredos com mascaramento de achados.",
+            "Backup e continuidade: validação de backups, idade de arquivos, tamanho, manifestos e retenção com quarentena.",
+            "GRC e compliance: pacote de evidências, relatórios consolidados e documentação para auditorias.",
+            "Linux Sysadmin: healthcheck, journal, disco, serviços systemd e falhas de autenticação."
+          ]
+        },
+        {
+          "title": "Módulos Windows",
+          "items": [
+            "Inventário completo da máquina com dados de SO, BIOS, CPU, memória, disco, GPU, rede, Defender e softwares.",
+            "Inventário de softwares com leitura de Registry, fontes opcionais e classificação de aplicações sensíveis ou relevantes.",
+            "Healthcheck Windows com CPU, RAM, uptime, discos, SMART básico, temperaturas quando disponíveis e processos de maior consumo.",
+            "Limpeza controlada e reparos com SFC, DISM e CHKDSK scan, sempre com proteção para evitar execução indevida.",
+            "Baseline de segurança com análise de Defender, firewall, RDP, SMBv1, UAC, BitLocker, admins locais, shares, serviços, tarefas e updates.",
+            "Event Hunter para triagem de eventos de autenticação, criação de usuários, grupos, serviços, PowerShell, Defender e falhas 4625."
+          ]
+        },
+        {
+          "title": "Módulos de rede e segurança",
+          "items": [
+            "Discovery autorizado com ping, ARP, resolução de nomes e identificação de hosts ativos.",
+            "Portscan TCP defensivo com perfis rápido, padrão e completo, validações de escopo e classificação de portas sensíveis.",
+            "Auditoria de conexões ativas e listeners com associação de PID, processo e exposição de portas.",
+            "Matriz de conectividade ICMP/TCP para validação de regras, mudanças e troubleshooting.",
+            "Checagens DNS, SPF, DMARC, MX, DKIM, headers web, disponibilidade HTTP/HTTPS e TLS.",
+            "Análise defensiva de IPs e URLs suspeitas com validação local e consultas opcionais de reputação."
+          ]
+        },
+        {
+          "title": "Resposta a incidentes e evidências",
+          "items": [
+            "Coletor de evidências com geração de ZIP contendo resumo, dados técnicos e relatórios.",
+            "Timeline básica para correlação temporal de eventos recentes.",
+            "Autoruns e serviços suspeitos para busca inicial de persistência e comportamentos anômalos.",
+            "Busca de IOCs em arquivos de texto, com detecção de IPs, domínios, hashes, e-mails e URLs.",
+            "Pacote de evidências GRC para agrupar relatórios recentes por status e severidade.",
+            "Relatório consolidado para transformar múltiplas coletas em visão executiva."
+          ]
+        },
+        {
+          "title": "PowerShell e Linux",
+          "items": [
+            "Auditoria de usuários inativos no Active Directory, contas bloqueadas, desabilitadas e senhas que nunca expiram.",
+            "Auditoria de regras de encaminhamento no Exchange Online e inbox rules.",
+            "Auditoria de licenças Microsoft 365 para identificar contas licenciadas, status e uso.",
+            "Gerenciamento de impressoras, drivers, spooler e instalação por IP.",
+            "Ingresso em domínio com validações de edição Windows, conectividade e controlador.",
+            "Healthcheck Linux, análise de falhas de autenticação e retenção segura com quarentena."
+          ]
+        },
+        {
+          "title": "Qualidade e segurança operacional",
+          "items": [
+            "Testes automatizados para reduzir regressões e validar comportamento dos módulos.",
+            "Runner seguro recusando execução direta de string e exigindo lista de argumentos.",
+            "Dry-run e confirmações explícitas para ações sensíveis.",
+            "Mascaramento de segredos em achados e relatórios.",
+            "Validação de escopo em rotinas de rede e segurança.",
+            "Quarentena em vez de exclusão direta em rotinas de limpeza e retenção."
+          ]
+        },
+        {
+          "title": "Resultado final",
+          "items": [
+            "O projeto transforma scripts isolados em um toolkit técnico padronizado e portátil.",
+            "A ferramenta reduz tempo de coleta de informações em suporte e troubleshooting.",
+            "O conjunto apoia rotinas de infraestrutura, segurança defensiva, auditoria e documentação.",
+            "Os relatórios exportáveis ajudam a apresentar evidências para operação, liderança, auditoria ou clientes.",
+            "A estrutura modular facilita evolução, manutenção e reaproveitamento dos módulos em novos cenários."
+          ]
+        }
+      ]
+    }
   },
   {
     "id": "auditoria-arquivos-cloud",

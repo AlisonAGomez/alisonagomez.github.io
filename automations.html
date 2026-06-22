@@ -30,7 +30,7 @@
     <div class="section-head reveal visible">
       <span class="section-tag">// AUTOMATIONS_INDEX</span>
       <h2>Automações</h2>
-      <p class="section-subtitle">Catálogo de scripts e ferramentas para auditoria, infraestrutura, monitoramento, resposta a incidente e operação técnica.</p>
+      <p class="section-subtitle">Catálogo de scripts, ferramentas e automações para auditoria, infraestrutura, monitoramento, backup e operação técnica.</p>
     </div>
 
     <div id="automationsGrid" class="reports-grid-page"></div>
@@ -41,14 +41,14 @@
   <script src="script.js"></script>
   <script>
     function automationCard(item) {
-      const tags = (item.tags || []).slice(0, 5).map(tag => `<span>${tag}</span>`).join("");
+      const tags = (item.tags || []).slice(0, 6).map(tag => `<span>${tag}</span>`).join("");
+
       return `
-        <article class="report-list-card automation-list-card">
-          <img src="${item.preview}" alt="Preview da automação ${item.title}" />
+        <article class="report-list-card automation-list-card automation-clean-card">
           <div class="report-list-card-content">
             <div class="report-card-meta">
               <span class="report-status">${item.language}</span>
-              <span class="report-severity">${item.status || "Case Técnico"}</span>
+              <span class="report-severity">${item.status}</span>
             </div>
 
             <h3>${item.title}</h3>
@@ -58,7 +58,7 @@
 
             <div class="project-links">
               <a href="automation/?id=${item.id}">Ver detalhes</a>
-              <a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "GitHub"}</a>
+              <a href="${item.repository}" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </div>
         </article>
