@@ -3432,6 +3432,7 @@ body {
 .report-list-card-content > p {
   display: -webkit-box !important;
   -webkit-line-clamp: 5 !important;
+  line-clamp: 5 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   line-height: 1.7 !important;
@@ -3539,6 +3540,7 @@ body {
   .report-list-card-content .card-summary,
   .report-list-card-content > p {
     -webkit-line-clamp: 6 !important;
+  line-clamp: 6 !important;
   }
 
   .report-detail-panel h1 {
@@ -3706,10 +3708,12 @@ body {
 
 .project-card:not(.featured-project) p {
   -webkit-line-clamp: 5 !important;
+  line-clamp: 5 !important;
 }
 
 .project-card.featured-project p {
   -webkit-line-clamp: 4 !important;
+  line-clamp: 4 !important;
 }
 
 /* Rodapé visual do card: tags sempre alinhadas antes dos botões */
@@ -3828,6 +3832,7 @@ body {
   .project-card.featured-project p,
   .project-card:not(.featured-project) p {
     -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
     display: block !important;
     overflow: visible !important;
   }
@@ -4048,6 +4053,7 @@ body {
 .report-list-card-content .card-summary {
   display: -webkit-box !important;
   -webkit-line-clamp: 5 !important;
+  line-clamp: 5 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   line-height: 1.75 !important;
@@ -4225,6 +4231,7 @@ body {
 .automation-list-card .card-summary {
   display: -webkit-box !important;
   -webkit-line-clamp: 5 !important;
+  line-clamp: 5 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
   line-height: 1.75 !important;
@@ -4671,3 +4678,10 @@ body {
     padding: 22px 16px !important;
   }
 }
+
+
+/* =========================================================
+   V35 - CSS: COMPATIBILIDADE LINE-CLAMP
+   Adicionada a propriedade padrão line-clamp junto do prefixo
+   -webkit-line-clamp para remover avisos do VS Code.
+========================================================= */
