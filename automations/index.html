@@ -7,7 +7,7 @@
   <title>Automações | Alison Gomez</title>
   <meta name="description" content="Catálogo de scripts, automações e ferramentas técnicas de Alison Gomez." />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="style.css?v=37" />
 </head>
 <body>
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
@@ -39,10 +39,14 @@
 
   <footer class="footer"><p>ALISON GOMEZ © <span id="year"></span> // Automações</p></footer>
 
-  <script src="script.js?v=35"></script>
+  <script src="script.js?v=37"></script>
   <script>
     function automationCard(item) {
       const tags = (item.tags || []).slice(0, 5).map(tag => `<span>${tag}</span>`).join("");
+      const hasRepository = item.repository && item.repository !== "https://github.com/AlisonAGomez";
+      const repositoryAction = hasRepository
+        ? `<a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "GitHub"}</a>`
+        : `<span class="link-disabled">Repositório em breve</span>`;
 
       return `
         <article class="report-list-card automation-list-card automation-clean-card standard-card">
@@ -61,7 +65,7 @@
 
             <div class="project-links">
               <a href="automation/?id=${item.id}">Ver detalhes</a>
-              <a href="${item.repository}" target="_blank" rel="noreferrer">GitHub</a>
+              ${repositoryAction}
             </div>
           </div>
         </article>

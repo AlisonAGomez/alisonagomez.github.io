@@ -9,7 +9,7 @@
   <meta name="description" content="Detalhes de script, automação ou ferramenta técnica." />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="style.css?v=37" />
 </head>
 
 <body>
@@ -42,7 +42,7 @@
     <p>ALISON GOMEZ © <span id="year"></span> // Automação</p>
   </footer>
 
-  <script src="script.js?v=35"></script>
+  <script src="script.js?v=37"></script>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -137,6 +137,10 @@
       const sections = Array.isArray(details.sections) && details.sections.length
         ? customSections(details.sections)
         : defaultSections(item);
+      const hasRepository = item.repository && item.repository !== "https://github.com/AlisonAGomez";
+      const repositoryAction = hasRepository
+        ? `<a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "GitHub"}</a>`
+        : `<span class="link-disabled">Repositório em breve</span>`;
 
       document.title = `${item.title} | Alison Gomez`;
 
@@ -181,7 +185,7 @@
               <p><strong>Ano:</strong> ${item.date}</p>
 
               <div class="report-action-stack">
-                <a href="${item.repository}" target="_blank" rel="noreferrer">${item.repositoryLabel || "GitHub"}</a>
+                ${repositoryAction}
                 <a href="automations/">Voltar ao catálogo</a>
               </div>
             </div>

@@ -4685,3 +4685,370 @@ body {
    Adicionada a propriedade padrão line-clamp junto do prefixo
    -webkit-line-clamp para remover avisos do VS Code.
 ========================================================= */
+
+
+/* =========================================================
+   V36 - POLIMENTO RECRUTADORES: MOBILE, CTAS E PRIMEIRA DOBRA
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body.loading {
+  overflow-y: auto !important;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+.section,
+.topbar,
+.hero,
+.reports-page,
+.report-detail-layout,
+.standard-card,
+.project-card,
+.report-list-card,
+.automation-list-card,
+.project-catalog-card,
+.report-list-card-content,
+.automation-featured-card,
+.report-detail-panel,
+.report-detail-card,
+.report-aside-card {
+  min-width: 0 !important;
+}
+
+.terminal-line,
+.hero-description,
+.section-subtitle,
+.card-main,
+.card-summary,
+.project-card h3,
+.report-list-card h3,
+.project-catalog-card h3,
+.report-detail-panel h1,
+.report-detail-panel p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.preloader {
+  transition: opacity 0.24s ease, visibility 0.24s ease !important;
+}
+
+.project-links .link-disabled,
+.report-action-stack .link-disabled {
+  min-height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(160, 176, 193, 0.24);
+  background: rgba(160, 176, 193, 0.06);
+  color: rgba(229, 240, 255, 0.72);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  line-height: 1.35;
+  padding: 12px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-inline: 16px !important;
+  }
+
+  .brand {
+    min-width: 0 !important;
+    max-width: calc(100vw - 76px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-inline: clamp(18px, 5vw, 24px) !important;
+  }
+
+  .reports-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .reports-page .section-head,
+  .reports-page .reports-grid-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+    padding-top: 104px !important;
+    padding-bottom: 64px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(44px, 15vw, 66px) !important;
+    line-height: 0.95 !important;
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+  }
+
+  .hero > .status-badge,
+  .hero > .eyebrow,
+  .hero > .terminal-line,
+  .hero > .hero-description {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .status-badge,
+  .eyebrow,
+  .terminal-line,
+  .terminal-line span {
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+
+  .hero > h2.terminal-line,
+  section.hero > h2.terminal-line {
+    font-size: clamp(24px, 8vw, 32px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-actions .btn,
+  .mini-action {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-inline: 16px !important;
+    white-space: normal !important;
+  }
+
+  .grid,
+  .grid.two,
+  .project-grid-fixed,
+  .reports-grid-page,
+  .automation-home-grid,
+  .automation-home-grid-v23,
+  .lab-grid,
+  .study-list {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .reports-grid-page {
+    justify-items: stretch !important;
+    overflow: hidden !important;
+  }
+
+  .standard-card,
+  .project-card,
+  .report-list-card,
+  .automation-list-card,
+  .project-catalog-card,
+  .automation-featured-card,
+  .report-clean-card,
+  .automation-clean-card,
+  .lab-card,
+  .study-list article {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .report-list-card-content,
+  .project-card .card-main,
+  .standard-card .card-main {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .report-list-card-content {
+    padding: 22px !important;
+    overflow: hidden !important;
+  }
+
+  .report-list-card-content h3,
+  .project-catalog-card h3,
+  .automation-list-card h3 {
+    min-height: auto !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .report-list-card-content .card-summary,
+  .project-catalog-card .card-summary,
+  .automation-list-card .card-summary {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .report-card-meta,
+  .report-tags,
+  .tags,
+  .project-links,
+  .report-featured-meta,
+  .report-featured-points {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+  }
+
+  .report-card-meta {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-items: start !important;
+  }
+
+  .report-card-meta span,
+  .report-tags span,
+  .tags span,
+  .report-featured-meta span,
+  .report-featured-points span {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .project-links,
+  .report-action-stack {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .project-links a,
+  .project-links .link-disabled,
+  .report-action-stack a,
+  .report-action-stack .link-disabled {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    padding-inline: 14px !important;
+  }
+
+  .report-list-card-content .card-summary,
+  .project-catalog-card .card-summary,
+  .automation-list-card .card-summary,
+  .project-card p,
+  .project-card.featured-project p,
+  .project-card:not(.featured-project) p {
+    display: block !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h1 {
+    font-size: clamp(40px, 14vw, 58px) !important;
+  }
+
+  .terminal-line {
+    font-size: clamp(22px, 7vw, 28px) !important;
+  }
+
+  .preloader-panel {
+    width: min(92vw, 360px) !important;
+    padding: 22px 18px !important;
+  }
+}
+
+
+/* =========================================================
+   V37 - NAVEGACAO INTERNA: BOTAO VOLTAR
+========================================================= */
+
+.page-back-shell {
+  position: fixed;
+  top: 84px;
+  left: max(20px, calc((100vw - var(--max)) / 2));
+  z-index: 29;
+  pointer-events: none;
+}
+
+.page-back-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 170, 255, 0.38);
+  background: rgba(2, 10, 22, 0.82);
+  color: var(--cyan);
+  box-shadow: 0 0 24px rgba(0, 170, 255, 0.16);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  line-height: 1;
+  padding: 12px 16px;
+  pointer-events: auto;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.page-back-button:hover,
+.page-back-button:focus-visible {
+  border-color: rgba(0, 229, 255, 0.76);
+  box-shadow: 0 0 30px rgba(0, 170, 255, 0.28);
+  color: var(--blue);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .page-back-shell {
+    top: 76px;
+    left: 18px;
+  }
+
+  .page-back-button {
+    min-height: 40px;
+    padding: 11px 14px;
+  }
+}

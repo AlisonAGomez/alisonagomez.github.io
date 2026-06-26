@@ -5,47 +5,33 @@ if (location.pathname.endsWith("/index.html")) {
 
 const typing = document.getElementById("typing");
 
-const phrases = [
-  "Suporte N1/N2/N3 • Infraestrutura • Segurança",
-  "Monitoramento com Zabbix e Grafana",
-  "Firewalls • VPNs • Redes • pfSense",
-  "Automação com Python, APIs e PowerShell",
-  "Proxmox • Linux • Windows Server",
-  "Blue Team • Logs • Phishing • Hardening",
-  "Sinalyx: análise de logs com IA"
+const desktopPhrases = [
+  "Suporte N2/N3 • Infraestrutura • Redes • Segurança defensiva",
+  "Monitoramento • Zabbix • Grafana • NOC",
+  "Firewalls • VPNs • pfSense • Troubleshooting",
+  "Automação • Python • APIs • PowerShell",
+  "Proxmox • Linux • Windows Server • Backups",
+  "Blue Team • Logs • Phishing • Hardening"
 ];
+
+const mobilePhrases = [
+  "Suporte N2/N3",
+  "Infra/Redes + Segurança",
+  "Segurança defensiva + Blue Team",
+  "Zabbix, pfSense e Proxmox",
+  "Python, PowerShell e Backups"
+];
+
+const phrases = window.matchMedia("(max-width: 720px)").matches ? mobilePhrases : desktopPhrases;
 
 if (typing) {
   let phraseIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
+  typing.textContent = phrases[phraseIndex];
 
-  function typeLoop() {
-    const current = phrases[phraseIndex];
-
-    if (!deleting) {
-      typing.textContent = current.slice(0, charIndex + 1);
-      charIndex++;
-
-      if (charIndex === current.length) {
-        deleting = true;
-        setTimeout(typeLoop, 1300);
-        return;
-      }
-    } else {
-      typing.textContent = current.slice(0, charIndex - 1);
-      charIndex--;
-
-      if (charIndex === 0) {
-        deleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-      }
-    }
-
-    setTimeout(typeLoop, deleting ? 42 : 78);
-  }
-
-  typeLoop();
+  window.setInterval(() => {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    typing.textContent = phrases[phraseIndex];
+  }, 3400);
 }
 
 const year = document.getElementById("year");
@@ -66,6 +52,42 @@ if (menuToggle && nav) {
       nav.classList.remove("active");
     });
   });
+}
+
+const internalPath = location.pathname.replace(/\/index\.html$/, "/");
+const isHomePath = internalPath === "/" || internalPath === "";
+
+if (!isHomePath) {
+  const backShell = document.createElement("div");
+  backShell.className = "page-back-shell";
+
+  const backButton = document.createElement("button");
+  backButton.type = "button";
+  backButton.className = "page-back-button";
+  backButton.setAttribute("aria-label", "Voltar para a página anterior");
+  backButton.textContent = "< Voltar";
+
+  backButton.addEventListener("click", () => {
+    let sameOriginReferrer = false;
+
+    try {
+      sameOriginReferrer = document.referrer
+        ? new URL(document.referrer).origin === location.origin
+        : false;
+    } catch {
+      sameOriginReferrer = false;
+    }
+
+    if (sameOriginReferrer && history.length > 1) {
+      history.back();
+      return;
+    }
+
+    location.href = `${location.origin}/#home`;
+  });
+
+  backShell.appendChild(backButton);
+  document.body.appendChild(backShell);
 }
 
 const revealElements = document.querySelectorAll(".reveal");
@@ -184,44 +206,30 @@ const preloaderPercent = document.getElementById("preloaderPercent");
 const preloaderStatus = document.getElementById("preloaderStatus");
 
 if (preloader && preloaderBar && preloaderPercent && preloaderStatus) {
-  const loadMessages = [
-    "Validando identidade...",
-    "Carregando módulos de interface...",
-    "Estabelecendo canal seguro...",
-    "Sincronizando portfólio...",
-    "Acesso autorizado."
-  ];
+  let closed = false;
 
-  function runPreloader() {
-    let value = 0;
-    let msgIndex = 0;
-
-    const tick = setInterval(() => {
-      value += Math.floor(Math.random() * 13) + 8;
-      if (value > 100) value = 100;
-
-      preloaderBar.style.width = value + "%";
-      preloaderPercent.textContent = value + "%";
-
-      const bucket = Math.min(loadMessages.length - 1, Math.floor((value / 100) * loadMessages.length));
-
-      if (bucket !== msgIndex || value === 100) {
-        msgIndex = bucket;
-        preloaderStatus.textContent = loadMessages[msgIndex];
-      }
-
-      if (value >= 100) {
-        clearInterval(tick);
-
-        setTimeout(() => {
-          preloader.classList.add("hide");
-          document.body.classList.remove("loading");
-        }, 360);
-      }
-    }, 105);
+  function finishPreloader() {
+    if (closed) return;
+    closed = true;
+    preloaderBar.style.width = "100%";
+    preloaderPercent.textContent = "100%";
+    preloaderStatus.textContent = "Interface pronta.";
+    preloader.classList.add("hide");
+    document.body.classList.remove("loading");
   }
 
-  window.addEventListener("load", () => {
-    setTimeout(runPreloader, 150);
-  });
+  function startPreloader() {
+    preloaderBar.style.width = "100%";
+    preloaderPercent.textContent = "100%";
+    preloaderStatus.textContent = "Portfólio carregado.";
+    window.setTimeout(finishPreloader, 280);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startPreloader, { once: true });
+  } else {
+    startPreloader();
+  }
+
+  window.setTimeout(finishPreloader, 1100);
 }

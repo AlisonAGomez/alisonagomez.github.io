@@ -9,7 +9,7 @@
   <meta name="description" content="Catálogo de projetos técnicos de Alison Gomez." />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="style.css?v=37" />
 </head>
 
 <body>
@@ -49,12 +49,15 @@
     <p>ALISON GOMEZ © <span id="year"></span> // Projetos</p>
   </footer>
 
-  <script src="script.js?v=35"></script>
+  <script src="script.js?v=37"></script>
 
   <script>
     function projectCard(project) {
       const tags = (project.tags || []).slice(0, 6).map(tag => `<span>${tag}</span>`).join("");
       const detailUrl = project.detailUrl || `project/?id=${project.id}`;
+      const repositoryAction = project.repository
+        ? `<a href="${project.repository}" target="_blank" rel="noreferrer">${project.repositoryLabel || "GitHub"}</a>`
+        : `<span class="link-disabled">${project.repositoryLabel || "Repositório em breve"}</span>`;
 
       return `
         <article class="report-list-card project-catalog-card standard-card reveal visible">
@@ -73,7 +76,7 @@
 
             <div class="project-links">
               <a href="${detailUrl}">Ver detalhes</a>
-              <a href="${project.repository}" target="_blank" rel="noreferrer">GitHub</a>
+              ${repositoryAction}
             </div>
           </div>
         </article>

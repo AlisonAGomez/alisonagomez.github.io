@@ -15,7 +15,8 @@
       "TensorFlow",
       "pfSense"
     ],
-    "repository": "https://github.com/AlisonAGomez",
+    "repository": "",
+    "repositoryLabel": "Repositório em breve",
     "documentation": "",
     "details": {
       "overview": "O Sinalyx busca melhorar o fluxo de análise de logs de firewall, apoiando analistas de redes e segurança na detecção de anomalias, priorização de eventos e investigação técnica.",
@@ -64,7 +65,8 @@
       "Backup",
       "Automação"
     ],
-    "repository": "https://github.com/AlisonAGomez",
+    "repository": "",
+    "repositoryLabel": "Repositório em breve",
     "documentation": "",
     "details": {
       "overview": "Projeto de automação para auditoria operacional de backups de VMs, containers e arquivos, integrando evidências de Proxmox, Dropbox, rclone e relatórios técnicos.",
@@ -94,7 +96,7 @@
     "id": "beewatts",
     "title": "BeeWatts — Aplicação Web para Energia Solar",
     "subtitle": "Aplicação web para estimativa de necessidade de painéis solares com base no consumo mensal.",
-    "category": "Web Infra/DevOpselopment",
+    "category": "Web Infra/DevOps",
     "status": "Projeto acadêmico",
     "date": "2025",
     "summary": "Participação técnica no front-end de uma aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.",
@@ -106,7 +108,8 @@
       "Django",
       "PostgreSQL"
     ],
-    "repository": "https://github.com/AlisonAGomez",
+    "repository": "",
+    "repositoryLabel": "Repositório em breve",
     "documentation": "",
     "details": {
       "overview": "BeeWatts é uma aplicação web voltada à análise inicial de viabilidade de energia solar, usando informações de consumo para apoiar uma estimativa de painéis.",
@@ -147,7 +150,8 @@
       "Redis",
       "MinIO"
     ],
-    "repository": "https://github.com/AlisonAGomez",
+    "repository": "",
+    "repositoryLabel": "Repositório em breve",
     "documentation": "assets/docs/veonyx/veonyx-relatorio-portfolio.pdf",
     "details": {
       "overview": "O VeoNyx é um projeto de aplicativo mobile-first de comunidades digitais criado para fãs de anime, RPG, games, fandoms, arte e grupos criativos. A proposta é oferecer comunidades com identidade própria, perfis locais personalizados, posts, wikis, chats, loja estética e ferramentas de moderação.",

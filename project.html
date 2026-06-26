@@ -9,7 +9,7 @@
   <meta name="description" content="Detalhes de projeto técnico de Alison Gomez." />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="style.css?v=37" />
 </head>
 
 <body>
@@ -41,7 +41,7 @@
     <p>ALISON GOMEZ © <span id="year"></span> // Projeto Técnico</p>
   </footer>
 
-  <script src="script.js?v=35"></script>
+  <script src="script.js?v=37"></script>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -71,6 +71,12 @@
 
     function renderProject(project) {
       const details = project.details || {};
+      const documentationAction = project.documentation
+        ? `<a href="${project.documentation}" target="_blank" rel="noreferrer">Baixar documentação</a>`
+        : `<span class="link-disabled">Documentação em breve</span>`;
+      const repositoryAction = project.repository
+        ? `<a href="${project.repository}" target="_blank" rel="noreferrer">${project.repositoryLabel || "GitHub"}</a>`
+        : `<span class="link-disabled">${project.repositoryLabel || "Repositório em breve"}</span>`;
       document.title = `${project.title} | Alison Gomez`;
 
       return `
@@ -106,8 +112,8 @@
               <p>Documento técnico com visão de produto, arquitetura, estado atual, roadmap, QA e diretrizes do projeto.</p>
 
               <div class="report-action-stack">
-                <a href="${project.documentation}" target="_blank" rel="noreferrer">Baixar documentação</a>
-                <a href="${project.repository}" target="_blank" rel="noreferrer">GitHub</a>
+                ${documentationAction}
+                ${repositoryAction}
                 <a href="./#projetos">Voltar aos projetos</a>
               </div>
             </div>
