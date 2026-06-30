@@ -22,16 +22,75 @@ const mobilePhrases = [
   "Python, PowerShell e Backups"
 ];
 
-const phrases = window.matchMedia("(max-width: 720px)").matches ? mobilePhrases : desktopPhrases;
-
 if (typing) {
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mobileQuery = window.matchMedia("(max-width: 720px)");
   let phraseIndex = 0;
-  typing.textContent = phrases[phraseIndex];
+  let charIndex = 0;
+  let deleting = false;
+  let typingTimer;
 
-  window.setInterval(() => {
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    typing.textContent = phrases[phraseIndex];
-  }, 3400);
+  function currentPhrases() {
+    return mobileQuery.matches ? mobilePhrases : desktopPhrases;
+  }
+
+  function scheduleTyping(delay) {
+    typingTimer = window.setTimeout(typePhrase, delay);
+  }
+
+  function resetTyping() {
+    window.clearTimeout(typingTimer);
+    phraseIndex = 0;
+    charIndex = 0;
+    deleting = false;
+
+    if (motionQuery.matches) {
+      typing.textContent = currentPhrases()[0];
+      return;
+    }
+
+    typing.textContent = "";
+    scheduleTyping(320);
+  }
+
+  function typePhrase() {
+    const activePhrases = currentPhrases();
+    const phrase = activePhrases[phraseIndex % activePhrases.length];
+
+    typing.textContent = phrase.slice(0, charIndex);
+
+    if (!deleting && charIndex < phrase.length) {
+      charIndex += 1;
+      scheduleTyping(46);
+      return;
+    }
+
+    if (!deleting) {
+      deleting = true;
+      scheduleTyping(1500);
+      return;
+    }
+
+    if (charIndex > 0) {
+      charIndex -= 1;
+      scheduleTyping(24);
+      return;
+    }
+
+    deleting = false;
+    phraseIndex = (phraseIndex + 1) % activePhrases.length;
+    scheduleTyping(260);
+  }
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", resetTyping);
+    motionQuery.addEventListener("change", resetTyping);
+  } else {
+    mobileQuery.addListener(resetTyping);
+    motionQuery.addListener(resetTyping);
+  }
+
+  resetTyping();
 }
 
 const year = document.getElementById("year");
