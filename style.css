@@ -5185,3 +5185,68 @@ svg {
     font-size: clamp(27px, 8.6vw, 34px) !important;
   }
 }
+
+/* Formação e Cursos: rodapé consistente nos cards */
+#formacao .cert-grid {
+  align-items: stretch;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#formacao .cert-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-height: 500px;
+}
+
+#formacao .cert-card h3 {
+  min-height: 58px;
+}
+
+#formacao .cert-card p {
+  margin-bottom: 18px;
+  line-height: 1.68;
+}
+
+#formacao .cert-card small {
+  margin-top: auto !important;
+  min-height: 42px;
+  padding-top: 12px;
+}
+
+#formacao .cert-card > .tags {
+  margin-top: 18px !important;
+  min-height: 76px;
+  align-items: flex-start !important;
+  align-content: flex-start !important;
+  gap: 12px !important;
+}
+
+@media (max-width: 1100px) {
+  #formacao .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #formacao .cert-card {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 720px) {
+  #formacao .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #formacao .cert-card {
+    min-height: auto;
+  }
+
+  #formacao .cert-card h3 {
+    min-height: auto;
+  }
+
+  #formacao .cert-card small,
+  #formacao .cert-card > .tags {
+    min-height: auto;
+  }
+}
