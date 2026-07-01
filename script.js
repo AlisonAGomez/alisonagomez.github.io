@@ -151,6 +151,15 @@ if (!isHomePath) {
 
 const revealElements = document.querySelectorAll(".reveal");
 
+function revealInitialElements() {
+  revealElements.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 90) {
+      element.classList.add("visible");
+    }
+  });
+}
+
 if ("IntersectionObserver" in window && revealElements.length) {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -165,6 +174,8 @@ if ("IntersectionObserver" in window && revealElements.length) {
   );
 
   revealElements.forEach((element) => observer.observe(element));
+  window.setTimeout(revealInitialElements, 450);
+  window.addEventListener("load", () => window.setTimeout(revealInitialElements, 180), { once: true });
 } else {
   revealElements.forEach((element) => element.classList.add("visible"));
 }
@@ -275,6 +286,12 @@ if (preloader && preloaderBar && preloaderPercent && preloaderStatus) {
     preloaderStatus.textContent = "Interface pronta.";
     preloader.classList.add("hide");
     document.body.classList.remove("loading");
+    revealInitialElements();
+    window.setTimeout(() => {
+      if (preloader.classList.contains("hide")) {
+        preloader.style.display = "none";
+      }
+    }, 560);
   }
 
   function startPreloader() {
