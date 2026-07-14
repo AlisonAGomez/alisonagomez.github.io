@@ -1,50 +1,103 @@
 [
   {
     "id": "sinalyx",
-    "title": "Sinalyx — Análise de Logs de Firewall com IA",
-    "subtitle": "Projeto autoral/TCC para organizar, analisar e priorizar eventos de logs de firewall.",
-    "category": "Cybersecurity / Data Analysis",
+    "title": "Sinalyx",
+    "subtitle": "Análise de logs de firewall pfSense com pipeline de detecção, API e dashboard operacional.",
+    "category": "Segurança defensiva / Análise de logs",
     "status": "Em desenvolvimento",
     "date": "2026",
-    "summary": "Projeto voltado à análise automatizada de logs de firewall, com parser, agregação por janelas, criação de features, modelos de IA/ML, dashboard e base de estudo com logs reais de pfSense.",
+    "benefit": "Transforma logs brutos em janelas analisáveis para apoiar triagem e investigação técnica.",
+    "summary": "Projeto autoral e TCC com parser de logs pfSense, engenharia de features, modelos de detecção, heurística, ensemble, decision engine, API FastAPI, PostgreSQL e dashboard Vue 3.",
+    "role": "Autor do projeto, responsável pelo pipeline de dados, modelos, API, persistência, documentação e integração com o dashboard.",
     "tags": [
       "Python",
-      "pandas",
-      "Vue.js",
+      "FastAPI",
+      "pfSense",
       "PostgreSQL",
-      "TensorFlow",
-      "pfSense"
+      "Vue 3",
+      "TensorFlow"
     ],
     "repository": "https://github.com/AlisonAGomez/sinalyx",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "",
+    "preview": "assets/img/cases/sinalyx/dashboard-desktop.png",
+    "gallery": [
+      {
+        "src": "assets/img/cases/sinalyx/dashboard-desktop.png",
+        "alt": "Dashboard desktop do Sinalyx com visão operacional de eventos",
+        "title": "Dashboard operacional",
+        "description": "Tela real da versão atual do frontend Vue 3."
+      },
+      {
+        "src": "assets/img/cases/sinalyx/detalhe-investigacao.png",
+        "alt": "Tela de detalhes de investigação do Sinalyx",
+        "title": "Detalhe de investigação",
+        "description": "Visão de análise usada para revisar o contexto de uma janela."
+      },
+      {
+        "src": "assets/img/cases/sinalyx/dashboard-mobile.png",
+        "alt": "Dashboard mobile do Sinalyx",
+        "title": "Interface mobile",
+        "description": "Comportamento responsivo documentado no repositório atual."
+      }
+    ],
     "details": {
-      "overview": "O Sinalyx busca melhorar o fluxo de análise de logs de firewall, apoiando analistas de redes e segurança na detecção de anomalias, priorização de eventos e investigação técnica.",
+      "overview": "O Sinalyx recebe ou coleta logs do filter.log do pfSense, normaliza os eventos, agrega informações em janelas e executa um pipeline híbrido de detecção. Os resultados são persistidos no PostgreSQL e apresentados por API e dashboard para apoiar triagem, histórico e investigação.",
+      "context": [
+        "Logs de firewall têm volume e formato que dificultam a leitura manual contínua.",
+        "Eventos relevantes precisam ser separados de ruído operacional sem esconder o contexto da análise.",
+        "O projeto é acadêmico e aplicado: busca documentar o pipeline, seus resultados e suas limitações."
+      ],
       "problem": [
-        "Logs de firewall podem ter alto volume e dificultar priorização manual.",
-        "Eventos relevantes podem ficar misturados a ruídos operacionais.",
-        "Equipes de redes e segurança precisam de visualização, filtros e indicadores para acelerar triagem.",
-        "Ambientes com pfSense e regras complexas exigem histórico e padronização de análise."
+        "Transformar registros brutos do pfSense em dados estruturados e comparáveis.",
+        "Produzir contexto por janela para reduzir decisões baseadas em uma linha isolada.",
+        "Persistir histórico e oferecer uma interface de consulta para o processo de triagem."
+      ],
+      "implemented": [
+        "Coleta SSH/SFTP e processamento incremental do filter.log do pfSense.",
+        "Parser canônico, validação e engenharia de features por janela.",
+        "Isolation Forest, autoencoder, heurística, ensemble e decision engine.",
+        "API FastAPI com autenticação, serviços, schemas e endpoints operacionais.",
+        "Persistência principal no PostgreSQL com SQLAlchemy e migrations.",
+        "Dashboard Vue 3 com login, alertas, histórico, relatórios, investigação, status e configurações.",
+        "Docker Compose para frontend, API e PostgreSQL, com dados e modelos mantidos fora da imagem."
+      ],
+      "partial": [
+        "A coleta live e o fechamento de janelas possuem modos contínuo e arquivo finito, mas dependem da configuração do ambiente pfSense.",
+        "A classificação combina modelos e regras; alguns cenários de baixo volume continuam exigindo revisão técnica.",
+        "A memória temporal existe em experimentos e validações, mas ainda não resolve com segurança todos os falsos negativos de port scan lento."
+      ],
+      "planned": [
+        "Aprimorar contexto temporal persistente para padrões lentos distribuídos entre janelas.",
+        "Consolidar calibração e validação com novos cenários sem promover automaticamente candidatos inferiores.",
+        "Evoluir observabilidade, operação contínua e documentação de implantação."
       ],
       "architecture": [
-        "Parser de logs para transformar registros em dados estruturados.",
-        "Agregação por janelas de tempo para gerar contexto de tráfego.",
-        "Criação de features para apoiar análise estatística e modelos de IA/ML.",
-        "Dashboard web para consulta, filtros e interpretação dos eventos.",
-        "Base de estudo com logs reais de pfSense em ambiente controlado."
+        "Logs pfSense",
+        "Parser",
+        "Feature engineering",
+        "Modelos + heurística",
+        "Ensemble",
+        "Decision engine",
+        "FastAPI",
+        "PostgreSQL",
+        "Dashboard Vue"
       ],
-      "features": [
-        "Ingestão e normalização de logs.",
-        "Classificação e priorização de eventos.",
-        "Dashboard para análise técnica.",
-        "Estrutura preparada para evolução com modelos de detecção.",
-        "Apoio à investigação de anomalias e padrões de tráfego."
+      "security": [
+        "Logs reais, datasets, modelos treinados, dumps, arquivos .env e artefatos de execução ficam fora do Git.",
+        "Uploads da API são restritos a arquivos .log e a paginação possui limites.",
+        "CORS, contas administrativas e segredos JWT são configuráveis por ambiente."
       ],
-      "learning": [
-        "Tratamento de dados e engenharia de features.",
-        "Arquitetura web com API, banco e dashboard.",
-        "Aplicação de IA/ML em contexto de segurança defensiva.",
-        "Organização de projeto acadêmico com aplicação prática."
+      "results": [
+        "Pipeline reproduzível desde o log bruto até a visualização operacional.",
+        "Separação clara entre análise, persistência, API e apresentação.",
+        "Documentação das decisões, experimentos que não foram promovidos e limitações atuais."
+      ],
+      "limitations": [
+        "Não substitui análise humana nem um SIEM de produção.",
+        "Padrões lentos podem perder contexto quando distribuídos entre várias janelas.",
+        "Modelos e dados reais precisam ser restaurados em ambiente privado para execução completa.",
+        "O projeto continua em desenvolvimento e validação acadêmica."
       ]
     },
     "detailUrl": "projects/?id=sinalyx"
@@ -53,165 +106,109 @@
     "id": "auditoria-backups",
     "title": "Auditor de Backups Dropbox",
     "subtitle": "Auditoria incremental de arquivos e backups de VMs armazenados no Dropbox.",
-    "category": "Backup Audit / Infraestrutura",
-    "status": "Projeto técnico / Portfólio",
+    "category": "Automação / Backup / Infraestrutura",
+    "status": "Projeto publicado",
     "date": "2026",
-    "summary": "Aplicação em Python para auditoria incremental de backups de arquivos e VMs armazenados no Dropbox, com histórico, checkpoints, políticas por empresa e relatórios PDF, CSV e JSON.",
+    "benefit": "Reduz uma rotina de quase cinco horas para 30 a 60 minutos com relatórios padronizados.",
+    "summary": "Aplicação em Python com cursores, checkpoints, histórico de VMs, políticas por empresa e relatórios PDF, CSV e JSON.",
+    "role": "Autor da automação e responsável pelas regras, integração com Dropbox, relatórios e documentação.",
     "tags": [
       "Python",
       "Dropbox API",
-      "Backup Audit",
-      "Infraestrutura",
-      "Automação",
-      "rclone"
+      "rclone",
+      "PDF",
+      "CSV",
+      "JSON"
     ],
     "repository": "https://github.com/AlisonAGomez/dropbox-backup-auditor",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "",
-    "details": {
-      "overview": "Projeto de automação para auditoria incremental de Arquivos e backups de VMs já armazenados no Dropbox, com histórico persistente e relatórios técnicos.",
-      "problem": [
-        "A conferência manual exigia navegar por diversas empresas, pastas e arquivos.",
-        "Inventários completos de estruturas muito grandes não eram adequados para uma rotina semanal.",
-        "Retenções diferentes e chunks do rclone exigiam regras que evitassem falsos alertas."
-      ],
-      "features": [
-        "Auditoria incremental por cursor e página.",
-        "Checkpoints e retomada de varreduras.",
-        "Histórico persistente dos backups de VMs no Dropbox.",
-        "Periodicidade e retenção configuráveis por ambiente.",
-        "Relatórios PDF, CSV e JSON."
-      ],
-      "learning": [
-        "Integração com a Dropbox API.",
-        "Automação operacional em Python.",
-        "Processamento incremental e persistência de histórico.",
-        "Tratamento de dados para relatórios técnicos."
-      ]
-    },
+    "preview": "assets/img/cases/auditoria-backups/relatorio-consolidado.png",
     "detailUrl": "automations/?id=auditor-backups-dropbox"
   },
   {
-    "id": "beewatts",
-    "title": "BeeWatts — Aplicação Web para Energia Solar",
-    "subtitle": "Aplicação web para estimativa de necessidade de painéis solares com base no consumo mensal.",
-    "category": "Web Infra/DevOps",
-    "status": "Projeto acadêmico",
-    "date": "2025",
-    "summary": "Participação técnica no front-end de uma aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.",
-    "tags": [
-      "HTML",
-      "CSS",
-      "Bootstrap",
-      "JavaScript",
-      "Django",
-      "PostgreSQL"
-    ],
-    "repository": "",
-    "repositoryLabel": "Repositório em breve",
-    "documentation": "",
-    "details": {
-      "overview": "BeeWatts é uma aplicação web voltada à análise inicial de viabilidade de energia solar, usando informações de consumo para apoiar uma estimativa de painéis.",
-      "problem": [
-        "Usuários nem sempre sabem dimensionar uma solução solar inicial.",
-        "Informações de consumo precisam ser transformadas em uma estimativa compreensível.",
-        "A aplicação precisava apresentar uma experiência simples e direta."
-      ],
-      "features": [
-        "Interface web responsiva.",
-        "Formulários para entrada de dados de consumo.",
-        "Organização visual das informações.",
-        "Integração com backend e banco de dados."
-      ],
-      "learning": [
-        "Construção de interface web com HTML, CSS, Bootstrap e JavaScript.",
-        "Integração com Django e PostgreSQL.",
-        "Organização de interface para projeto acadêmico."
-      ]
-    },
-    "detailUrl": "projects/?id=beewatts"
-  },
-  {
     "id": "veonyx",
-    "title": "VeoNyx — Aplicativo Mobile para Comunidades",
-    "subtitle": "Projeto mobile-first de comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética e moderação comunitária.",
-    "category": "Mobile / Infra & Produto",
+    "title": "VeoNyx",
+    "subtitle": "Aplicativo mobile-first para comunidades digitais com identidade global e local.",
+    "category": "Desenvolvimento aplicado / Produto",
     "status": "Em desenvolvimento",
     "date": "2026",
-    "summary": "VeoNyx é um aplicativo mobile-first voltado para comunidades digitais de anime, RPG, games, fandoms, arte e grupos criativos. O objetivo do projeto é demonstrar arquitetura técnica, evolução de produto, modelagem de domínio social, QA incremental e decisões técnicas.",
+    "benefit": "Demonstra integração entre aplicativo mobile, API, banco, cache, filas, storage e tempo real.",
+    "summary": "Projeto complementar com Flutter, NestJS, Prisma, PostgreSQL, Redis, BullMQ e MinIO, evoluído por funcionalidades e validações incrementais.",
+    "role": "Autor do produto, arquitetura, API, aplicativo Flutter, modelagem de dados e documentação técnica.",
     "tags": [
       "Flutter",
-      "Dart",
       "NestJS",
-      "TypeScript",
       "PostgreSQL",
-      "Prisma",
       "Redis",
+      "BullMQ",
       "MinIO"
     ],
     "repository": "https://github.com/AlisonAGomez/veonyx",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "assets/docs/veonyx/veonyx-relatorio-portfolio.pdf",
+    "preview": "assets/img/cases/veonyx/arquitetura.png",
+    "gallery": [
+      {
+        "src": "assets/img/cases/veonyx/arquitetura.png",
+        "alt": "Diagrama de arquitetura do VeoNyx",
+        "title": "Arquitetura documentada",
+        "description": "Diagrama real mantido no repositório atual do projeto."
+      }
+    ],
     "details": {
-      "overview": "O VeoNyx é um projeto de aplicativo mobile-first de comunidades digitais criado para fãs de anime, RPG, games, fandoms, arte e grupos criativos. A proposta é oferecer comunidades com identidade própria, perfis locais personalizados, posts, wikis, chats, loja estética e ferramentas de moderação.",
-      "problem": [
-        "Plataformas de comunidade como Amino e Project Z deixaram usuários sem uma alternativa moderna, estável e organizada.",
-        "Apps genéricos como Discord e Reddit nem sempre valorizam identidade visual por comunidade.",
-        "Comunidades de fandom, RPG e criação precisam de perfis locais, posts, wikis, chats e moderação contextual.",
-        "Produtos sociais com público jovem precisam crescer com segurança, QA e regras claras."
+      "overview": "O VeoNyx é um aplicativo independente de comunidades. O projeto combina Flutter no cliente, API NestJS, Prisma e PostgreSQL, Redis para presença e controle de flood, BullMQ para jobs e MinIO como storage local de desenvolvimento.",
+      "context": [
+        "O projeto explora comunidades com identidade própria e perfis locais por contexto.",
+        "A implementação é usada para praticar arquitetura de produto, domínio social, segurança, persistência e QA incremental.",
+        "O VeoNyx é apresentado como desenvolvimento complementar, não como foco principal do portfólio."
       ],
-      "differentials": [
-        "Perfil global + perfil local: o usuário pode ter uma identidade geral e uma identidade diferente em cada comunidade.",
-        "Tags comunitárias: tags livres e tags de equipe aparecem no perfil local com limites e permissões.",
-        "Comunidade como sub-app: a navegação muda quando o usuário entra em uma comunidade.",
-        "Conteúdo estruturado: posts, comentários, wikis, salvos e denúncias.",
-        "Moderação comunitária: ações de staff, logs, denúncias, banimento e punições temporárias.",
-        "Seed QA: dados de teste para validar comunidades com membros reais no ambiente local."
+      "implemented": [
+        "Autenticação JWT, cadastro, login, logout e sessão persistida no Flutter.",
+        "Perfis globais e perfis locais por comunidade.",
+        "Criação, descoberta, entrada e gestão básica de comunidades.",
+        "Posts, comentários, curtidas, salvos e wikis.",
+        "Chat comunitário com WebSocket, histórico, presença e flood control por Redis.",
+        "Moderação com denúncias, logs, warn, mute, ban e punições temporárias.",
+        "Rate limit HTTP, health operacional protegido e filas BullMQ para eventos.",
+        "Infraestrutura local com PostgreSQL, Redis e MinIO."
       ],
-      "stack": [
-        "Mobile: Flutter / Dart.",
-        "Backend: NestJS / TypeScript.",
-        "Banco de dados: PostgreSQL.",
-        "ORM: Prisma.",
-        "Cache e tempo real: Redis.",
-        "Storage local: MinIO.",
-        "Testes e QA: flutter analyze, flutter test, build APK, seed QA e testes manuais no celular."
+      "partial": [
+        "Upload de mídia e política de limpeza ainda precisam de estabilização para uso amplo.",
+        "Notificações internas e loja cosmética possuem base inicial, mas a experiência ainda está em evolução.",
+        "A última rodada de correções ainda precisa de validação consolidada em aparelho físico."
       ],
-      "features": [
-        "Autenticação e sessão com JWT.",
-        "Perfil global com avatar, banner, bio e wallet.",
-        "Criação, edição, entrada e saída de comunidades.",
-        "Perfil local por comunidade com avatar, banner, bio, cargo e tags.",
-        "Posts, comentários, curtidas e salvos.",
-        "Wikis com capa e detalhe.",
-        "Chats públicos por comunidade.",
-        "Notificações internas.",
-        "Loja cosmética inicial.",
-        "Tags livres e tags de equipe com regras de permissão.",
-        "Moderação com denúncias, logs, warn, ban e punições temporárias.",
-        "Seed QA para testar comunidades com membros de exemplo."
+      "planned": [
+        "Busca avançada com mecanismo dedicado quando a escala justificar.",
+        "Observabilidade, métricas e alertas antes de um beta amplo.",
+        "Testes E2E, paginação mais robusta e evolução de Trust & Safety.",
+        "Storage compatível com S3 e CDN em um cenário de produção."
       ],
       "architecture": [
-        "Fluxo local de desenvolvimento: Flutter App -> NestJS API -> Prisma -> PostgreSQL / Redis / MinIO.",
-        "A separação mais importante do projeto é entre a identidade global do usuário e a identidade local dentro de cada comunidade.",
-        "A arquitetura reforça organização de domínio social, API, persistência, cache, storage e validação incremental."
+        "Flutter",
+        "NestJS API",
+        "Prisma",
+        "PostgreSQL",
+        "Redis",
+        "BullMQ",
+        "MinIO",
+        "WebSocket"
       ],
-      "roadmap": [
-        "Validar a última rodada de correções no celular.",
-        "Consolidar loja/cosméticos e economia visual.",
-        "Implementar níveis, XP e check-in privado.",
-        "Criar menu/central da comunidade.",
-        "Evoluir suporte, tutoriais e categorias de conteúdo.",
-        "Planejar RPG/personagens e lojas comunitárias.",
-        "Executar fase futura de segurança, IA, bots, privacidade e Trust & Safety."
+      "security": [
+        "Token armazenado no aplicativo com flutter_secure_storage.",
+        "Rate limit global e limites menores para login e denúncias.",
+        "Rotas protegidas por JWT, moderação contextual e logs sem senhas ou tokens.",
+        "Separação entre perfil público e dados privados do usuário."
       ],
-      "learning": [
-        "Arquitetura técnica com mobile, API, banco, cache e storage.",
-        "Modelagem de domínio social com escopo global e local.",
-        "Permissões comunitárias e moderação contextual.",
-        "Uso de migrations e seeds com Prisma.",
-        "QA incremental em aparelho real.",
-        "Planejamento de produto inspirado em análise de concorrentes."
+      "tests": [
+        "Validação do schema Prisma e build da API documentados.",
+        "Smoke test HTTP para a API disponível no repositório.",
+        "Flutter analyze, flutter test e roteiro de QA manual fazem parte do fluxo de validação."
+      ],
+      "limitations": [
+        "Projeto ainda não preparado para produção pública.",
+        "Upload, busca, observabilidade e testes E2E exigem evolução.",
+        "Partes do roadmap dependem de validação em aparelho real e infraestrutura externa."
       ]
     },
     "detailUrl": "projects/?id=veonyx"

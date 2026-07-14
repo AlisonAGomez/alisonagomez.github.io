@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecionando | Alison Gomez</title>
+  <title>Página não encontrada | Alison Gomez</title>
+  <meta name="description" content="A página solicitada não foi encontrada no portfólio de Alison Gomez." />
   <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+  <link rel="stylesheet" href="/style.css?v=43" />
 </head>
-<body>
-  <p>Redirecionando...</p>
+<body class="not-found-page">
+  <main class="not-found-shell">
+    <p class="eyebrow">Erro 404</p>
+    <h1>Página não encontrada</h1>
+    <p>O endereço pode estar incorreto ou o conteúdo pode ter sido removido.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="/">Voltar ao início</a>
+      <a class="btn secondary" href="/projects/">Ver projetos</a>
+    </div>
+  </main>
 
   <script>
     const redirects = {
@@ -23,8 +34,6 @@
 
     if (target) {
       window.location.replace(target + window.location.search + window.location.hash);
-    } else {
-      window.location.replace("/#home");
     }
   </script>
 </body>

@@ -2,67 +2,135 @@
   {
     "id": "extensao-maliciosa-chrome",
     "title": "Resposta a Incidente: Extensão Maliciosa no Google Chrome",
-    "subtitle": "Investigação de browser hijacker / banking trojan com reinfecção por política do Chrome.",
-    "type": "Incident Response / Malware Analysis / Browser Security",
+    "subtitle": "Investigação de browser hijacker com reinfecção por política do Chrome em endpoint Windows.",
+    "type": "Resposta a incidente / Segurança de endpoint",
     "severity": "Alta / Crítica",
     "date": "2026-05-26",
-    "status": "Relatório Técnico",
-    "summary": "Investigação de uma extensão maliciosa que se passava por “Receita Federal”, retornava após remoção manual e apresentava risco de captura de sessão, cookies, inputs, telas e fraude bancária.",
-    "readTime": "Relatório técnico",
+    "status": "Relatório técnico sanitizado",
+    "summary": "Investigação de uma extensão maliciosa que se apresentava como Receita Federal, retornava após remoção manual e mantinha foco em bancos, webmail, cookies, inputs e sessão do navegador.",
+    "readTime": "16 páginas",
     "tags": [
       "Incident Response",
       "Chrome",
       "Browser Hijacker",
-      "Banking Trojan",
       "Chrome Policy",
+      "Windows",
       "MITRE ATT&CK"
     ],
     "pdf": "assets/reports/extensao-maliciosa-chrome/relatorio.pdf",
     "preview": "assets/reports/extensao-maliciosa-chrome/preview.png",
+    "gallery": [
+      {
+        "src": "assets/reports/extensao-maliciosa-chrome/preview.png",
+        "alt": "Capa do relatório de resposta a incidente com extensão maliciosa no Chrome",
+        "title": "Capa do relatório",
+        "description": "Documento sanitizado para portfólio profissional."
+      },
+      {
+        "src": "assets/reports/extensao-maliciosa-chrome/resumo-executivo.png",
+        "alt": "Página de sumário executivo do relatório de incidente",
+        "title": "Sumário executivo",
+        "description": "Resumo do incidente, risco, confiança e escopo analisado."
+      },
+      {
+        "src": "assets/reports/extensao-maliciosa-chrome/achados-confirmados.png",
+        "alt": "Página de achados confirmados da investigação",
+        "title": "Achados confirmados",
+        "description": "Extensão, política de persistência e foco em bancos e webmail."
+      },
+      {
+        "src": "assets/reports/extensao-maliciosa-chrome/persistencia.png",
+        "alt": "Página que documenta o mecanismo de persistência da extensão",
+        "title": "Mecanismo de persistência",
+        "description": "Fluxo de reinfecção e causa raiz técnica confirmada."
+      }
+    ],
     "details": {
-      "overview": "Foi investigado um incidente em endpoint Windows envolvendo sequestro de navegador e reinstalação persistente de uma extensão maliciosa no Google Chrome. A extensão se apresentava como “Receita Federal” e retornava após remoção manual quando o computador era reconectado à rede. A causa técnica foi atribuída a uma política do Chrome no perfil do usuário, contendo o ID da extensão e um update_url externo.",
+      "overview": "Foi investigado um incidente em endpoint Windows envolvendo sequestro de navegador e reinstalação persistente de uma extensão maliciosa no Google Chrome. A extensão retornava após remoção manual quando o computador era reconectado à rede. A investigação confirmou persistência por Machine Level User Cloud Policy no perfil do Chrome.",
+      "highlights": [
+        "A extensão maliciosa retornava após remoção manual e reconexão à rede.",
+        "A causa técnica confirmada foi uma Machine Level User Cloud Policy contendo o ID da extensão e um update_url externo.",
+        "O código e as permissões observadas eram compatíveis com captura de cookies, storage, inputs, screenshots e interação com bancos e webmail."
+      ],
+      "symptoms": [
+        "Extensão exibida como Receita Federal no Google Chrome.",
+        "Retorno do artefato depois da remoção manual.",
+        "Reinfecção observada após reconexão controlada à rede.",
+        "Comportamento de navegador associado a risco de sessão e fraude."
+      ],
+      "risk": [
+        "Roubo de sessão, cookies e dados digitados.",
+        "Captura de tela e interferência em páginas de bancos e webmail.",
+        "Reinstalação da extensão enquanto a política permanecesse ativa.",
+        "Risco de fraude bancária e comprometimento de credenciais."
+      ],
+      "scope": [
+        "Endpoint Windows e perfil do Google Chrome afetado.",
+        "Chrome User Data, Secure Preferences, Extensions, Local Extension Settings e Policy.",
+        "Chaves de Registro relacionadas a políticas, extensões, Run/RunOnce, Winlogon e PreferenceMACs.",
+        "Artefatos selecionados, strings, hashes e relatórios de triagem, sem execução de amostras maliciosas."
+      ],
       "methodology": [
         "Coleta controlada e preservação de pastas relevantes, evitando coleta indiscriminada de dados pessoais.",
-        "Cálculo de hashes para arquivos suspeitos e artefatos relacionados à extensão.",
-        "Extração passiva de strings em arquivos .job e executáveis para identificar comandos, URLs e indicadores.",
-        "Consulta de políticas do Chrome, chaves de Registro, Run/RunOnce, External Extensions, Enrollment e PreferenceMACs.",
-        "Análise do Chrome User Data, incluindo Extensions, Secure Preferences, Local Extension Settings, Policy e Machine Level User Cloud Policy.",
-        "Comparação entre o estado offline e o estado após reconexão à rede para confirmar o mecanismo de retorno da extensão."
+        "Cálculo de hashes e extração passiva de strings em artefatos selecionados.",
+        "Consulta de políticas do Chrome, Registro e estruturas do perfil do navegador.",
+        "Comparação entre o estado offline e o estado após reconexão à rede.",
+        "Separação entre evidências confirmadas, IOCs auxiliares, hipóteses e itens descartados."
       ],
       "findings": [
-        "Extensão maliciosa identificada no Google Chrome com nome exibido “Receita Federal”.",
-        "ID confirmado da extensão: lcnbblofcdgbkjhheceldgmhdlfjoaij, versão 11.0.0.",
-        "A política Machine Level User Cloud Policy continha o ID da extensão e o update_url externo, explicando a reinfecção após remoção manual.",
-        "A extensão possuía foco em bancos e webmail, com scripts direcionados a Bradesco, Banco do Brasil, Caixa, UOL, Locaweb e webmail-seguro.",
-        "Foram observadas permissões e comportamentos compatíveis com captura de cookies, storage, inputs, screenshots, overlays e comunicação externa.",
-        "Consultas em métodos clássicos de Registro não explicaram a origem, reforçando que a persistência estava associada ao perfil/política do Chrome."
+        "Extensão maliciosa identificada com nome exibido Receita Federal e versão 11.0.0.",
+        "Machine Level User Cloud Policy continha o ID da extensão e o update_url externo.",
+        "Scripts e permissões apresentavam foco em bancos, webmail, cookies, storage, inputs e screenshots.",
+        "Consultas clássicas de ExtensionInstallForcelist no Registro não explicaram a origem da reinfecção."
       ],
-      "actions": [
-        "Isolar o endpoint da rede para evitar reinstalação, comunicação externa e novas interações do artefato.",
-        "Bloquear uso do host para banco, webmail, certificado digital e troca de senhas até a conclusão da resposta.",
-        "Preservar perfil do Chrome, extensão, arquivos de policy, hashes, relatórios e artefatos suspeitos antes da remoção.",
-        "Bloquear indicadores em DNS, proxy, firewall e EDR.",
-        "Revogar sessões e tokens de contas utilizadas no endpoint afetado.",
-        "Forçar troca de senhas a partir de dispositivo limpo e revisar MFA.",
-        "Remover policy/perfil/extensão de forma controlada ou realizar reinstalação limpa do Windows.",
-        "Executar validação pós-limpeza em chrome://extensions, chrome://policy e chrome://management."
+      "persistence": [
+        "O Chrome lia a política persistida no perfil do usuário ao voltar à rede.",
+        "A política instruía a instalação ou atualização da extensão por um update_url externo.",
+        "A remoção manual da extensão não eliminava a política, permitindo o retorno do artefato.",
+        "O vetor inicial que configurou a política permaneceu não confirmado."
+      ],
+      "containment": [
+        "Isolar o endpoint da rede para interromper reinstalação e comunicação externa.",
+        "Bloquear uso do host para banco, webmail, certificado digital e troca de senhas.",
+        "Preservar perfil, extensão, políticas, hashes e artefatos antes da remoção.",
+        "Bloquear indicadores em DNS, proxy, firewall e EDR quando disponíveis.",
+        "Revogar sessões e tokens de contas utilizadas no endpoint afetado."
+      ],
+      "eradication": [
+        "Encerrar processos do Chrome e preservar as evidências relevantes.",
+        "Remover a política, o perfil comprometido e a extensão de forma controlada.",
+        "Quarentenar artefatos auxiliares após preservação.",
+        "Executar varredura offline e considerar reinstalação limpa do Windows.",
+        "Trocar senhas em dispositivo limpo e revisar MFA."
+      ],
+      "validation": [
+        "Confirmar ausência da extensão em chrome://extensions.",
+        "Confirmar ausência da política maliciosa em chrome://policy e Chrome User Data.",
+        "Reconectar de forma controlada e verificar se não há reinstalação.",
+        "Monitorar DNS, proxy e EDR para novos acessos aos indicadores.",
+        "A investigação não declara o sistema confiável sem validação pós-limpeza ou reinstalação."
       ],
       "mitre": [
-        "T1176 - Browser Extensions: extensão maliciosa instalada/gerenciada no Google Chrome.",
-        "T1036 - Masquerading: uso do nome “Receita Federal” e descrição relacionada a emissão de notas fiscais para parecer legítima.",
-        "T1113 - Screen Capture: uso de captura de tela da aba ativa.",
-        "T1539 - Steal Web Session Cookie: uso de API de cookies e coleta de sessão.",
-        "T1056 - Input Capture: scripts voltados à captura de entradas digitadas.",
-        "T1105 - Ingress Tool Transfer: evidência auxiliar de download relacionado a artefatos suspeitos.",
-        "T1053 - Scheduled Task/Job: tarefas .job foram investigadas e reclassificadas conforme relevância."
+        "T1176 - Browser Extensions: extensão maliciosa instalada e gerenciada no Chrome.",
+        "T1036 - Masquerading: uso do nome Receita Federal para parecer legítima.",
+        "T1113 - Screen Capture: captura de tela da aba ativa.",
+        "T1539 - Steal Web Session Cookie: acesso a cookies e sessão.",
+        "T1056 - Input Capture: scripts voltados à captura de entradas.",
+        "T1105 - Ingress Tool Transfer: evidência auxiliar de download de artefato.",
+        "T1053 - Scheduled Task/Job: tarefas investigadas e reclassificadas conforme relevância."
       ],
       "lessons": [
-        "Nem toda persistência de extensão aparece em ExtensionInstallForcelist clássico no Registro.",
-        "Chrome User Data, Secure Preferences, Extension Settings e Machine Level User Cloud Policy devem fazer parte do playbook de investigação.",
-        "Remover a extensão manualmente não resolve quando existe política de gerenciamento reinstalando o artefato.",
-        "Comparar o estado antes e depois da reconexão à rede pode revelar o mecanismo real de reinfecção.",
-        "Relatos do usuário são importantes, mas devem ser separados das evidências confirmadas por arquivo, hash, política ou log.",
-        "Em incidentes com foco em bancos e webmail, a recuperação deve priorizar credenciais, sessões, tokens, MFA e reinstalação limpa."
+        "Persistência de extensão nem sempre aparece no ExtensionInstallForcelist clássico do Registro.",
+        "Chrome User Data, Secure Preferences, Extension Settings e Machine Level User Cloud Policy devem integrar o playbook de investigação.",
+        "Remover somente a extensão não resolve quando uma política reinstala o artefato.",
+        "Comparar o estado antes e depois da reconexão pode revelar o mecanismo de reinfecção.",
+        "Relatos do usuário precisam ser separados de evidências confirmadas por arquivo, hash, política ou log."
+      ],
+      "limitations": [
+        "Nenhuma amostra foi executada durante a análise assistida.",
+        "O vetor inicial que inseriu a política não foi preservado de forma conclusiva.",
+        "A remoção manual anterior alterou parte do estado antes da coleta final.",
+        "Sem validação pós-limpeza ou reinstalação, não é correto afirmar que o sistema voltou a ser confiável."
       ]
     }
   }

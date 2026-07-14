@@ -4,185 +4,190 @@
   <base href="../" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Estudos & Relatórios | Alison Gomez</title>
-
-  <meta name="description" content="Catálogo e detalhes de estudos técnicos, resposta a incidentes e documentação operacional de Alison Gomez." />
-
+  <title>Relatórios e Estudos | Alison Gomez</title>
+  <meta name="description" content="Relatórios técnicos e estudos de segurança defensiva de Alison Gomez, com metodologia, evidências, limitações e recomendações." />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="canonical" href="https://alisonagomez.github.io/reports/" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=42" />
+  <link rel="stylesheet" href="style.css?v=43" />
 </head>
 
 <body>
-  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
-  <div class="scanline" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
+  <a class="skip-link" href="#reportsRoot">Pular para o conteúdo</a>
 
-  <header class="topbar">
-    <a href="./#home" class="brand"><span>[</span> ALISON GOMEZ <span>]</span></a>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav" id="nav">
-      <a href="./#home">./home</a>
-      <a href="./#estudos">./estudos</a>
-      <a href="reports/">./relatórios</a>
-      <a href="./#automacoes">./automações</a>
-      <a href="automations/">./scripts</a>
-      <a href="./#contato">./contato</a>
-    </nav>
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="./#home" aria-label="Alison Gomez, início">
+        <span class="brand-mark">AG</span>
+        <span class="brand-copy"><strong>Alison Gomez</strong><small>Segurança · Infraestrutura · Automação</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-controls="mainNavigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="mainNavigation" aria-label="Navegação principal">
+        <a href="./#home">Início</a>
+        <a href="./#cases">Cases</a>
+        <a href="projects/">Projetos</a>
+        <a href="automations/">Automações</a>
+        <a href="reports/" aria-current="page">Relatórios</a>
+        <a href="./#contato">Contato</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="section reports-page">
-    <div id="reportsRoot"></div>
-  </main>
+  <main class="page-shell" id="reportsRoot" tabindex="-1"></main>
 
-  <footer class="footer">
-    <p>ALISON GOMEZ © <span id="year"></span> // Estudos & Relatórios</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Alison Gomez</strong> · Segurança defensiva e documentação</p>
+      <p>© <span id="year"></span></p>
+    </div>
   </footer>
 
-  <script src="script.js?v=42"></script>
-
+  <script src="script.js?v=43"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(location.search);
     const reportId = params.get("id");
     const root = document.getElementById("reportsRoot");
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const description = document.querySelector('meta[name="description"]');
 
-    function list(items) {
+    const escapeHtml = (value = "") => String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    function renderTags(items = [], limit = items.length) {
       const safeItems = Array.isArray(items) ? items : [];
-      if (!safeItems.length) return `<p>Informações em revisão.</p>`;
-      return `<ul>${safeItems.map(item => `<li>${item}</li>`).join("")}</ul>`;
+      const visible = safeItems.slice(0, limit);
+      const remaining = safeItems.length - visible.length;
+      return `<div class="tag-list">${visible.map(item => `<span>${escapeHtml(item)}</span>`).join("")}${remaining > 0 ? `<span>+${remaining} tópicos</span>` : ""}</div>`;
     }
 
-    function tags(items) {
-      const safeItems = Array.isArray(items) ? items : [];
-      return `<div class="report-tags">${safeItems.map(item => `<span>${item}</span>`).join("")}</div>`;
+    function renderList(items = []) {
+      if (!Array.isArray(items) || !items.length) return "";
+      return `<ul>${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    }
+
+    function renderSection(id, title, items) {
+      if (!Array.isArray(items) || !items.length) return "";
+      return `<section class="detail-section" id="${id}"><h2>${title}</h2>${renderList(items)}</section>`;
+    }
+
+    function renderGallery(items = []) {
+      if (!Array.isArray(items) || !items.length) return "";
+      return `
+        <section class="detail-section" id="evidencias">
+          <h2>Evidências sanitizadas</h2>
+          <p>As páginas abaixo pertencem ao PDF canônico publicado. Identificadores pessoais e internos foram pseudonimizados.</p>
+          <div class="evidence-grid">
+            ${items.map(image => `
+              <figure>
+                <a href="${escapeHtml(image.src)}" target="_blank" rel="noreferrer"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt)}" loading="lazy" /></a>
+                <figcaption><strong>${escapeHtml(image.title)}</strong><span>${escapeHtml(image.description)}</span></figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        </section>
+      `;
     }
 
     function reportCard(report) {
-      const cardTags = (report.tags || []).slice(0, 6).map(tag => `<span>${tag}</span>`).join("");
-
       return `
-        <article class="report-list-card report-clean-card reveal visible">
-          <div class="report-list-card-content">
-            <div class="report-card-meta">
-              <span class="report-status">${report.status || "Relatório Técnico"}</span>
-              <span class="report-severity">${report.severity || "N/A"}</span>
-            </div>
-
-            <h3>${report.title}</h3>
-            <p>${report.summary || report.subtitle || ""}</p>
-
-            <div class="report-tags">${cardTags}</div>
-
-            <div class="project-links">
-              <a href="reports/?id=${report.id}">Ver estudo</a>
-              <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar relatório</a>
-            </div>
+        <article class="catalog-card is-featured">
+          <a class="catalog-media" href="reports/?id=${encodeURIComponent(report.id)}" tabindex="-1" aria-hidden="true"><img src="${escapeHtml(report.preview)}" alt="" loading="lazy" /></a>
+          <div class="catalog-body">
+            <div class="case-meta"><span>${escapeHtml(report.type)}</span><b class="status status-info">${escapeHtml(report.status)}</b></div>
+            <h2><a href="reports/?id=${encodeURIComponent(report.id)}">${escapeHtml(report.title)}</a></h2>
+            <p class="catalog-benefit">Investigação estruturada da persistência, causa raiz, resposta e validação.</p>
+            <p class="catalog-summary">${escapeHtml(report.summary)}</p>
+            ${renderTags(report.tags, 3)}
+            <div class="catalog-actions"><a href="reports/?id=${encodeURIComponent(report.id)}">Ler case</a><a href="${escapeHtml(report.pdf)}" target="_blank" rel="noreferrer">Baixar PDF</a></div>
           </div>
         </article>
       `;
     }
 
     function renderCatalog(reports) {
-      document.title = "Estudos & Relatórios | Alison Gomez";
-
+      document.title = "Relatórios e Estudos | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/reports/";
       root.innerHTML = `
-        <div class="section-head reveal visible">
-          <span class="section-tag">// STUDIES_INDEX</span>
-          <h2>Estudos & Relatórios</h2>
-          <p class="section-subtitle">
-            Estudos de caso, resposta a incidentes, análise técnica e documentação operacional para ambientes de infraestrutura, SOC e Blue Team.
-          </p>
-        </div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><span aria-current="page">Relatórios</span></nav>
+        <header class="catalog-header">
+          <p class="section-label">Segurança defensiva</p>
+          <h1>Relatórios e estudos técnicos</h1>
+          <p>Cases com escopo, metodologia, evidências, ações de resposta e limitações. Os documentos publicados são sanitizados para proteger dados pessoais e de ambiente.</p>
+        </header>
+        <div class="catalog-grid">${reports.map(reportCard).join("")}</div>
+      `;
+    }
 
-        <div class="reports-grid-page">
-          ${reports.map(reportCard).join("")}
-        </div>
+    function renderNotFound() {
+      document.title = "Relatório não encontrado | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/reports/";
+      root.innerHTML = `
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="reports/">Relatórios</a><span aria-hidden="true">/</span><span aria-current="page">Não encontrado</span></nav>
+        <section class="detail-hero content-not-found"><p class="section-label">Relatório não encontrado</p><h1>Este conteúdo não está disponível.</h1><p class="detail-lead">Confira o catálogo para acessar os relatórios atuais.</p><div class="detail-top-actions"><a href="reports/">Ver relatórios</a><a href="./#cases">Ver cases</a></div></section>
       `;
     }
 
     function renderReport(report) {
       const details = report.details || {};
-
-      const overview = details.overview || report.summary || report.subtitle || "Estudo técnico em preparação.";
-      const methodology = details.methodology || report.methodology || [];
-      const findings = details.findings || report.findings || report.highlights || [];
-      const actions = details.actions || report.actions || [];
-      const mitre = details.mitre || report.mitre || [];
-      const lessons = details.lessons || report.lessons || [];
-
       document.title = `${report.title} | Alison Gomez`;
+      canonical.href = `https://alisonagomez.github.io/reports/?id=${encodeURIComponent(report.id)}`;
+      description.content = report.summary;
 
       root.innerHTML = `
-        <div class="report-detail-layout">
-          <article>
-            <section class="report-detail-panel">
-              <span class="section-tag">// CASE_STUDY</span>
-              <h1>${report.title}</h1>
-              <p>${report.subtitle || report.summary || ""}</p>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="reports/">Relatórios</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(report.title)}</span></nav>
+        <div class="detail-layout">
+          <article class="detail-main">
+            <header class="detail-hero">
+              <p class="section-label">${escapeHtml(report.type)}</p>
+              <h1>${escapeHtml(report.title)}</h1>
+              <p class="detail-lead">${escapeHtml(report.subtitle)}</p>
+              <div class="detail-meta"><span>${escapeHtml(report.severity)}</span><span>${escapeHtml(report.status)}</span><span>${escapeHtml(report.date)}</span><span>${escapeHtml(report.readTime)}</span></div>
+              ${renderTags(report.tags)}
+              <div class="detail-top-actions"><a href="${escapeHtml(report.pdf)}" target="_blank" rel="noreferrer">Baixar relatório completo</a><a href="#evidencias">Ver evidências</a></div>
+            </header>
 
-              <div class="report-card-meta">
-                <span class="report-badge">${report.type || "Estudo Técnico"}</span>
-                <span class="report-severity">${report.severity || "N/A"}</span>
-                <span class="report-status">${report.status || "Relatório Técnico"}</span>
-                <span class="report-badge">${report.date || "Sem data"}</span>
-              </div>
-
-              ${tags(report.tags)}
+            <section class="detail-section" id="achados-chave">
+              <h2>Três achados relevantes</h2>
+              ${renderList(details.highlights)}
             </section>
 
-            <section class="report-detail-card">
-              <h2>Visão geral</h2>
-              <p>${overview}</p>
-            </section>
+            <nav class="detail-toc" aria-label="Sumário do case">
+              <strong>Nesta página</strong>
+              <a href="#resumo">Resumo</a><a href="#sintomas">Sintomas</a><a href="#risco">Risco</a><a href="#escopo">Escopo</a><a href="#metodologia">Metodologia</a><a href="#achados">Achados</a><a href="#persistencia">Persistência</a><a href="#contencao">Contenção</a><a href="#erradicacao">Erradicação</a><a href="#validacao">Validação</a><a href="#mitre">MITRE</a><a href="#licoes">Lições</a><a href="#limitacoes">Limitações</a><a href="#evidencias">Evidências</a>
+            </nav>
 
-            <section class="report-detail-card">
-              <h2>Metodologia</h2>
-              ${list(methodology)}
-            </section>
+            <section class="detail-section" id="resumo"><h2>Resumo do incidente</h2><p>${escapeHtml(details.overview || report.summary)}</p></section>
+            ${renderSection("sintomas", "Sintomas observados", details.symptoms)}
+            ${renderSection("risco", "Risco identificado", details.risk)}
+            ${renderSection("escopo", "Escopo analisado", details.scope)}
+            ${renderSection("metodologia", "Metodologia da investigação", details.methodology)}
+            ${renderSection("achados", "Evidências e achados confirmados", details.findings)}
+            ${renderSection("persistencia", "Mecanismo de persistência", details.persistence)}
+            ${renderSection("contencao", "Ações de contenção", details.containment)}
+            ${renderSection("erradicacao", "Ações de erradicação", details.eradication)}
+            ${renderSection("validacao", "Validação após a correção", details.validation)}
+            ${renderSection("mitre", "Mapeamento MITRE ATT&CK", details.mitre)}
+            ${renderSection("licoes", "Lições aprendidas", details.lessons)}
+            ${renderSection("limitacoes", "Limitações", details.limitations)}
+            ${renderGallery(report.gallery)}
 
-            <section class="report-detail-card">
-              <h2>Achados principais</h2>
-              ${list(findings)}
-            </section>
-
-            <section class="report-detail-card">
-              <h2>Ações de resposta</h2>
-              ${list(actions)}
-            </section>
-
-            <section class="report-detail-card">
-              <h2>MITRE ATT&CK</h2>
-              ${list(mitre)}
-            </section>
-
-            <section class="report-detail-card">
-              <h2>Lições aprendidas</h2>
-              ${list(lessons)}
+            <section class="detail-section">
+              <h2>Documentação completa</h2>
+              <p>O PDF reúne matriz de evidências, linha do tempo, indicadores, hunting, resposta e apêndices técnicos.</p>
+              <div class="detail-top-actions"><a href="${escapeHtml(report.pdf)}" target="_blank" rel="noreferrer">Baixar PDF de ${escapeHtml(report.readTime)}</a><a href="reports/">Voltar ao catálogo</a><a href="automations/">Ver automações</a></div>
             </section>
           </article>
 
-          <aside>
-            <div class="report-aside-card">
-              <h3>Relatório</h3>
-              <p>Documento técnico com investigação, evidências, análise e recomendações do caso.</p>
-
-              <div class="report-action-stack">
-                <a href="${report.pdf}" target="_blank" rel="noreferrer">Baixar relatório</a>
-                <a href="reports/">Voltar ao catálogo</a>
-              </div>
-            </div>
-
-            <div class="report-aside-card">
-              <h3>Resumo</h3>
-              <p><strong>Severidade:</strong> ${report.severity || "N/A"}</p>
-              <p><strong>Status:</strong> ${report.status || "Relatório Técnico"}</p>
-              <p><strong>Tipo:</strong> ${report.type || "Estudo técnico"}</p>
-              <p><strong>Data:</strong> ${report.date || "Sem data"}</p>
-            </div>
+          <aside class="detail-aside" aria-label="Resumo do relatório">
+            <section class="aside-card"><h2>Classificação</h2><p><strong>${escapeHtml(report.severity)}</strong></p><p>${escapeHtml(report.status)}</p></section>
+            <section class="aside-card"><h2>Documento</h2><p>${escapeHtml(report.readTime)} · ${escapeHtml(report.date)}</p><div class="report-action-stack"><a href="${escapeHtml(report.pdf)}" target="_blank" rel="noreferrer">Abrir PDF</a></div></section>
+            <section class="aside-card"><h2>Privacidade</h2><p>Documento sanitizado. Dados pessoais, nomes internos e caminhos de usuário foram pseudonimizados.</p></section>
           </aside>
         </div>
       `;
@@ -190,31 +195,20 @@
 
     fetch("assets/reports/reports.json", { cache: "no-store" })
       .then(response => {
-        if (!response.ok) throw new Error("HTTP " + response.status);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
       })
       .then(reports => {
-        if (!Array.isArray(reports) || reports.length === 0) {
-          root.innerHTML = `<div class="report-empty">Nenhum estudo cadastrado.</div>`;
+        if (!Array.isArray(reports) || !reports.length) throw new Error("Catálogo vazio");
+        if (!reportId) {
+          renderCatalog(reports);
           return;
         }
-
-        if (reportId) {
-          const report = reports.find(item => item.id === reportId) || reports[0];
-          renderReport(report);
-          return;
-        }
-
-        renderCatalog(reports);
+        const report = reports.find(item => item.id === reportId);
+        report ? renderReport(report) : renderNotFound();
       })
-      .catch((error) => {
-        root.innerHTML = `
-          <div class="report-empty">
-            Não foi possível carregar os estudos.<br>
-            Verifique o arquivo <strong>assets/reports/reports.json</strong>.<br>
-            Detalhe: ${error.message}
-          </div>
-        `;
+      .catch(error => {
+        root.innerHTML = `<section class="report-empty"><h1>Não foi possível carregar os relatórios.</h1><p>${escapeHtml(error.message)}</p></section>`;
       });
   </script>
 </body>
