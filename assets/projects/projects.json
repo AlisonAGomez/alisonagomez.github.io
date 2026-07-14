@@ -92,46 +92,6 @@
     "detailUrl": "automations/?id=auditor-backups-dropbox"
   },
   {
-    "id": "beewatts",
-    "title": "BeeWatts — Aplicação Web para Energia Solar",
-    "subtitle": "Aplicação web para estimativa de necessidade de painéis solares com base no consumo mensal.",
-    "category": "Web Infra/DevOps",
-    "status": "Projeto acadêmico",
-    "date": "2025",
-    "summary": "Participação técnica no front-end de uma aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.",
-    "tags": [
-      "HTML",
-      "CSS",
-      "Bootstrap",
-      "JavaScript",
-      "Django",
-      "PostgreSQL"
-    ],
-    "repository": "",
-    "repositoryLabel": "Repositório em breve",
-    "documentation": "",
-    "details": {
-      "overview": "BeeWatts é uma aplicação web voltada à análise inicial de viabilidade de energia solar, usando informações de consumo para apoiar uma estimativa de painéis.",
-      "problem": [
-        "Usuários nem sempre sabem dimensionar uma solução solar inicial.",
-        "Informações de consumo precisam ser transformadas em uma estimativa compreensível.",
-        "A aplicação precisava apresentar uma experiência simples e direta."
-      ],
-      "features": [
-        "Interface web responsiva.",
-        "Formulários para entrada de dados de consumo.",
-        "Organização visual das informações.",
-        "Integração com backend e banco de dados."
-      ],
-      "learning": [
-        "Construção de interface web com HTML, CSS, Bootstrap e JavaScript.",
-        "Integração com Django e PostgreSQL.",
-        "Organização de interface para projeto acadêmico."
-      ]
-    },
-    "detailUrl": "projects/?id=beewatts"
-  },
-  {
     "id": "veonyx",
     "title": "VeoNyx — Aplicativo Mobile para Comunidades",
     "subtitle": "Projeto mobile-first de comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética e moderação comunitária.",

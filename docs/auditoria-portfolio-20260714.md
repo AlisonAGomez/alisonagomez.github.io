@@ -18,7 +18,7 @@ Baseline preservada: commit `1b101c6536c414ca579cdbfea3989899cf044709`
 1. A proposta profissional divide atenção entre muitas áreas e não prioriza Segurança da Informação e automação.
 2. A home apresenta dez seções longas, com pouco contraste de importância entre cases, cursos, laboratórios e ferramentas.
 3. O visual usa excesso de caixa alta, fonte monoespaçada, bordas ciano, efeitos de terminal, scanline, ruído, glitch e preloader temático.
-4. BeeWatts permanece na home e em `assets/projects/projects.json`.
+4. Um projeto acadêmico solicitado para remoção permanece na home e em `assets/projects/projects.json`.
 5. O botão de currículo aponta para `assets/curriculo-alison-gomez.pdf`, que é um placeholder de uma página. O currículo completo está em `assets/Curriculo_Alison_Gomez_Completo.pdf`.
 6. O relatório do incidente existe em dois PDFs com hash SHA-256 idêntico.
 7. A página 404 redireciona qualquer rota desconhecida silenciosamente para a home.
@@ -55,7 +55,7 @@ Baseline preservada: commit `1b101c6536c414ca579cdbfea3989899cf044709`
 
 ## Alterações planejadas
 
-1. Remover BeeWatts e tratar a URL antiga como conteúdo não encontrado.
+1. Remover integralmente o projeto acadêmico indicado e tratar sua URL antiga como conteúdo não encontrado.
 2. Reduzir a home para hero, provas, cases, experiência, competências, formação e contato.
 3. Reposicionar o portfólio para segurança e automação, seguidas por infraestrutura, redes e suporte.
 4. Transformar Auditor e incidente Chrome em estudos de caso completos e verificáveis.
@@ -71,7 +71,7 @@ Baseline preservada: commit `1b101c6536c414ca579cdbfea3989899cf044709`
 - Reintroduzir conteúdo antigo do Auditor ao editar o JSON.
 - Fazer afirmações incompatíveis com o código atual de Sinalyx ou VeoNyx.
 - Ocultar CTAs ou provocar overflow em telas pequenas.
-- Deixar referências órfãs depois da remoção de BeeWatts ou de PDFs duplicados.
+- Deixar referências órfãs depois da remoção do projeto indicado ou de PDFs duplicados.
 
 ## Elementos que devem ser preservados
 

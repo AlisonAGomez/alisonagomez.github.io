@@ -182,6 +182,21 @@
       `;
     }
 
+    function renderNotFound() {
+      document.title = "Projeto não encontrado | Alison Gomez";
+      root.innerHTML = `
+        <section class="report-detail-panel content-not-found">
+          <span class="section-tag">PROJETO NÃO ENCONTRADO</span>
+          <h1>Este projeto não está mais disponível.</h1>
+          <p>O conteúdo solicitado foi removido ou o endereço está incorreto.</p>
+          <div class="project-links">
+            <a href="projects/">Ver catálogo de projetos</a>
+            <a href="./#cases">Ver cases principais</a>
+          </div>
+        </section>
+      `;
+    }
+
     fetch("assets/projects/projects.json", { cache: "no-store" })
       .then(response => response.json())
       .then(projects => {
@@ -191,8 +206,12 @@
         }
 
         if (projectId) {
-          const project = projects.find(entry => entry.id === projectId) || projects[0];
-          renderProject(project);
+          const project = projects.find(entry => entry.id === projectId);
+          if (project) {
+            renderProject(project);
+          } else {
+            renderNotFound();
+          }
           return;
         }
 
