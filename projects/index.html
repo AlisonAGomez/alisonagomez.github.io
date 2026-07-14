@@ -49,6 +49,8 @@
     const params = new URLSearchParams(location.search);
     const projectId = params.get("id");
     const root = document.getElementById("projectsRoot");
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const description = document.querySelector('meta[name="description"]');
 
     const escapeHtml = (value = "") => String(value)
       .replaceAll("&", "&amp;")
@@ -134,6 +136,7 @@
 
     function renderCatalog(projects) {
       document.title = "Projetos | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/projects/";
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><span aria-current="page">Projetos</span></nav>
         <header class="catalog-header">
@@ -147,6 +150,7 @@
 
     function renderNotFound() {
       document.title = "Projeto não encontrado | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/projects/";
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="projects/">Projetos</a><span aria-hidden="true">/</span><span aria-current="page">Não encontrado</span></nav>
         <section class="detail-hero content-not-found">
@@ -174,6 +178,8 @@
         : "";
 
       document.title = `${project.title} | Alison Gomez`;
+      canonical.href = `https://alisonagomez.github.io/projects/?id=${encodeURIComponent(project.id)}`;
+      description.content = `${project.title}: ${project.benefit}`;
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="projects/">Projetos</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(project.title)}</span></nav>
         <div class="detail-layout">

@@ -1,7 +1,7 @@
 # Diagnóstico do portfólio antes da reestruturação
 
-Data: 14/07/2026  
-Branch de trabalho: `codex/portfolio-seguranca-automacao`  
+Data: 14/07/2026
+Branch de trabalho: `codex/portfolio-seguranca-automacao`
 Baseline preservada: commit `1b101c6536c414ca579cdbfea3989899cf044709`
 
 ## Estrutura atual

@@ -49,6 +49,8 @@
     const params = new URLSearchParams(location.search);
     const reportId = params.get("id");
     const root = document.getElementById("reportsRoot");
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const description = document.querySelector('meta[name="description"]');
 
     const escapeHtml = (value = "") => String(value)
       .replaceAll("&", "&amp;")
@@ -110,6 +112,7 @@
 
     function renderCatalog(reports) {
       document.title = "Relatórios e Estudos | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/reports/";
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><span aria-current="page">Relatórios</span></nav>
         <header class="catalog-header">
@@ -123,6 +126,7 @@
 
     function renderNotFound() {
       document.title = "Relatório não encontrado | Alison Gomez";
+      canonical.href = "https://alisonagomez.github.io/reports/";
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="reports/">Relatórios</a><span aria-hidden="true">/</span><span aria-current="page">Não encontrado</span></nav>
         <section class="detail-hero content-not-found"><p class="section-label">Relatório não encontrado</p><h1>Este conteúdo não está disponível.</h1><p class="detail-lead">Confira o catálogo para acessar os relatórios atuais.</p><div class="detail-top-actions"><a href="reports/">Ver relatórios</a><a href="./#cases">Ver cases</a></div></section>
@@ -132,6 +136,8 @@
     function renderReport(report) {
       const details = report.details || {};
       document.title = `${report.title} | Alison Gomez`;
+      canonical.href = `https://alisonagomez.github.io/reports/?id=${encodeURIComponent(report.id)}`;
+      description.content = report.summary;
 
       root.innerHTML = `
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./">Início</a><span aria-hidden="true">/</span><a href="reports/">Relatórios</a><span aria-hidden="true">/</span><span aria-current="page">${escapeHtml(report.title)}</span></nav>

@@ -185,6 +185,39 @@ function markCurrentNavigation() {
 
 markCurrentNavigation();
 
+function initializeDetailToc() {
+  const toc = document.querySelector(".detail-toc");
+  if (!toc || toc.dataset.ready === "true" || !("IntersectionObserver" in window)) return;
+
+  const links = [...toc.querySelectorAll("a[href^='#']")];
+  const targets = links
+    .map((link) => document.getElementById(link.hash.slice(1)))
+    .filter(Boolean);
+  if (!targets.length) return;
+
+  toc.dataset.ready = "true";
+  const observer = new IntersectionObserver((entries) => {
+    const current = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!current) return;
+
+    links.forEach((link) => {
+      if (link.hash === `#${current.target.id}`) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }, { rootMargin: "-22% 0px -68%", threshold: [0, 0.1, 0.35] });
+
+  targets.forEach((target) => observer.observe(target));
+}
+
+initializeDetailToc();
+const detailObserver = new MutationObserver(() => initializeDetailToc());
+detailObserver.observe(document.body, { childList: true, subtree: true });
+
 const internalPath = location.pathname.replace(/\/index\.html$/, "/");
 const isHomePath = internalPath === "/" || internalPath === "";
 

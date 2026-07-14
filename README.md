@@ -1,26 +1,52 @@
-# Portfolio Alison Gomez
+# Portfólio Alison Gomez
 
-Portfolio profissional publicado via GitHub Pages com foco em suporte tecnico, infraestrutura, redes, automacao, analise de logs e seguranca da informacao.
+Portfólio profissional publicado no GitHub Pages com foco em Segurança da Informação e automação, seguido por infraestrutura, redes e suporte técnico.
+
+## Posicionamento
+
+O site apresenta experiências e projetos com base em evidências verificáveis:
+
+- automação da auditoria de backups em ambiente multiempresa;
+- resposta a incidente com extensão maliciosa no Chrome;
+- análise de logs de firewall com o Sinalyx;
+- suporte, monitoramento, redes e infraestrutura;
+- desenvolvimento aplicado com o VeoNyx.
+
+O conteúdo diferencia funcionalidades implementadas, itens em validação, roadmap e limitações. Dados de clientes, credenciais e identificadores internos não são publicados.
 
 ## Rotas principais
 
-- Home: https://alisonagomez.github.io/
-- Projetos: https://alisonagomez.github.io/projects/
-- Detalhe de projeto: https://alisonagomez.github.io/projects/?id=sinalyx
-- Relatorios: https://alisonagomez.github.io/reports/
-- Detalhe de relatorio: https://alisonagomez.github.io/reports/?id=extensao-maliciosa-chrome
-- Automacoes: https://alisonagomez.github.io/automations/
-- Detalhe de automacao: https://alisonagomez.github.io/automations/?id=auditor-backups-dropbox
+- Home: <https://alisonagomez.github.io/>
+- Projetos: <https://alisonagomez.github.io/projects/>
+- Sinalyx: <https://alisonagomez.github.io/projects/?id=sinalyx>
+- VeoNyx: <https://alisonagomez.github.io/projects/?id=veonyx>
+- Automações: <https://alisonagomez.github.io/automations/>
+- Auditor de Backups Dropbox: <https://alisonagomez.github.io/automations/?id=auditor-backups-dropbox>
+- Relatórios: <https://alisonagomez.github.io/reports/>
+- Incidente Chrome: <https://alisonagomez.github.io/reports/?id=extensao-maliciosa-chrome>
 
 ## Estrutura
 
-- `index.html`: pagina inicial do portfolio.
-- `projects/`, `reports/`, `automations/`: rotas publicas usadas pelo GitHub Pages.
-- `assets/projects/projects.json`: catalogo de projetos.
-- `assets/reports/reports.json`: catalogo de relatorios tecnicos.
-- `assets/automations/automations.json`: catalogo de automacoes e scripts.
-- `assets/curriculo-alison-gomez.pdf`: curriculo publicado no botao de download.
+- `index.html`: página inicial orientada a recrutadores.
+- `projects/`: catálogo e detalhes de projetos.
+- `automations/`: catálogo e estudos de caso de automações.
+- `reports/`: relatórios e cases de segurança defensiva.
+- `assets/projects/projects.json`: conteúdo estruturado dos projetos.
+- `assets/automations/automations.json`: conteúdo estruturado das automações.
+- `assets/reports/reports.json`: conteúdo estruturado dos relatórios.
+- `assets/curriculo-alison-gomez.pdf`: currículo canônico publicado.
+- `tests/validate_portfolio.py`: validação de HTML, JSON, links e assets.
 
-## Observacao
+## Validação local
 
-As rotas canonicas usam apenas pastas no plural, como `/projects/` e `/projects/?id=...`, para evitar arquivos duplicados no repositorio.
+```powershell
+py -3.10 -m http.server 8132 --bind 127.0.0.1
+py -3.10 tests\validate_portfolio.py
+node --check script.js
+```
+
+Abra <http://127.0.0.1:8132/> para revisar o resultado antes de publicar.
+
+## Publicação segura
+
+As alterações devem ser preparadas em branch própria e revisadas localmente. A branch e a tag `fallback/pre-reestrutura-portfolio-20260714` preservam o estado anterior a esta reestruturação.
