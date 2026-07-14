@@ -10,7 +10,7 @@ Portfolio profissional publicado via GitHub Pages com foco em suporte tecnico, i
 - Relatorios: https://alisonagomez.github.io/reports/
 - Detalhe de relatorio: https://alisonagomez.github.io/reports/?id=extensao-maliciosa-chrome
 - Automacoes: https://alisonagomez.github.io/automations/
-- Detalhe de automacao: https://alisonagomez.github.io/automations/?id=auditoria-backups-proxmox-dropbox
+- Detalhe de automacao: https://alisonagomez.github.io/automations/?id=auditor-backups-dropbox
 
 ## Estrutura
 

@@ -51,46 +51,45 @@
   },
   {
     "id": "auditoria-backups",
-    "title": "Automação de Auditoria de Backups",
-    "subtitle": "Automação para validar backups Dropbox e Proxmox em ambiente multiempresa.",
-    "category": "Automation / Infrastructure",
-    "status": "Case Técnico",
+    "title": "Auditor de Backups Dropbox",
+    "subtitle": "Auditoria incremental de arquivos e backups de VMs armazenados no Dropbox.",
+    "category": "Backup Audit / Infraestrutura",
+    "status": "Projeto técnico / Portfólio",
     "date": "2026",
-    "summary": "Automação em Python para verificação de backups em Dropbox e Proxmox, com foco em reduzir tempo de auditoria, identificar pendências, validar evidências e apoiar rotinas operacionais.",
+    "summary": "Aplicação em Python para auditoria incremental de backups de arquivos e VMs armazenados no Dropbox, com histórico, checkpoints, políticas por empresa e relatórios PDF, CSV e JSON.",
     "tags": [
       "Python",
-      "APIs",
-      "Proxmox",
-      "Dropbox",
-      "Backup",
-      "Automação"
+      "Dropbox API",
+      "Backup Audit",
+      "Infraestrutura",
+      "Automação",
+      "rclone"
     ],
     "repository": "https://github.com/AlisonAGomez/dropbox-backup-auditor",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "",
     "details": {
-      "overview": "Projeto de automação para auditoria operacional de backups de VMs, containers e arquivos, integrando evidências de Proxmox, Dropbox, rclone e relatórios técnicos.",
+      "overview": "Projeto de automação para auditoria incremental de Arquivos e backups de VMs já armazenados no Dropbox, com histórico persistente e relatórios técnicos.",
       "problem": [
-        "Conferência manual de backups consumia tempo operacional.",
-        "Falhas de upload, atrasos e arquivos incompletos precisavam ser identificados com rapidez.",
-        "Ambientes multiempresa exigiam padronização e rastreabilidade.",
-        "Era necessário separar falha local de geração e falha de envio para nuvem."
+        "A conferência manual exigia navegar por diversas empresas, pastas e arquivos.",
+        "Inventários completos de estruturas muito grandes não eram adequados para uma rotina semanal.",
+        "Retenções diferentes e chunks do rclone exigiam regras que evitassem falsos alertas."
       ],
       "features": [
-        "Auditoria de VMs e containers.",
-        "Auditoria de arquivos em nuvem.",
-        "Consulta de Proxmox via API.",
-        "Geração de relatórios HTML, CSV e JSON.",
-        "Classificação de status e pendências críticas."
+        "Auditoria incremental por cursor e página.",
+        "Checkpoints e retomada de varreduras.",
+        "Histórico persistente dos backups de VMs no Dropbox.",
+        "Periodicidade e retenção configuráveis por ambiente.",
+        "Relatórios PDF, CSV e JSON."
       ],
       "learning": [
-        "Integração com APIs.",
+        "Integração com a Dropbox API.",
         "Automação operacional em Python.",
-        "Tratamento de dados para relatórios.",
-        "Criação de ferramenta para ambiente multiempresa."
+        "Processamento incremental e persistência de histórico.",
+        "Tratamento de dados para relatórios técnicos."
       ]
     },
-    "detailUrl": "automations/?id=auditoria-backups-proxmox-dropbox"
+    "detailUrl": "automations/?id=auditor-backups-dropbox"
   },
   {
     "id": "beewatts",

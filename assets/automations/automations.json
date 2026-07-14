@@ -1,116 +1,108 @@
 [
   {
-    "id": "auditoria-backups-proxmox-dropbox",
-    "title": "Auditoria de Backups Dropbox e Proxmox",
-    "subtitle": "Sistema de auditoria operacional para validar backups locais, uploads em nuvem, uso de storage e pendências críticas em ambiente multiempresa.",
+    "id": "auditor-backups-dropbox",
+    "title": "Auditor de Backups Dropbox",
+    "subtitle": "Auditoria incremental de arquivos e backups de VMs armazenados no Dropbox.",
     "category": "Backup Audit / Infraestrutura",
     "language": "Python",
-    "status": "Case Técnico",
+    "status": "Projeto técnico / Portfólio",
     "date": "2026",
-    "summary": "Auditoria operacional para validar backups locais, uploads em nuvem, uso de storage, arquivos incompletos e pendências críticas em ambiente multiempresa.",
+    "summary": "Aplicação em Python para auditoria incremental de backups de arquivos e VMs armazenados no Dropbox, com histórico, checkpoints, políticas por empresa e relatórios PDF, CSV e JSON.",
     "tags": [
       "Python",
       "Dropbox API",
-      "Proxmox API",
+      "Backup Audit",
+      "Infraestrutura",
+      "Automação",
       "rclone",
-      "Backup",
-      "Auditoria",
-      "CSV",
-      "JSON",
-      "HTML"
+      "Backup"
     ],
     "features": [
-      "Auditoria de VMs e containers enviados ao Dropbox, com identificação por empresa, VMID, data, status, quantidade de backups e caminho.",
-      "Auditoria de arquivos no Dropbox com modo completo, modo cursor, cache e checkpoint para estruturas grandes.",
-      "Consulta à API do Proxmox para validar VMs, containers, jobs de backup, storages, tasks recentes, backups locais e próximas execuções.",
-      "Separação entre falha de geração local e falha de envio para nuvem, facilitando diagnóstico operacional.",
-      "Detecção de uploads incompletos e arquivos temporários do rclone, evitando que chunks sejam tratados como backups válidos.",
-      "Classificação de status como OK, ATRASADO, IRREGULAR, AMOSTRA_INSUFICIENTE, SEM_MUDANCA_DETECTADA, INCOMPLETO, NAO_EXISTE e SEM_PASTA_VMS.",
-      "Tratamento de exceções para clientes com backup migrado para outros destinos, evitando alertas indevidos.",
-      "Relatórios em HTML, CSV e JSON para leitura técnica, análise em planilha, histórico e integrações futuras."
+      "Auditoria incremental das pastas de Arquivos por cursor, com detecção de novos uploads, alterações, exclusões e rotações.",
+      "Checkpoints para preservar resultados parciais e retomar varreduras longas com segurança.",
+      "Histórico persistente dos backups de VMs armazenados no Dropbox, incluindo uploads e exclusões.",
+      "Periodicidade individual por VM e retenções adaptáveis às políticas de cada empresa.",
+      "Agrupamento de chunks do rclone para evitar duplicidade e falsos alertas.",
+      "Localização de arquivos de backup de VM fora da árvore VMS esperada.",
+      "Estratégia separada para auditoria semanal e inventários completos de grandes volumes.",
+      "Relatórios PDF, CSV e JSON, logs técnicos e pacote ZIP de suporte."
     ],
     "tech": [
       "Python",
       "Dropbox API",
-      "Proxmox VE API",
-      "rclone",
+      "PDF",
       "CSV",
       "JSON",
-      "HTML",
-      "YAML",
-      "Windows Batch",
-      "Linux Shell",
-      "Cron"
+      "rclone"
     ],
     "repository": "https://github.com/AlisonAGomez/dropbox-backup-auditor",
     "download": "",
     "preview": "",
     "details": {
-      "overview": "O projeto foi desenvolvido para apoiar a rotina semanal de verificação de backups em ambiente de infraestrutura gerenciada. A solução centraliza informações de servidores, máquinas virtuais, containers, storages locais, jobs de backup e repositórios Dropbox, permitindo identificar rapidamente quais clientes exigem atenção.",
-      "problem": [
-        "A validação era feita manualmente, exigindo acesso individual a servidores, pastas no Dropbox, nomes de arquivos e logs.",
-        "Backups antigos, falhas de upload, storages cheios e arquivos temporários podiam passar despercebidos.",
-        "Havia risco de confundir chunks ou arquivos temporários do rclone com backups válidos.",
-        "Clientes com periodicidades diferentes exigiam regras flexíveis para evitar falsos positivos.",
-        "A operação precisava de uma visão consolidada por cliente, separando alertas críticos de exceções conhecidas."
-      ],
-      "architecture": [
-        "Auditoria de VMs e containers no Dropbox.",
-        "Auditoria de arquivos no Dropbox.",
-        "Auditoria de ambientes Proxmox via API.",
-        "Arquivos de configuração separados para Dropbox e Proxmox.",
-        "Pastas de logs, cache e relatórios para rastreabilidade operacional."
-      ],
-      "dropbox": [
-        "Localização de arquivos Proxmox nos padrões vzdump-qemu e vzdump-lxc.",
-        "Organização por empresa, VMID, arquivo, data, status, quantidade de backups e caminho.",
-        "Uso da data de modificação/atividade no Dropbox como evidência principal, evitando falsos positivos quando o upload ocorre após a geração local.",
-        "Identificação de arquivos temporários e incompletos, como .rclone_chunk.",
-        "Modo completo para base inicial e modo cursor para auditorias semanais incrementais.",
-        "Cache e checkpoint para continuar varreduras longas sem perder progresso."
-      ],
-      "proxmox": [
-        "Consulta à API Proxmox com token de autenticação.",
-        "Verificação de VMs, containers, storages, jobs de backup e tasks recentes.",
-        "Validação de backups locais antes da conferência do envio para Dropbox.",
-        "Separação entre backup local não gerado e backup local gerado, mas não enviado para nuvem.",
-        "Análise de uso de storage, com destaque para níveis de atenção, crítico e urgente."
-      ],
-      "statusRules": [
-        "OK: há evidência recente de backup ou alteração.",
-        "ATRASADO: o último backup está fora da janela esperada.",
-        "IRREGULAR: a periodicidade encontrada não é consistente ou precisa ser analisada.",
-        "AMOSTRA_INSUFICIENTE: há poucos backups para determinar frequência com segurança.",
-        "SEM_MUDANCA_DETECTADA: o auditor de arquivos não encontrou alteração desde a última execução.",
-        "INCOMPLETO: a auditoria encontrou atividade, mas não conseguiu varrer toda a estrutura.",
-        "NAO_EXISTE: a pasta esperada não foi encontrada.",
-        "SEM_PASTA_VMS: a pasta padrão de backups de VMs não foi localizada no Dropbox."
-      ],
-      "benefits": [
-        "Redução do tempo de conferência manual.",
-        "Maior visibilidade sobre backups críticos.",
-        "Identificação rápida de falhas de upload.",
-        "Separação entre problema local e problema de nuvem.",
-        "Padronização da rotina de auditoria semanal.",
-        "Geração de histórico em CSV, JSON e HTML.",
-        "Redução de falsos positivos por exceções e regras de periodicidade.",
-        "Facilidade para outros técnicos analisarem os resultados."
-      ],
-      "result": "O resultado foi uma solução de auditoria operacional capaz de consolidar múltiplos clientes e ambientes em relatórios de fácil leitura, aumentando a confiabilidade, rastreabilidade e eficiência da rotina de backup."
+      "overview": "O projeto automatiza a auditoria de backups armazenados no Dropbox em um ambiente multiempresa. A aplicação acompanha alterações de arquivos por cursor, mantém um histórico persistente dos backups de VMs e gera relatórios técnicos para análise.",
+      "sections": [
+        {
+          "title": "Problema identificado",
+          "items": [
+            "A conferência manual exigia navegar por diversas empresas, pastas e arquivos.",
+            "Em estruturas com milhões de registros, inventários completos se tornavam lentos e pouco adequados para uma rotina semanal.",
+            "Retenções diferentes, arquivos divididos em chunks e estruturas distintas de diretórios aumentavam a possibilidade de falsos alertas."
+          ]
+        },
+        {
+          "title": "Arquitetura da solução",
+          "items": [
+            "A solução separa a auditoria semanal do inventário completo.",
+            "Alterações em Arquivos são processadas incrementalmente por cursor e página.",
+            "Os backups de VMs armazenados no Dropbox alimentam um histórico persistente, permitindo acompanhar uploads mesmo depois da rotação.",
+            "Checkpoints preservam resultados parciais e políticas por empresa adaptam o comportamento às características de cada ambiente."
+          ]
+        },
+        {
+          "title": "Backups de VMs no Dropbox",
+          "items": [
+            "O auditor acompanha no Dropbox arquivos de backup de VMs produzidos pelo Proxmox.",
+            "A aplicação não acessa diretamente os servidores: a análise usa apenas os arquivos e eventos já armazenados no Dropbox.",
+            "O histórico registra uploads e exclusões, periodicidades por VM, retenções variáveis e arquivos encontrados fora da árvore VMS."
+          ]
+        },
+        {
+          "title": "Resultados",
+          "items": [
+            "Redução da necessidade de inventários completos.",
+            "Continuidade segura por cursor e checkpoint.",
+            "Visão consolidada por empresa e histórico de uploads e exclusões.",
+            "Suporte a periodicidades diferentes e tratamento de chunks do rclone.",
+            "Relatórios PDF, CSV e JSON, logs técnicos e pacote automático de suporte."
+          ]
+        }
+      ]
     },
     "repositoryLabel": "Ver no GitHub",
     "gallery": [
       {
-        "title": "Menu principal do auditor",
-        "description": "Interface em terminal com opções para auditoria de VMs Dropbox, arquivos, execuções completas, incompletas, Proxmox e resumo operacional.",
-        "src": "assets/img/cases/auditoria-backups/auditoria-menu-principal.png",
-        "alt": "Menu principal do Dropbox Proxmox Backup Auditor"
+        "title": "Menu principal",
+        "description": "Interface atual com a rotina semanal, auditorias de Arquivos e VMs no Dropbox, diagnósticos e pacote de suporte.",
+        "src": "assets/img/cases/auditoria-backups/auditor-menu.png",
+        "alt": "Menu principal do Auditor de Backups Dropbox"
       },
       {
-        "title": "Relatórios gerados",
-        "description": "Saídas em CSV, HTML e JSON para consulta técnica, histórico, análise em planilha e validações futuras.",
-        "src": "assets/img/cases/auditoria-backups/auditoria-relatorios-gerados.png",
-        "alt": "Arquivos de relatórios gerados pelo auditor de backups"
+        "title": "Auditoria de Arquivos",
+        "description": "Primeira página de um relatório PDF gerado com empresas e resultados fictícios.",
+        "src": "assets/img/cases/auditoria-backups/relatorio-arquivos.png",
+        "alt": "Relatório PDF da auditoria de Arquivos"
+      },
+      {
+        "title": "Auditoria de VMs",
+        "description": "Visão simulada de periodicidade, histórico e itens que exigem verificação.",
+        "src": "assets/img/cases/auditoria-backups/relatorio-vms.png",
+        "alt": "Relatório PDF da auditoria de VMs"
+      },
+      {
+        "title": "Relatório consolidado",
+        "description": "Resumo semanal fictício com prioridades e visão consolidada por empresa.",
+        "src": "assets/img/cases/auditoria-backups/relatorio-consolidado.png",
+        "alt": "Relatório semanal consolidado"
       }
     ]
   },
