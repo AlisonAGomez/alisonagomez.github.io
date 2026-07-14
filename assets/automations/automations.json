@@ -5,9 +5,14 @@
     "subtitle": "Auditoria incremental de arquivos e backups de VMs armazenados no Dropbox.",
     "category": "Backup Audit / Infraestrutura",
     "language": "Python",
-    "status": "Projeto técnico / Portfólio",
+    "status": "Projeto publicado",
     "date": "2026",
     "summary": "Aplicação em Python para auditoria incremental de backups de arquivos e VMs armazenados no Dropbox, com histórico, checkpoints, políticas por empresa e relatórios PDF, CSV e JSON.",
+    "benefit": "Reduz uma rotina de quase cinco horas para 30 a 60 minutos e entrega uma revisão padronizada por empresa.",
+    "audience": "Operação de suporte e infraestrutura em ambiente multiempresa.",
+    "input": "Configuração por empresa, cursores do Dropbox, metadados de arquivos e nomes de backups de VMs.",
+    "output": "Relatórios PDF, CSV e JSON, histórico persistente, logs técnicos e pacote de suporte.",
+    "risk": "Reduz o risco de conferência incompleta, perda de contexto após retenção e falsos alertas por regras genéricas.",
     "tags": [
       "Python",
       "Dropbox API",
@@ -37,43 +42,148 @@
     ],
     "repository": "https://github.com/AlisonAGomez/dropbox-backup-auditor",
     "download": "",
-    "preview": "",
+    "preview": "assets/img/cases/auditoria-backups/relatorio-consolidado.png",
     "details": {
-      "overview": "O projeto automatiza a auditoria de backups armazenados no Dropbox em um ambiente multiempresa. A aplicação acompanha alterações de arquivos por cursor, mantém um histórico persistente dos backups de VMs e gera relatórios técnicos para análise.",
+      "overview": "O projeto automatiza a auditoria de backups armazenados no Dropbox em um ambiente multiempresa. A aplicação acompanha alterações de arquivos por cursor, mantém um histórico persistente dos backups de VMs e gera relatórios técnicos para análise. O currículo registra o uso da rotina em 37 empresas e a redução de quase cinco horas para 30 a 60 minutos.",
       "sections": [
         {
-          "title": "Problema identificado",
+          "id": "contexto",
+          "title": "Contexto operacional",
           "items": [
-            "A conferência manual exigia navegar por diversas empresas, pastas e arquivos.",
-            "Em estruturas com milhões de registros, inventários completos se tornavam lentos e pouco adequados para uma rotina semanal.",
-            "Retenções diferentes, arquivos divididos em chunks e estruturas distintas de diretórios aumentavam a possibilidade de falsos alertas."
+            "A rotina atende um ambiente multiempresa com estruturas e políticas de backup diferentes.",
+            "Os arquivos de backup de VMs são produzidos pelo Proxmox e posteriormente armazenados no Dropbox.",
+            "A aplicação audita somente o conteúdo já armazenado no Dropbox e não acessa diretamente os servidores Proxmox."
           ]
         },
         {
-          "title": "Arquitetura da solução",
+          "id": "processo-anterior",
+          "title": "Processo anterior",
           "items": [
-            "A solução separa a auditoria semanal do inventário completo.",
-            "Alterações em Arquivos são processadas incrementalmente por cursor e página.",
-            "Os backups de VMs armazenados no Dropbox alimentam um histórico persistente, permitindo acompanhar uploads mesmo depois da rotação.",
-            "Checkpoints preservam resultados parciais e políticas por empresa adaptam o comportamento às características de cada ambiente."
+            "A conferência exigia navegar por empresas, pastas e arquivos, comparar datas e interpretar retenções distintas.",
+            "Inventários completos de árvores grandes eram lentos e pouco adequados para a revisão semanal.",
+            "A rotina manual descrita no currículo levava quase cinco horas."
           ]
         },
         {
-          "title": "Backups de VMs no Dropbox",
+          "id": "problema",
+          "title": "Problema",
           "items": [
-            "O auditor acompanha no Dropbox arquivos de backup de VMs produzidos pelo Proxmox.",
-            "A aplicação não acessa diretamente os servidores: a análise usa apenas os arquivos e eventos já armazenados no Dropbox.",
-            "O histórico registra uploads e exclusões, periodicidades por VM, retenções variáveis e arquivos encontrados fora da árvore VMS."
+            "Retenções diferentes não podiam ser avaliadas por uma regra única.",
+            "Chunks do rclone poderiam ser contados como backups separados e gerar falsos alertas.",
+            "A rotação removia arquivos da listagem atual e eliminava contexto importante para a análise.",
+            "Timeouts e limites de paginação não podiam avançar o estado como se a execução estivesse completa."
           ]
         },
         {
-          "title": "Resultados",
+          "id": "responsabilidade",
+          "title": "Minha responsabilidade",
           "items": [
-            "Redução da necessidade de inventários completos.",
-            "Continuidade segura por cursor e checkpoint.",
-            "Visão consolidada por empresa e histórico de uploads e exclusões.",
-            "Suporte a periodicidades diferentes e tratamento de chunks do rclone.",
-            "Relatórios PDF, CSV e JSON, logs técnicos e pacote automático de suporte."
+            "Mapear o processo manual e transformar as regras operacionais em validações configuráveis.",
+            "Desenvolver a integração com a Dropbox API, persistência, relatórios e fluxo de execução.",
+            "Testar cursores, checkpoints, periodicidade, retenções, chunks e geração de PDFs.",
+            "Documentar configuração, segurança, limitações e uso da ferramenta."
+          ]
+        },
+        {
+          "id": "solucao",
+          "title": "Solução desenvolvida",
+          "items": [
+            "Auditoria incremental de Arquivos por cursor e página.",
+            "Checkpoints e retomada para execuções longas ou interrompidas.",
+            "Histórico persistente de uploads e exclusões de backups de VMs.",
+            "Periodicidade manual ou aprendida por VM e políticas específicas por empresa.",
+            "Separação entre rotina semanal, diagnóstico e inventário completo."
+          ]
+        },
+        {
+          "id": "arquitetura",
+          "title": "Arquitetura e fluxo",
+          "items": [
+            "Configuração e credenciais locais -> Dropbox API -> paginação incremental -> regras por empresa -> histórico e checkpoints -> relatórios e logs.",
+            "A rotina de Arquivos processa mudanças posteriores ao último cursor confirmado.",
+            "A rotina de VMs interpreta nomes, agrupa chunks e atualiza o histórico antes de avaliar periodicidade e retenção.",
+            "O consolidado reúne prioridades e referências para investigação nos relatórios detalhados."
+          ]
+        },
+        {
+          "id": "integracoes",
+          "title": "Integrações",
+          "items": [
+            "Dropbox API para listar alterações, páginas e metadados.",
+            "rclone como origem de arquivos divididos em chunks, tratados como um backup lógico.",
+            "Proxmox apenas como origem dos arquivos de backup de VM já enviados ao Dropbox.",
+            "Bibliotecas Python para configuração, persistência e geração de PDF, CSV e JSON."
+          ]
+        },
+        {
+          "id": "validacoes",
+          "title": "Regras de validação",
+          "items": [
+            "Cursores confirmado e pendente são tratados separadamente.",
+            "Execução incompleta não confirma o avanço do estado.",
+            "Periodicidades diária, semanal, quinzenal, mensal e irregular usam tolerâncias configuráveis.",
+            "Retenções são avaliadas por VM e empresa, sem pressupor uma quantidade fixa.",
+            "Backups fora da árvore VMS podem ser localizados por uma busca opcional."
+          ]
+        },
+        {
+          "id": "erros",
+          "title": "Tratamento de erros",
+          "items": [
+            "Checkpoints preservam páginas já processadas em caso de timeout ou interrupção.",
+            "Limites de páginas e duração evitam execuções sem controle em estruturas grandes.",
+            "Códigos de saída diferenciam execução normal, atenção operacional e erro ou execução incompleta.",
+            "Logs técnicos e pacote de suporte reúnem evidências para diagnóstico sem alterar o resultado confirmado."
+          ]
+        },
+        {
+          "id": "seguranca",
+          "title": "Segurança e credenciais",
+          "items": [
+            "Tokens e segredos são fornecidos por variáveis de ambiente ou configuração local ignorada pelo Git.",
+            "O repositório público contém apenas config.example.yaml com dados fictícios.",
+            "Logs, relatórios operacionais, cache, histórico e pacotes de suporte não são versionados.",
+            "Nomes de clientes, caminhos internos e resultados reais foram removidos das evidências públicas."
+          ]
+        },
+        {
+          "id": "relatorios",
+          "title": "Relatórios gerados",
+          "items": [
+            "PDF da auditoria de Arquivos.",
+            "PDF da auditoria de VMs.",
+            "PDF semanal consolidado.",
+            "CSV para filtros e conferência.",
+            "JSON para diagnóstico e integrações."
+          ]
+        },
+        {
+          "id": "resultado",
+          "title": "Resultado",
+          "items": [
+            "A rotina documentada no currículo passou de quase cinco horas para 30 a 60 minutos.",
+            "A revisão ganhou visão consolidada por empresa e acesso a detalhes por Arquivos e VMs.",
+            "Cursores e checkpoints reduziram a necessidade de inventários completos recorrentes.",
+            "Decisões como confirmar uma falha, ajustar uma política ou investigar um ambiente continuam sob análise humana."
+          ]
+        },
+        {
+          "id": "limitacoes",
+          "title": "Limitações",
+          "items": [
+            "A auditoria depende da disponibilidade e dos limites da Dropbox API.",
+            "A primeira baseline de estruturas grandes pode exigir mais tempo.",
+            "A detecção de VMs depende de nomes e estruturas reconhecíveis.",
+            "A ferramenta não valida a execução do hipervisor nem substitui testes de restauração."
+          ]
+        },
+        {
+          "id": "proximos-passos",
+          "title": "Próximos passos",
+          "items": [
+            "Evoluir testes com novos formatos de nomes e políticas sem expor dados reais.",
+            "Aprimorar observabilidade e indicadores de duração por etapa.",
+            "Manter a documentação e os exemplos alinhados às mudanças do código."
           ]
         }
       ]
@@ -88,19 +198,19 @@
       },
       {
         "title": "Auditoria de Arquivos",
-        "description": "Primeira página de um relatório PDF gerado com empresas e resultados fictícios.",
+        "description": "Primeira página de um relatório PDF gerado com dados de demonstração sanitizados.",
         "src": "assets/img/cases/auditoria-backups/relatorio-arquivos.png",
         "alt": "Relatório PDF da auditoria de Arquivos"
       },
       {
         "title": "Auditoria de VMs",
-        "description": "Visão simulada de periodicidade, histórico e itens que exigem verificação.",
+        "description": "Visão de periodicidade, histórico e itens que exigem verificação com dados de demonstração.",
         "src": "assets/img/cases/auditoria-backups/relatorio-vms.png",
         "alt": "Relatório PDF da auditoria de VMs"
       },
       {
         "title": "Relatório consolidado",
-        "description": "Resumo semanal fictício com prioridades e visão consolidada por empresa.",
+        "description": "Resumo semanal com prioridades e visão consolidada usando dados de demonstração.",
         "src": "assets/img/cases/auditoria-backups/relatorio-consolidado.png",
         "alt": "Relatório semanal consolidado"
       }
