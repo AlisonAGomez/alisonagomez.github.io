@@ -7,6 +7,7 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
 
 const script = read("script.js");
 const style = read("style.css");
+const circuitDecor = read("assets/img/decor/circuit-traces.svg");
 assert(!script.includes("typeNextFrame"), "Efeito de digitação não deveria existir.");
 assert(script.includes("Escape"), "Menu precisa fechar com Escape.");
 assert(script.includes('event.key !== "Tab"'), "Menu precisa conter o foco durante a navegação por teclado.");
@@ -20,7 +21,10 @@ assert(script.includes("entry.isIntersecting"), "Reveal precisa responder à ent
 assert(script.includes('matchMedia("(prefers-reduced-motion: reduce)")'), "Motion precisa consultar a preferência de redução.");
 assert(style.includes(".motion-ready .reveal-item"), "Estados visuais do reveal estão ausentes.");
 assert(style.includes("@media (prefers-reduced-motion: reduce)"), "Fallback de movimento reduzido está ausente.");
-assert(style.includes("--grid-line"), "Ambientação técnica em grid está ausente.");
+assert(style.includes("circuit-traces.svg"), "Ambientação técnica de circuitos está ausente.");
+assert(!style.includes("--grid-line"), "Grid técnico dominante não deveria permanecer.");
+assert(circuitDecor.includes("01001110"), "Textura binária sutil está ausente.");
+assert(circuitDecor.includes("<circle"), "Nós de conexão do circuito estão ausentes.");
 assert(!style.includes("@keyframes glitch"), "Glitch pesado não deve ser introduzido.");
 
 const routeHelper = script.match(/function activeNavigationHashForPath\(pathname\) \{[\s\S]*?\n\}/);

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" fill="none">
+  <g stroke="#28c4dd" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+    <path d="M0 126H112L164 74H326L368 116H474" stroke-opacity=".28"/>
+    <path d="M56 202H204L252 154H422L470 202H618L672 148H786" stroke-opacity=".38"/>
+    <path d="M0 344H132L184 292H336V210H512L566 264H708" stroke-opacity=".24"/>
+    <path d="M164 600V512L218 458H394L448 404H588V330H766L820 276H958" stroke-opacity=".34"/>
+    <path d="M1200 104H1084L1030 158H908V246H772" stroke-opacity=".3"/>
+    <path d="M1200 318H1066L1012 264H928L874 318H738" stroke-opacity=".42"/>
+    <path d="M1200 492H1040L986 438H822L768 492H650" stroke-opacity=".25"/>
+    <path d="M302 0V48L350 96" stroke-opacity=".22"/>
+    <path d="M884 0V70L836 118" stroke-opacity=".26"/>
+    <path d="M1028 600V544L974 490" stroke-opacity=".24"/>
+    <path d="M102 430H260L304 386" stroke-opacity=".18" stroke-dasharray="3 10"/>
+    <path d="M720 82H918L968 132" stroke-opacity=".2" stroke-dasharray="3 10"/>
+  </g>
+  <g fill="#071522" stroke="#92e5f0" stroke-width="1" vector-effect="non-scaling-stroke">
+    <circle cx="112" cy="126" r="4" stroke-opacity=".42"/>
+    <circle cx="326" cy="74" r="4" stroke-opacity=".34"/>
+    <circle cx="474" cy="116" r="5" stroke-opacity=".48"/>
+    <circle cx="204" cy="202" r="4" stroke-opacity=".42"/>
+    <circle cx="422" cy="154" r="5" stroke-opacity=".5"/>
+    <circle cx="618" cy="202" r="4" stroke-opacity=".36"/>
+    <circle cx="786" cy="148" r="5" stroke-opacity=".5"/>
+    <circle cx="184" cy="292" r="4" stroke-opacity=".32"/>
+    <circle cx="336" cy="210" r="5" stroke-opacity=".46"/>
+    <circle cx="708" cy="264" r="4" stroke-opacity=".38"/>
+    <circle cx="448" cy="404" r="5" stroke-opacity=".48"/>
+    <circle cx="588" cy="330" r="4" stroke-opacity=".38"/>
+    <circle cx="820" cy="276" r="5" stroke-opacity=".5"/>
+    <circle cx="1030" cy="158" r="4" stroke-opacity=".38"/>
+    <circle cx="908" cy="246" r="5" stroke-opacity=".48"/>
+    <circle cx="1012" cy="264" r="4" stroke-opacity=".42"/>
+    <circle cx="874" cy="318" r="5" stroke-opacity=".52"/>
+    <circle cx="986" cy="438" r="4" stroke-opacity=".36"/>
+    <circle cx="768" cy="492" r="5" stroke-opacity=".46"/>
+  </g>
+  <g fill="#28c4dd">
+    <rect x="40" y="120" width="12" height="12" rx="2" fill-opacity=".25"/>
+    <rect x="246" y="148" width="12" height="12" rx="2" fill-opacity=".28"/>
+    <rect x="560" y="258" width="12" height="12" rx="2" fill-opacity=".3"/>
+    <rect x="762" y="486" width="12" height="12" rx="2" fill-opacity=".24"/>
+    <rect x="1024" y="152" width="12" height="12" rx="2" fill-opacity=".28"/>
+    <rect x="1006" y="258" width="12" height="12" rx="2" fill-opacity=".3"/>
+  </g>
+  <g fill="#92e5f0" fill-opacity=".2" font-family="Consolas, monospace" font-size="10" letter-spacing="3">
+    <text x="36" y="560">01001110 00110010 00101111 00110011</text>
+    <text x="858" y="58">10110010 01000001 01010101</text>
+    <text x="842" y="552">00100011 11001010 00010110</text>
+  </g>
+</svg>
