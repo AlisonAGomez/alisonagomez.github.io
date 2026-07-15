@@ -2,27 +2,23 @@ if (location.pathname.endsWith("/index.html")) {
   history.replaceState(null, "", location.pathname.replace(/index\.html$/, "") + location.search + location.hash);
 }
 
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const year = document.getElementById("year");
-const header = document.getElementById("siteHeader") || document.querySelector("header");
+const header = document.getElementById("siteHeader");
 const menuToggle = document.getElementById("menuToggle");
-const navigation = document.getElementById("mainNavigation") || document.getElementById("nav");
+const navigation = document.getElementById("mainNavigation");
+const year = document.getElementById("year");
 
-if (year) year.textContent = new Date().getFullYear();
+if (year) year.textContent = String(new Date().getFullYear());
 
 function setMenuState(open, restoreFocus = false) {
   if (!menuToggle || !navigation) return;
-
   navigation.classList.toggle("is-open", open);
-  navigation.classList.toggle("active", open);
-  document.body.classList.toggle("nav-open", open);
   menuToggle.classList.toggle("is-open", open);
   menuToggle.setAttribute("aria-expanded", String(open));
   menuToggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  document.body.classList.toggle("nav-open", open);
 
   if (open) {
-    const firstLink = navigation.querySelector("a");
-    window.setTimeout(() => firstLink?.focus(), 40);
+    window.setTimeout(() => navigation.querySelector("a")?.focus(), 30);
   } else if (restoreFocus) {
     menuToggle.focus();
   }
@@ -30,221 +26,118 @@ function setMenuState(open, restoreFocus = false) {
 
 if (menuToggle && navigation) {
   menuToggle.addEventListener("click", () => {
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    setMenuState(!isOpen, isOpen);
+    setMenuState(menuToggle.getAttribute("aria-expanded") !== "true", true);
   });
-
-  navigation.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenuState(false));
-  });
-
+  navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenuState(false)));
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
-      setMenuState(false, true);
-    }
+    if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") setMenuState(false, true);
   });
-
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 860) setMenuState(false);
+    if (window.innerWidth > 900) setMenuState(false);
   });
 }
 
-function updateHeaderState() {
-  header?.classList.toggle("is-scrolled", window.scrollY > 18);
+function updateHeader() {
+  header?.classList.toggle("is-scrolled", window.scrollY > 12);
 }
-
-updateHeaderState();
-window.addEventListener("scroll", updateHeaderState, { passive: true });
-
-const typing = document.getElementById("typing");
-const phrases = [
-  "segurança defensiva",
-  "automação operacional",
-  "infraestrutura e redes",
-  "suporte técnico N2/N3",
-  "análise de logs e evidências"
-];
-
-if (typing) {
-  let phraseIndex = 0;
-  let characterIndex = 0;
-  let deleting = false;
-  let timer;
-
-  function schedule(delay) {
-    window.clearTimeout(timer);
-    timer = window.setTimeout(typeNextFrame, delay);
-  }
-
-  function typeNextFrame() {
-    if (reducedMotion.matches) {
-      typing.textContent = phrases[0];
-      return;
-    }
-
-    const phrase = phrases[phraseIndex];
-    typing.textContent = phrase.slice(0, characterIndex);
-
-    if (!deleting && characterIndex < phrase.length) {
-      characterIndex += 1;
-      schedule(48);
-      return;
-    }
-
-    if (!deleting) {
-      deleting = true;
-      schedule(1450);
-      return;
-    }
-
-    if (characterIndex > 0) {
-      characterIndex -= 1;
-      schedule(26);
-      return;
-    }
-
-    deleting = false;
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-    schedule(260);
-  }
-
-  function resetTyping() {
-    window.clearTimeout(timer);
-    phraseIndex = 0;
-    characterIndex = reducedMotion.matches ? phrases[0].length : 0;
-    deleting = false;
-    typing.textContent = reducedMotion.matches ? phrases[0] : "";
-    if (!reducedMotion.matches) schedule(280);
-  }
-
-  reducedMotion.addEventListener?.("change", resetTyping);
-  resetTyping();
-}
-
-const revealElements = document.querySelectorAll(".reveal");
-
-if (reducedMotion.matches || !("IntersectionObserver" in window)) {
-  revealElements.forEach((element) => element.classList.add("is-visible", "visible"));
-} else {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible", "visible");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.08, rootMargin: "0px 0px -40px" });
-
-  revealElements.forEach((element) => revealObserver.observe(element));
-}
+updateHeader();
+window.addEventListener("scroll", updateHeader, { passive: true });
+window.addEventListener("load", () => {
+  if (!location.hash) return;
+  const anchor = document.getElementById(location.hash.slice(1));
+  if (!anchor) return;
+  window.requestAnimationFrame(() => window.requestAnimationFrame(() => anchor.scrollIntoView({ block: "start" })));
+});
 
 function markCurrentNavigation() {
   if (!navigation) return;
-
   const links = [...navigation.querySelectorAll("a")];
-  links.forEach((link) => link.removeAttribute("aria-current"));
-
   const currentPath = location.pathname.replace(/\/index\.html$/, "/");
-  const isHome = currentPath === "/" || currentPath === "";
+  const onHome = currentPath === "/" || currentPath === "";
 
-  if (!isHome) {
-    const matchingLink = links.find((link) => {
-      const url = new URL(link.href, location.href);
-      return url.pathname !== "/" && currentPath.startsWith(url.pathname);
-    });
-    matchingLink?.setAttribute("aria-current", "page");
+  if (!onHome) {
+    links[0]?.setAttribute("aria-current", "page");
     return;
   }
 
   const sectionLinks = links.filter((link) => link.hash && link.pathname === location.pathname);
-  const sections = sectionLinks
-    .map((link) => document.querySelector(link.hash))
-    .filter(Boolean);
+  const sections = sectionLinks.map((link) => document.querySelector(link.hash)).filter(Boolean);
+  if (!("IntersectionObserver" in window) || !sections.length) return;
 
-  if (!sections.length || !("IntersectionObserver" in window)) {
-    sectionLinks[0]?.setAttribute("aria-current", "location");
-    return;
-  }
-
-  const activeObserver = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (!visible) return;
-
     sectionLinks.forEach((link) => {
-      if (link.hash === `#${visible.target.id}`) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
+      if (link.hash === `#${visible.target.id}`) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
     });
-  }, { rootMargin: "-30% 0px -60%", threshold: [0, 0.1, 0.5] });
-
-  sections.forEach((section) => activeObserver.observe(section));
+  }, { rootMargin: "-30% 0px -60%", threshold: [0, 0.15, 0.5] });
+  sections.forEach((section) => observer.observe(section));
 }
-
 markCurrentNavigation();
 
-function initializeDetailToc() {
-  const toc = document.querySelector(".detail-toc");
-  if (!toc || toc.dataset.ready === "true" || !("IntersectionObserver" in window)) return;
-
+const toc = document.querySelector(".case-toc");
+if (toc && "IntersectionObserver" in window) {
   const links = [...toc.querySelectorAll("a[href^='#']")];
-  const targets = links
-    .map((link) => document.getElementById(link.hash.slice(1)))
-    .filter(Boolean);
-  if (!targets.length) return;
-
-  toc.dataset.ready = "true";
+  const targets = links.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean);
   const observer = new IntersectionObserver((entries) => {
-    const current = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (!current) return;
-
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
     links.forEach((link) => {
-      if (link.hash === `#${current.target.id}`) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
+      if (link.hash === `#${visible.target.id}`) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
     });
-  }, { rootMargin: "-22% 0px -68%", threshold: [0, 0.1, 0.35] });
-
+  }, { rootMargin: "-24% 0px -66%", threshold: [0, 0.2, 0.5] });
   targets.forEach((target) => observer.observe(target));
 }
 
-initializeDetailToc();
-const detailObserver = new MutationObserver(() => initializeDetailToc());
-detailObserver.observe(document.body, { childList: true, subtree: true });
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxTitle = document.getElementById("lightboxTitle");
+const lightboxCaption = document.getElementById("lightboxCaption");
+const lightboxClose = document.getElementById("lightboxClose");
+let lightboxTrigger = null;
 
-const internalPath = location.pathname.replace(/\/index\.html$/, "/");
-const isHomePath = internalPath === "/" || internalPath === "";
-
-if (!isHomePath && !document.querySelector(".page-back-shell")) {
-  const shell = document.createElement("div");
-  shell.className = "page-back-shell";
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "page-back-button";
-  button.setAttribute("aria-label", "Voltar para a página anterior");
-  button.textContent = "← Voltar";
-
-  button.addEventListener("click", () => {
-    let sameOriginReferrer = false;
-    try {
-      sameOriginReferrer = Boolean(document.referrer) && new URL(document.referrer).origin === location.origin;
-    } catch {
-      sameOriginReferrer = false;
-    }
-
-    if (sameOriginReferrer && history.length > 1) {
-      history.back();
-    } else {
-      location.href = `${location.origin}/#home`;
-    }
+document.querySelectorAll("[data-lightbox]").forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    if (!lightbox || !lightboxImage) return;
+    event.preventDefault();
+    lightboxTrigger = trigger;
+    lightboxImage.src = trigger.href;
+    lightboxImage.alt = trigger.dataset.alt || "Evidência técnica ampliada";
+    if (lightboxTitle) lightboxTitle.textContent = trigger.dataset.title || "Evidência técnica";
+    if (lightboxCaption) lightboxCaption.textContent = trigger.dataset.caption || "";
+    lightbox.showModal();
+    lightboxClose?.focus();
   });
+});
 
-  shell.appendChild(button);
-  document.body.appendChild(shell);
+function closeLightbox() {
+  if (!lightbox?.open) return;
+  lightbox.close();
+  lightboxTrigger?.focus();
 }
+
+lightboxClose?.addEventListener("click", closeLightbox);
+lightbox?.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+lightbox?.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeLightbox();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && lightbox?.open) {
+    event.preventDefault();
+    closeLightbox();
+  }
+});
+
+document.querySelectorAll("[data-back]").forEach((button) => {
+  button.addEventListener("click", () => {
+    let sameOrigin = false;
+    try { sameOrigin = Boolean(document.referrer) && new URL(document.referrer).origin === location.origin; } catch { sameOrigin = false; }
+    if (sameOrigin && history.length > 1) history.back();
+    else location.href = `${location.origin}/#cases`;
+  });
+});
