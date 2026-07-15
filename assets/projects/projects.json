@@ -100,7 +100,7 @@
         "O projeto continua em desenvolvimento e validação acadêmica."
       ]
     },
-    "detailUrl": "projects/?id=sinalyx"
+    "detailUrl": "cases/sinalyx/"
   },
   {
     "id": "auditoria-backups",
@@ -124,18 +124,18 @@
     "repositoryLabel": "Ver no GitHub",
     "documentation": "",
     "preview": "assets/img/cases/auditoria-backups/relatorio-consolidado.png",
-    "detailUrl": "automations/?id=auditor-backups-dropbox"
+    "detailUrl": "cases/auditor-backups-dropbox/"
   },
   {
     "id": "veonyx",
     "title": "VeoNyx",
     "subtitle": "Aplicativo mobile-first para comunidades digitais com identidade global e local.",
-    "category": "Desenvolvimento aplicado / Produto",
+    "category": "Arquitetura / Estudo complementar",
     "status": "Em desenvolvimento",
     "date": "2026",
-    "benefit": "Demonstra integração entre aplicativo mobile, API, banco, cache, filas, storage e tempo real.",
-    "summary": "Projeto complementar com Flutter, NestJS, Prisma, PostgreSQL, Redis, BullMQ e MinIO, evoluído por funcionalidades e validações incrementais.",
-    "role": "Autor do produto, arquitetura, API, aplicativo Flutter, modelagem de dados e documentação técnica.",
+    "benefit": "Documenta requisitos, componentes, autenticação, dados, cache, filas, storage e moderação.",
+    "summary": "Estudo complementar de arquitetura com Flutter, NestJS, Prisma, PostgreSQL, Redis, BullMQ e MinIO, ainda em desenvolvimento local.",
+    "role": "Responsável pelo estudo de arquitetura, modelagem, integração entre componentes e documentação técnica.",
     "tags": [
       "Flutter",
       "NestJS",
@@ -147,10 +147,10 @@
     "repository": "https://github.com/AlisonAGomez/veonyx",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "assets/docs/veonyx/veonyx-relatorio-portfolio.pdf",
-    "preview": "assets/img/cases/veonyx/arquitetura.png",
+    "preview": "assets/img/cases/veonyx/arquitetura.webp",
     "gallery": [
       {
-        "src": "assets/img/cases/veonyx/arquitetura.png",
+        "src": "assets/img/cases/veonyx/arquitetura.webp",
         "alt": "Diagrama de arquitetura do VeoNyx",
         "title": "Arquitetura documentada",
         "description": "Diagrama real mantido no repositório atual do projeto."
@@ -211,6 +211,6 @@
         "Partes do roadmap dependem de validação em aparelho real e infraestrutura externa."
       ]
     },
-    "detailUrl": "projects/?id=veonyx"
+    "detailUrl": "cases/veonyx-arquitetura/"
   }
 ]

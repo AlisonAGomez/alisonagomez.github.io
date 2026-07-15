@@ -1,52 +1,39 @@
-# Portfólio Alison Gomez
+# Portfólio Alison Gomez V3
 
-Portfólio profissional publicado no GitHub Pages com foco em Segurança da Informação e automação, seguido por infraestrutura, redes e suporte técnico.
+Portfólio profissional estático com foco em Infraestrutura, Redes, Suporte N1/N2/N3, Segurança da Informação e Automação Operacional.
 
-## Posicionamento
+## Estado
 
-O site apresenta experiências e projetos com base em evidências verificáveis:
+- Branch de revisão: `codex/portfolio-v3-security-infra`
+- Produção preservada: `main` no commit `04d6daaeae422c5597a28895a3d24cd7aaac7797`
+- V1 legada: `archive/portfolio-v1-legacy` e `portfolio-v1-legacy-20260701`
+- V2 publicada: `archive/portfolio-v2-evidence` e `portfolio-v2-evidence-20260714`
 
-- automação da auditoria de backups em ambiente multiempresa;
-- resposta a incidente com extensão maliciosa no Chrome;
-- análise de logs de firewall com o Sinalyx;
-- suporte, monitoramento, redes e infraestrutura;
-- desenvolvimento aplicado com o VeoNyx.
+Nenhum merge ou deploy da V3 deve ser feito antes da aprovação visual.
 
-O conteúdo diferencia funcionalidades implementadas, itens em validação, roadmap e limitações. Dados de clientes, credenciais e identificadores internos não são publicados.
+## Rotas canônicas
 
-## Rotas principais
+- `/cases/incidente-extensao-chrome/`
+- `/cases/auditor-backups-dropbox/`
+- `/cases/sinalyx/`
+- `/cases/veonyx-arquitetura/`
+- `/labs/vmware-security-lab/`
 
-- Home: <https://alisonagomez.github.io/>
-- Projetos: <https://alisonagomez.github.io/projects/>
-- Sinalyx: <https://alisonagomez.github.io/projects/?id=sinalyx>
-- VeoNyx: <https://alisonagomez.github.io/projects/?id=veonyx>
-- Automações: <https://alisonagomez.github.io/automations/>
-- Auditor de Backups Dropbox: <https://alisonagomez.github.io/automations/?id=auditor-backups-dropbox>
-- Relatórios: <https://alisonagomez.github.io/reports/>
-- Incidente Chrome: <https://alisonagomez.github.io/reports/?id=extensao-maliciosa-chrome>
+As rotas antigas em `reports/`, `automations/` e `projects/` continuam disponíveis e redirecionam os IDs principais.
 
-## Estrutura
-
-- `index.html`: página inicial orientada a recrutadores.
-- `projects/`: catálogo e detalhes de projetos.
-- `automations/`: catálogo e estudos de caso de automações.
-- `reports/`: relatórios e cases de segurança defensiva.
-- `assets/projects/projects.json`: conteúdo estruturado dos projetos.
-- `assets/automations/automations.json`: conteúdo estruturado das automações.
-- `assets/reports/reports.json`: conteúdo estruturado dos relatórios.
-- `assets/curriculo-alison-gomez.pdf`: currículo canônico publicado.
-- `tests/validate_portfolio.py`: validação de HTML, JSON, links e assets.
-
-## Validação local
+## Revisão local
 
 ```powershell
 py -3.10 -m http.server 8132 --bind 127.0.0.1
 py -3.10 tests\validate_portfolio.py
 node --check script.js
+node tests\validate_runtime.js
 ```
 
-Abra <http://127.0.0.1:8132/> para revisar o resultado antes de publicar.
+Abra `http://127.0.0.1:8132/` para revisar a V3 localmente.
 
-## Publicação segura
+## Conteúdo e privacidade
 
-As alterações devem ser preparadas em branch própria e revisadas localmente. A branch e a tag `fallback/pre-reestrutura-portfolio-20260714` preservam o estado anterior a esta reestruturação.
+- O currículo publicado é a fonte canônica para cargos, empresas e datas.
+- Evidências do incidente e do Auditor são sanitizadas.
+- Credenciais, identificadores internos, dados reais de clientes, `.env` e artefatos de execução não fazem parte do site.

@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+screenshots/
+docs/capturas-v3/
+docs/RELATORIO_VALIDACAO_V3.md
+docs/auditoria-portfolio-20260714.md
+.lighthouseci/
+lighthouse-*.report.*

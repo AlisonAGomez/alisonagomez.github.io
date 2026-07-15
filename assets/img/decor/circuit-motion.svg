@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <style>
+    .flow { fill: none; stroke: #92e5f0; stroke-linecap: round; stroke-width: 2; stroke-dasharray: 5 520; stroke-dashoffset: 520; opacity: 0; vector-effect: non-scaling-stroke; animation: circuit-flow 18s linear infinite; animation-delay: -13.4s; }
+    .flow-b { animation-delay: -8s; animation-duration: 21s; }
+    .node-pulse { fill: #28c4dd; opacity: .16; transform-box: fill-box; transform-origin: center; animation: node-glow 14s ease-in-out infinite; animation-delay: -10.8s; }
+    .node-pulse-b { animation-delay: -4s; }
+    .binary-text { fill: #92e5f0; font: 10px Consolas, monospace; letter-spacing: 3px; opacity: .1; animation: binary-breathe 15s ease-in-out infinite; animation-delay: -7s; }
+    @keyframes circuit-flow {
+      0%, 70% { opacity: 0; stroke-dashoffset: 520; }
+      75% { opacity: .72; }
+      92% { opacity: .48; stroke-dashoffset: -80; }
+      96%, 100% { opacity: 0; stroke-dashoffset: -150; }
+    }
+    @keyframes node-glow {
+      0%, 74%, 100% { opacity: .16; filter: none; transform: scale(.9); }
+      81% { opacity: .85; filter: drop-shadow(0 0 5px #28c4dd); transform: scale(1.2); }
+      88% { opacity: .26; filter: none; transform: scale(1); }
+    }
+    @keyframes binary-breathe {
+      0%, 100% { opacity: .08; }
+      48% { opacity: .13; }
+      55% { opacity: .18; }
+      66% { opacity: .1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .node-pulse, .binary-text { animation: none !important; }
+      .flow { opacity: 0; }
+      .node-pulse { opacity: .18; transform: none; }
+      .binary-text { opacity: .1; }
+    }
+  </style>
+  <path class="flow" d="M0 322H118L170 270H330L382 218H540"/>
+  <path class="flow flow-b" d="M1600 764H1488L1436 712H1284L1232 660H1096"/>
+  <circle class="node-pulse" cx="118" cy="322" r="4"/>
+  <circle class="node-pulse node-pulse-b" cx="1240" cy="442" r="4"/>
+  <g class="binary-text">
+    <text x="40" y="82">01001110 00110010 00101111</text>
+    <text x="1284" y="820">00100011 11001010 00010110</text>
+  </g>
+</svg>

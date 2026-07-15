@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alisonagomez.github.io/</loc></url>
-  <url><loc>https://alisonagomez.github.io/projects/</loc></url>
-  <url><loc>https://alisonagomez.github.io/projects/?id=sinalyx</loc></url>
-  <url><loc>https://alisonagomez.github.io/projects/?id=veonyx</loc></url>
-  <url><loc>https://alisonagomez.github.io/automations/</loc></url>
-  <url><loc>https://alisonagomez.github.io/automations/?id=auditor-backups-dropbox</loc></url>
-  <url><loc>https://alisonagomez.github.io/reports/</loc></url>
-  <url><loc>https://alisonagomez.github.io/reports/?id=extensao-maliciosa-chrome</loc></url>
+  <url><loc>https://alisonagomez.github.io/</loc><priority>1.0</priority></url>
+  <url><loc>https://alisonagomez.github.io/cases/incidente-extensao-chrome/</loc><priority>0.9</priority></url>
+  <url><loc>https://alisonagomez.github.io/cases/auditor-backups-dropbox/</loc><priority>0.9</priority></url>
+  <url><loc>https://alisonagomez.github.io/cases/sinalyx/</loc><priority>0.8</priority></url>
+  <url><loc>https://alisonagomez.github.io/labs/vmware-security-lab/</loc><priority>0.8</priority></url>
+  <url><loc>https://alisonagomez.github.io/cases/veonyx-arquitetura/</loc><priority>0.6</priority></url>
 </urlset>
