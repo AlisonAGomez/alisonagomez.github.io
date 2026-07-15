@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps</title>
+
+  <meta
+    name="description"
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+  />
+
+  <meta name="author" content="Alison Gomez" />
+  <meta name="theme-color" content="#020712" />
+
+  <meta property="og:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps" />
+  <meta
+    property="og:description"
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+  />
+  <meta property="og:image" content="https://alisonagomez.github.io/assets/img/preview.png" />
+  <meta property="og:url" content="https://alisonagomez.github.io" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alison Gomez | Infraestrutura, Cibersegurança & Redes & DevOps" />
+  <meta
+    name="twitter:description"
+    content="Portfólio técnico de Alison Gomez com projetos em infraestrutura, Blue Team, automação, redes, monitoramento e desenvolvimento."
+  />
+  <meta name="twitter:image" content="https://alisonagomez.github.io/assets/img/preview.png" />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+
+  <link rel="stylesheet" href="style.css?v=42" />
+</head>
+
+<body class="loading">
+  <div id="preloader" class="preloader" aria-hidden="true">
+    <div class="preloader-grid"></div>
+    <div class="preloader-panel">
+      <span class="preloader-badge">SECURE ACCESS</span>
+      <p class="preloader-label">ALISON_GOMEZ.PORTFOLIO</p>
+      <h2>Inicializando interface protegida</h2>
+      <p class="preloader-text">Validando identidade, carregando módulos e estabelecendo sessão segura...</p>
+
+      <div class="preloader-steps">
+        <div><span class="step-dot"></span> identity.check()</div>
+        <div><span class="step-dot"></span> modules.load()</div>
+        <div><span class="step-dot"></span> secure.channel()</div>
+      </div>
+
+      <div class="preloader-progress">
+        <div class="preloader-progress-bar" id="preloaderBar"></div>
+      </div>
+
+      <div class="preloader-footer">
+        <span id="preloaderStatus">Aguardando autenticação...</span>
+        <strong id="preloaderPercent">0%</strong>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="#home" class="brand">
+      <span>[</span> ALISON GOMEZ <span>]</span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a href="./#home">./home</a>
+      <a href="./#sobre">./sobre</a>
+      <a href="./#skills">./skills</a>
+      <a href="./#projetos">./projetos</a>
+      <a href="./#estudos">./estudos</a>
+      <a href="reports/">./relatórios</a>
+      <a href="./#automacoes">./automações</a>
+      <a href="automations/">./scripts</a>
+      <a href="./#contato">./contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="status-badge reveal">
+        <span class="pulse"></span>
+        SYSTEM ONLINE // BLUE TEAM & INFRA INTERFACE ACTIVE
+      </div>
+
+      <p class="eyebrow reveal">Suporte • Infraestrutura • Redes • Segurança • Automação</p>
+
+      <h1 class="glitch reveal" data-text="ALISON GOMEZ">ALISON GOMEZ</h1>
+
+      <h2 class="terminal-line reveal">
+        &gt;&gt; <span id="typing"></span><span class="cursor">_</span>
+      </h2>
+
+      <p class="hero-description reveal">
+        Profissional de TI com atuação em suporte técnico, infraestrutura,
+        redes, monitoramento, servidores, automação, desenvolvimento e
+        segurança defensiva. Foco em ambientes reais, troubleshooting,
+        análise de logs, firewalls, backups e melhoria contínua de processos.
+      </p>
+
+      <div class="hero-actions reveal">
+        <a href="#projetos" class="btn primary">&gt; Ver Projetos</a>
+
+        <a href="assets/curriculo-alison-gomez.pdf" class="btn secondary" target="_blank" rel="noreferrer">
+          # Baixar Currículo
+        </a>
+
+        <a href="#contato" class="btn secondary"># Contato</a>
+      </div>
+
+      <div class="hero-panels reveal">
+        <article>
+          <span>OPS</span>
+          <strong>57+</strong>
+          <p>Empresas monitoradas</p>
+        </article>
+
+        <article>
+          <span>NOC</span>
+          <strong>15/dia</strong>
+          <p>Alertas analisados</p>
+        </article>
+
+        <article>
+          <span>SUP</span>
+          <strong>30/dia</strong>
+          <p>Chamados tratados</p>
+        </article>
+
+        <article>
+          <span>AUTO</span>
+          <strong>37</strong>
+          <p>Empresas em auditoria de backup</p>
+        </article>
+      </div>
+
+    </section>
+
+    <section id="sobre" class="section about-section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_001</span>
+        <h2>Sobre</h2>
+        <p class="section-subtitle">Quem sou, o que faço e por que segurança importa.</p>
+      </div>
+
+      <div class="about-file reveal">
+        <div class="about-file-top">
+          <span class="file-stamp">PUBLIC_PROFILE</span>
+
+          <div class="file-meta">
+            <span>FILE: alison_profile.log</span>
+            <span>ACCESS: PUBLIC</span>
+            <span>STATUS: ACTIVE</span>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <aside class="about-sidebar">
+            <div class="avatar-terminal profile-photo">
+              <img src="assets/img/perfil-alison.jpg" alt="Foto de perfil de Alison Gomez" />
+            </div>
+
+            <div class="identity-list">
+              <p><span>ID:</span> AG-2026-0427</p>
+              <p><span>ROLE:</span> Profissional de TI</p>
+              <p><span>FOCO:</span> Infraestrutura & Segurança Defensiva</p>
+              <p><span>LOCALIZAÇÃO:</span> Brasil • Remoto</p>
+              <p><span>STATUS:</span> Disponível para novos desafios</p>
+            </div>
+          </aside>
+
+          <div class="about-terminal">
+            <p class="terminal-command">
+              <span>alison@infra-sec:~$</span> cat sobre_mim.txt
+            </p>
+
+            <p>
+              Olá! Eu sou <strong>Alison Gomez</strong>, profissional de TI
+              apaixonado por infraestrutura, redes e segurança da informação.
+              Trabalho para manter ambientes estáveis, seguros e eficientes,
+              com foco em suporte técnico, monitoramento contínuo, automação e
+              defesa em profundidade.
+            </p>
+
+            <p>
+              Atuo na operação e administração de ambientes <strong>Windows,
+              Linux e Windows Server</strong>, com experiência em
+              <strong>Active Directory</strong>, políticas de grupo, hardening,
+              virtualização com <strong>Proxmox e VMware</strong>, além de
+              conteinerização de serviços com <strong>Docker</strong>.
+            </p>
+
+            <p>
+              Utilizo ferramentas como <strong>Zabbix e Grafana</strong> para
+              observabilidade, <strong>pfSense e Mikrotik</strong> para redes
+              seguras, <strong>VPNs</strong> para acesso remoto, e implemento
+              rotinas de <strong>backup</strong> e recuperação para garantir
+              resiliência e continuidade de negócio.
+            </p>
+
+            <p>
+              Automatizo tarefas repetitivas e crio integrações que geram
+              resultado: scripts em <strong>Python, PowerShell e Bash</strong>,
+              com consumo e exposição de <strong>APIs REST/JSON</strong> para
+              orquestrar sistemas e coletar dados.
+            </p>
+
+            <p>
+              Acredito que a segurança não é um produto, é um processo contínuo,
+              feito por <strong>pessoas</strong> e para pessoas.
+            </p>
+
+            <div class="about-tags">
+              <span>#infraestrutura</span>
+              <span>#blue-team</span>
+              <span>#python-automation</span>
+              <span>#pfsense</span>
+              <span>#zabbix-grafana</span>
+              <span>#backups</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_002</span>
+        <h2>Skills</h2>
+        <p class="section-subtitle">
+          Competências técnicas e operacionais aplicadas para entregar soluções seguras, estáveis e escaláveis.
+        </p>
+      </div>
+
+      <div class="skill-grid">
+        <article class="skill-panel reveal">
+          <div class="skill-title">
+            <span>01</span>
+            <h3>Suporte & Operação</h3>
+          </div>
+          <div class="skill-item"><div><span>Suporte N1</span><em>Operacional</em></div><b style="--level: 86%"></b></div>
+          <div class="skill-item"><div><span>Suporte N2</span><em>Intermediário</em></div><b style="--level: 76%"></b></div>
+          <div class="skill-item"><div><span>Suporte N3</span><em>Em evolução</em></div><b style="--level: 62%"></b></div>
+          <div class="skill-item"><div><span>Troubleshooting</span><em>Operacional</em></div><b style="--level: 88%"></b></div>
+          <div class="skill-item"><div><span>Helpdesk / Service Desk</span><em>Operacional</em></div><b style="--level: 84%"></b></div>
+          <div class="skill-footer"><span>Atendimento, diagnóstico e resolução com foco em experiência e agilidade.</span></div>
+        </article>
+
+        <article class="skill-panel reveal">
+          <div class="skill-title"><span>02</span><h3>Infraestrutura</h3></div>
+          <div class="skill-item"><div><span>Windows Server</span><em>Operacional</em></div><b style="--level: 82%"></b></div>
+          <div class="skill-item"><div><span>Linux / Ubuntu / Debian</span><em>Intermediário</em></div><b style="--level: 74%"></b></div>
+          <div class="skill-item"><div><span>Active Directory</span><em>Intermediário</em></div><b style="--level: 76%"></b></div>
+          <div class="skill-item"><div><span>Proxmox / VMware / Docker</span><em>Em evolução</em></div><b style="--level: 68%"></b></div>
+          <div class="skill-footer"><span>Ambientes estáveis, virtualizados e preparados para alta disponibilidade.</span></div>
+        </article>
+
+        <article class="skill-panel reveal">
+          <div class="skill-title"><span>03</span><h3>Redes & Segurança</h3></div>
+          <div class="skill-item"><div><span>pfSense / Mikrotik</span><em>Intermediário</em></div><b style="--level: 78%"></b></div>
+          <div class="skill-item"><div><span>VPN / VLAN / DNS / DHCP</span><em>Operacional</em></div><b style="--level: 82%"></b></div>
+          <div class="skill-item"><div><span>Wireshark / Nmap</span><em>Intermediário</em></div><b style="--level: 66%"></b></div>
+          <div class="skill-item"><div><span>Logs / Phishing / Hardening</span><em>Em evolução</em></div><b style="--level: 72%"></b></div>
+          <div class="skill-footer"><span>Proteção, visibilidade e prevenção para reduzir riscos e fortalecer ambientes.</span></div>
+        </article>
+
+        <article class="skill-panel reveal">
+          <div class="skill-title"><span>04</span><h3>Redes & DevOps & Automação</h3></div>
+          <div class="skill-item"><div><span>Python / pandas</span><em>Intermediário</em></div><b style="--level: 78%"></b></div>
+          <div class="skill-item"><div><span>PowerShell / Bash</span><em>Operacional</em></div><b style="--level: 80%"></b></div>
+          <div class="skill-item"><div><span>APIs REST/JSON</span><em>Intermediário</em></div><b style="--level: 76%"></b></div>
+          <div class="skill-item"><div><span>Vue.js / React / Django</span><em>Estudo contínuo</em></div><b style="--level: 58%"></b></div>
+          <div class="skill-footer"><span>Automação de processos, integrações e desenvolvimento de soluções.</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiencia" class="section">
+      <div class="section-head reveal"><span class="section-tag">// ARQUIVO_003</span><h2>Experiência</h2><p class="section-subtitle">Histórico profissional e atuação prática em ambientes reais.</p></div>
+      <div class="timeline">
+        <article class="reveal"><span>2026 - ATUAL</span><h3>Meu CPD — Técnico de Suporte</h3><p>Atuação em ambiente multiempresa com suporte, monitoramento e manutenção de infraestrutura, firewalls, servidores, backups, e-mails, VMs, links e serviços críticos para mais de 57 empresas.</p><p>Tratamento médio de 30 chamados por dia e cerca de 15 alertas diários em Zabbix/Grafana.</p><p>Criação de automação em Python via APIs para verificação de backups em Dropbox e Proxmox de 37 empresas, reduzindo rotina manual de quase 5 horas para 30 a 60 minutos.</p></article>
+        <article class="reveal"><span>2025 - 2026</span><h3>Atuação autônoma/freelancer — Suporte, Redes e Automação</h3><p>Apoio em suporte técnico, redes, configuração de equipamentos, automações, diagnóstico, troubleshooting, inventário e melhoria de processos manuais.</p></article>
+        <article class="reveal"><span>2022 - 2024</span><h3>Prefeitura Municipal de Rio Claro — Suporte e Infraestrutura</h3><p>Suporte N1/N2 remoto e presencial, manutenção de estações, sistemas, impressoras, e-mails, infraestrutura de rede, Active Directory, permissões, cabeamento, câmeras/DVR e certificados digitais.</p></article>
+        <article class="reveal"><span>2018 - 2019</span><h3>BRK Ambiental — Técnico de Suporte N1</h3><p>Suporte técnico N1 via Helpdesk, instalação e configuração de impressoras, computadores, softwares corporativos, periféricos, backups e apoio a rotinas de infraestrutura.</p></article>
+      </div>
+    </section>
+
+    <section id="projetos" class="section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_004</span>
+        <h2>Projetos</h2>
+        <p class="section-subtitle">Projetos técnicos, acadêmicos e automações práticas.</p>
+
+        <div class="section-actions">
+          <a href="projects/" class="mini-action">Ver catálogo de projetos</a>
+        </div>
+      </div>
+
+      <div class="grid two project-grid-fixed">
+        <article class="project-card standard-card featured-project reveal">
+          <div class="project-index">01</div>
+
+          <div class="card-main">
+            <h3>Sinalyx — Análise de Logs de Firewall com IA</h3>
+            <p>Projeto autoral/TCC em desenvolvimento para melhorar o fluxo de análise de logs de firewall, apoiando analistas de redes e segurança na detecção de anomalias e priorização de eventos.</p>
+            <p>Arquitetura com API REST, parser de logs, agregação por janelas, features, modelos de IA/ML, dashboard e base de estudo com logs reais do pfSense.</p>
+          </div>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>pandas</span>
+            <span>Vue.js</span>
+            <span>PostgreSQL</span>
+            <span>TensorFlow</span>
+            <span>pfSense</span>
+          </div>
+
+          <div class="project-links">
+            <a href="projects/?id=sinalyx">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez/sinalyx" target="_blank" rel="noreferrer">Ver no GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card standard-card reveal">
+          <div class="project-index">02</div>
+
+          <div class="card-main">
+            <h3>Automação de Auditoria de Backups</h3>
+            <p>Automação em Python para verificação de backups em Dropbox e Proxmox, aplicada em ambiente multiempresa, com foco em reduzir tempo de auditoria, identificar pendências e apoiar rotinas operacionais.</p>
+          </div>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>APIs</span>
+            <span>Proxmox</span>
+            <span>Dropbox</span>
+            <span>Backup</span>
+            <span>Automação</span>
+          </div>
+
+          <div class="project-links">
+            <a href="automations/?id=auditoria-backups-proxmox-dropbox">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez/dropbox-backup-auditor" target="_blank" rel="noreferrer">Ver no GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card standard-card reveal">
+          <div class="project-index">03</div>
+
+          <div class="card-main">
+            <h3>BeeWatts — Aplicação Web para Energia Solar</h3>
+            <p>Participação como responsável por front-end em aplicação web para avaliação de necessidade de painéis solares com base no gasto mensal de energia.</p>
+          </div>
+
+          <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Bootstrap</span>
+            <span>JavaScript</span>
+            <span>Django</span>
+            <span>PostgreSQL</span>
+          </div>
+
+          <div class="project-links">
+            <a href="projects/?id=beewatts">Ver detalhes</a>
+            <span class="link-disabled">Repositório em breve</span>
+          </div>
+        </article>
+
+        <article class="project-card standard-card reveal">
+          <div class="project-index">04</div>
+
+          <div class="card-main">
+            <h3>VeoNyx — Aplicativo Mobile para Comunidades</h3>
+            <p>Aplicativo mobile-first para comunidades digitais com perfis globais e locais, posts, wikis, chats, loja estética, moderação comunitária e QA local.</p>
+          </div>
+
+          <div class="tags">
+            <span>Flutter</span>
+            <span>Dart</span>
+            <span>NestJS</span>
+            <span>PostgreSQL</span>
+            <span>Prisma</span>
+            <span>Redis</span>
+          </div>
+
+          <div class="project-links">
+            <a href="projects/?id=veonyx">Ver detalhes</a>
+            <a href="https://github.com/AlisonAGomez/veonyx" target="_blank" rel="noreferrer">Ver no GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="labs" class="section">
+      <div class="section-head reveal"><span class="section-tag">// ARQUIVO_005</span><h2>Labs & Ambientes</h2><p class="section-subtitle">Ambientes práticos, laboratórios e projetos para pesquisa, automação e engenharia de segurança.</p></div>
+      <div class="lab-grid">
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_01</span><b class="lab-status active">ATIVO</b></div><h3>Active Directory Lab</h3><p>Ambiente dedicado a estudos e práticas de AD DS, GPO, Kerberos, autenticação segura e hardening de domínio.</p><div class="tags"><span>Active Directory</span><span>GPO</span><span>Kerberos</span><span>AD CS</span></div></article>
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_02</span><b class="lab-status active">ATIVO</b></div><h3>pfSense Security Lab</h3><p>Ambiente de rede com pfSense para estudo de firewall, NAT, VPN, IDS/IPS, DNS seguro e segmentação.</p><div class="tags"><span>pfSense</span><span>Firewall</span><span>VPN</span><span>IDS/IPS</span></div></article>
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_03</span><b class="lab-status continuous">ESTUDO CONTÍNUO</b></div><h3>Zabbix/Grafana NOC Lab</h3><p>Laboratório de observabilidade com Zabbix e Grafana para monitoramento, métricas, alertas e dashboards.</p><div class="tags"><span>Zabbix</span><span>Grafana</span><span>Monitoramento</span><span>SNMP</span></div></article>
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_04</span><b class="lab-status continuous">ESTUDO CONTÍNUO</b></div><h3>Backup Automation Lab</h3><p>Automação de rotinas de backup e restauração com versionamento, testes de integridade e armazenamento seguro.</p><div class="tags"><span>Backup</span><span>Automação</span><span>Bash</span><span>Rclone</span></div></article>
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_05</span><b class="lab-status active">ATIVO</b></div><h3>Sinalyx AI Log Analysis</h3><p>Análise inteligente de logs com Sinalyx e IA para detecção de padrões, anomalias e investigação acelerada.</p><div class="tags"><span>Sinalyx</span><span>IA</span><span>Logs</span><span>Detecção</span></div></article>
+        <article class="lab-card reveal"><div class="lab-top"><span>LAB_06</span><b class="lab-status continuous">ESTUDO CONTÍNUO</b></div><h3>VMware Cyber Lab</h3><p>Ambiente virtualizado para simular cenários, testar hardening, EDR e resiliência em infraestrutura.</p><div class="tags"><span>VMware</span><span>Virtualização</span><span>EDR</span><span>Hardening</span></div></article>
+      </div>
+    </section>
+
+    <section id="estudos" class="section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_006</span>
+        <h2>Análises & Estudos</h2>
+        <p class="section-subtitle">
+          Pesquisas, relatórios técnicos, análises e documentações de casos reais para fortalecer conhecimento e promover segurança.
+        </p>
+      </div>
+
+      <div class="study-list">
+        <article class="reveal featured-study-card">
+          <div class="study-meta">
+            <span>2026.05.26</span>
+            <b>INCIDENT RESPONSE</b>
+          </div>
+
+          <h3>Resposta a Incidente: Extensão Maliciosa no Chrome</h3>
+
+          <p>
+            Estudo de caso sobre investigação de browser hijacker / banking trojan via extensão maliciosa no Google Chrome,
+            com análise de persistência por política/cloud policy, coleta de evidências, IOCs, contenção e mapeamento MITRE ATT&CK.
+          </p>
+
+          <div class="tags">
+            <span>SOC</span>
+            <span>Malware</span>
+            <span>Chrome</span>
+            <span>Chrome Policy</span>
+            <span>MITRE ATT&CK</span>
+          </div>
+
+          <div class="project-links">
+            <a href="reports/?id=extensao-maliciosa-chrome">Ver detalhes</a>
+            <a href="reports/">Ver catálogo</a>
+          </div>
+        </article>
+
+        <article class="reveal">
+          <div class="study-meta">
+            <span>2026</span>
+            <b>SEGURANÇA</b>
+          </div>
+          <h3>Análise de phishing e e-mails suspeitos</h3>
+          <p>Investigação de mensagens suspeitas, análise de headers, URLs, engenharia social e indicadores para triagem de ameaças.</p>
+          <div class="tags"><span>Segurança</span><span>Incidente</span><span>E-mail</span></div>
+        </article>
+
+        <article class="reveal">
+          <div class="study-meta">
+            <span>2026</span>
+            <b>INFRA</b>
+          </div>
+          <h3>Troubleshooting de VPN, firewall e conectividade</h3>
+          <p>Diagnóstico de falhas em VPN, rotas, DNS, regras de firewall, bloqueios e comportamento de rede.</p>
+          <div class="tags"><span>Infra</span><span>Conectividade</span><span>Firewall</span></div>
+        </article>
+
+        <article class="reveal">
+          <div class="study-meta">
+            <span>2026</span>
+            <b>AUTOMAÇÃO</b>
+          </div>
+          <h3>Auditoria de backups em ambiente multiempresa</h3>
+          <p>Revisão de políticas, retenção, testes de restauração, identificação de gaps e propostas de automação com alertas.</p>
+          <div class="tags"><span>Infra</span><span>Automação</span><span>Backup</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="automacoes" class="section automations-section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_007</span>
+        <h2>Automações</h2>
+        <p class="section-subtitle">
+          Scripts, ferramentas e rotinas automatizadas para reduzir trabalho manual, auditar ambientes, apoiar suporte técnico e fortalecer segurança defensiva.
+        </p>
+      </div>
+
+      <div class="automation-home-grid automation-home-grid-v23">
+        <article class="automation-featured-card standard-card reveal">
+          <div class="report-featured-meta">
+            <span>PYTHON</span>
+            <span>APIs</span>
+            <span>BACKUP AUDIT</span>
+          </div>
+
+          <div class="card-main">
+            <h3>Auditoria de Backups Dropbox e Proxmox</h3>
+            <p>Sistema de auditoria para validar backups locais, uploads em nuvem, uso de storage, uploads incompletos e pendências críticas em ambiente multiempresa.</p>
+          </div>
+
+          <div class="report-featured-points">
+            <span>Dropbox API</span>
+            <span>Proxmox API</span>
+            <span>rclone</span>
+            <span>CSV/HTML/JSON</span>
+          </div>
+
+          <div class="project-links">
+            <a href="automations/?id=auditoria-backups-proxmox-dropbox">Ver detalhes</a>
+            <a href="automations/">Ver catálogo</a>
+          </div>
+        </article>
+
+        <article class="automation-featured-card standard-card reveal">
+          <div class="report-featured-meta">
+            <span>PYTHON</span>
+            <span>POWERSHELL</span>
+            <span>BLUE TEAM</span>
+          </div>
+
+          <div class="card-main">
+            <h3>Pendrivão Toolkit Defensivo</h3>
+            <p>Toolkit portátil para suporte técnico, inventário, hardening Windows, auditoria de rede, resposta a incidentes, backup, Linux, Redes & DevOpsSecOps e evidências GRC.</p>
+          </div>
+
+          <div class="report-featured-points">
+            <span>Menu / CLI</span>
+            <span>Dry-run</span>
+            <span>JSON/CSV/HTML</span>
+            <span>Testes automatizados</span>
+          </div>
+
+          <div class="project-links">
+            <a href="automations/?id=pendrivao-toolkit-defensivo">Ver detalhes</a>
+            <a href="automations/">Ver catálogo</a>
+          </div>
+        </article>
+
+        <aside class="reports-mini-panel reveal">
+          <span>AUTOMATIONS_INDEX</span>
+          <strong>5</strong>
+          <p>cases técnicos</p>
+          <small>Catálogo de automações, scripts e ferramentas para suporte, infraestrutura, segurança defensiva e operação técnica.</small>
+        </aside>
+      </div>
+    </section>
+
+    <section id="formacao" class="section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_008</span>
+        <h2>Formação e Cursos</h2>
+        <p class="section-subtitle">Base acadêmica e certificados que sustentam minha atuação em suporte, redes, infraestrutura, segurança defensiva e desenvolvimento.</p>
+      </div>
+
+      <div class="cert-grid">
+        <article class="cert-card reveal"><div class="cert-status progress">EM ANDAMENTO</div><span class="cert-icon">🎓</span><h3>Bacharelado em Sistemas de Informação</h3><p>Formação acadêmica voltada ao desenvolvimento, análise e gestão de soluções em tecnologia da informação. O curso abrange programação, banco de dados, redes, infraestrutura, sistemas operacionais, engenharia de software, segurança da informação e gestão de projetos, preparando para atuar na criação, manutenção e evolução de sistemas e ambientes tecnológicos.</p><small>FHO — Fundação Hermínio Ometto • 2023 - 2026</small><div class="tags"><span>Sistemas</span><span>Banco de Dados</span><span>TI</span></div></article>
+        <article class="cert-card reveal"><div class="cert-status done">FINALIZADO</div><span class="cert-icon">🌐</span><h3>Cisco Networking Academy</h3><p>Formação complementar pela Cisco Networking Academy em suporte técnico, fundamentos de redes e introdução à cibersegurança. A trilha reforça diagnóstico de problemas, atendimento ao usuário, conceitos de infraestrutura e boas práticas para proteger ambientes de TI.</p><small>Formação complementar concluída</small><div class="tags"><span>Suporte</span><span>Redes</span><span>Cibersegurança</span></div></article>
+        <article class="cert-card reveal"><div class="cert-status done">FINALIZADO</div><span class="cert-icon">💻</span><h3>Udemy — Programação & Desenvolvimento Web</h3><p>Cursos práticos em lógica de programação e desenvolvimento web full stack. Conteúdo com C, C++, Python, C# e Java, além de HTML5, CSS3, Bootstrap 5, JavaScript, PHP, Orientação a Objetos, MySQL, PDO, Ajax, jQuery, MVC, APIs, Ionic, WordPress e Sass.</p><small>Cursos finalizados</small><div class="tags"><span>Lógica</span><span>Web</span><span>Python</span><span>JavaScript</span></div></article>
+        <article class="cert-card reveal"><div class="cert-status done">FINALIZADO</div><span class="cert-icon">📁</span><h3>SEBRAE</h3><p>Cursos complementares focados em LGPD, gestão empresarial integrada e inteligência emocional. A formação fortalece visão de negócio, organização de processos, proteção de dados, tomada de decisão e comunicação profissional em ambientes corporativos.</p><small>Cursos finalizados em jul. 2025</small><div class="tags"><span>LGPD</span><span>Gestão</span><span>Comportamental</span></div></article>
+        <article class="cert-card reveal"><div class="cert-status done">FINALIZADO</div><span class="cert-icon">🏅</span><h3>Certificações</h3><p>Boas Práticas em Cibersegurança, com foco em postura segura, proteção de dados, prevenção de ameaças e aplicação de controles básicos em ambientes corporativos.</p><small>Certificação finalizada</small><div class="tags"><span>Cibersegurança</span><span>Boas Práticas</span><span>Proteção de Dados</span></div></article>
+      </div>
+    </section>
+
+    <section id="tools" class="section">
+      <div class="section-head reveal"><span class="section-tag">// ARQUIVO_009</span><h2>Arsenal Técnico</h2><p class="section-subtitle">Ferramentas, tecnologias e plataformas que utilizo para projetar, proteger e otimizar ambientes e soluções.</p></div>
+      <div class="tool-categories">
+        <article class="reveal"><h3><span>01</span> Infraestrutura</h3><div><span>Windows Server</span><span>Linux</span><span>Ubuntu</span><span>Debian</span><span>Proxmox VE</span><span>VMware</span><span>Docker</span><span>AD DS</span><span>Group Policy</span></div></article>
+        <article class="reveal"><h3><span>02</span> Redes</h3><div><span>pfSense</span><span>MikroTik</span><span>Cisco</span><span>VPN</span><span>VLAN</span><span>DNS</span><span>DHCP</span><span>NAT</span><span>Firewall</span><span>Proxy</span></div></article>
+        <article class="reveal"><h3><span>03</span> Monitoramento</h3><div><span>Zabbix</span><span>Grafana</span><span>Dashboards</span><span>Triggers</span><span>Alertas</span><span>SNMP</span><span>Logs</span><span>Uptime</span><span>Métricas</span></div></article>
+        <article class="reveal"><h3><span>04</span> Segurança</h3><div><span>Wireshark</span><span>Nmap</span><span>Firewall</span><span>Hardening</span><span>SIEM</span><span>IDS/IPS</span><span>OpenVPN</span><span>LGPD</span><span>Backup 3-2-1</span></div></article>
+        <article class="reveal"><h3><span>05</span> Automação</h3><div><span>Python</span><span>PowerShell</span><span>Bash</span><span>Git</span><span>APIs REST/JSON</span><span>Postman</span><span>Webhooks</span><span>Scripts</span><span>Tasks</span></div></article>
+        <article class="reveal"><h3><span>06</span> Redes & DevOps & Dados</h3><div><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Vue.js</span><span>React.js</span><span>Django</span><span>FastAPI</span><span>PostgreSQL</span><span>MySQL</span><span>GitHub</span></div></article>
+      </div>
+    </section>
+
+    <section id="contato" class="section contact-section">
+      <div class="section-head reveal">
+        <span class="section-tag">// ARQUIVO_009</span>
+        <h2>Contato</h2>
+        <p class="section-subtitle">Escolha um canal para contato profissional, oportunidades, projetos ou networking técnico.</p>
+      </div>
+
+      <div class="contact-layout contact-layout-terminal-only">
+        <div class="contact-terminal contact-terminal-wide reveal">
+          <div class="terminal-header">
+            <span></span><span></span><span></span>
+            <p>secure_channel.ps1</p>
+          </div>
+
+          <div class="terminal-body terminal-contact-menu contact-terminal-v34">
+            <div class="terminal-console-safe" aria-label="Terminal de contato">
+              <p><strong>PS C:\portfolio\alison&gt;</strong> .\connect.ps1 -Secure</p>
+              <p><em>[ OK ]</em> Canal profissional disponível</p>
+              <p><em>[ OK ]</em> Currículo carregado</p>
+              <p><b>[ INFO ]</b> Selecione um canal de contato:</p>
+            </div>
+
+            <div class="terminal-options terminal-options-fixed contact-options-v34">
+              <a href="mailto:almeidaalison@hotmail.com">
+                <span>[01]</span>
+                <strong>E-mail</strong>
+                <small>almeidaalison@hotmail.com</small>
+              </a>
+
+              <a href="https://wa.me/5519999051896" target="_blank" rel="noreferrer">
+                <span>[02]</span>
+                <strong>WhatsApp</strong>
+                <small>+55 19 99905-1896</small>
+              </a>
+
+              <a href="https://www.linkedin.com/in/alison-gomez-3b339a23a" target="_blank" rel="noreferrer">
+                <span>[03]</span>
+                <strong>LinkedIn</strong>
+                <small>linkedin.com/in/alison-gomez-3b339a23a</small>
+              </a>
+
+              <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer">
+                <span>[04]</span>
+                <strong>GitHub</strong>
+                <small>github.com/AlisonAGomez</small>
+              </a>
+
+              <a href="assets/curriculo-alison-gomez.pdf" target="_blank" rel="noreferrer">
+                <span>[05]</span>
+                <strong>Currículo</strong>
+                <small>curriculo_alison_gomez.pdf</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-footer reveal">
+        <div><strong>AG</strong><p>ALISON GOMEZ</p><span>INFRAESTRUTURA | REDES | SEGURANÇA | DEVOPS</span></div>
+        <div><p><span class="ok-dot"></span> Disponível para novos desafios</p><p>Brasil • Remoto • UTC-3</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>ALISON GOMEZ © <span id="year"></span> // Infraestrutura • Redes • Segurança • DevOps</p>
+  </footer>
+
+  <script src="script.js?v=42"></script>
+</body>
+</html>

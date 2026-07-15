@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecionando | Alison Gomez</title>
+  <meta name="robots" content="noindex" />
+</head>
+<body>
+  <p>Redirecionando...</p>
+
+  <script>
+    const redirects = {
+      "/project": "/projects/",
+      "/project/": "/projects/",
+      "/report": "/reports/",
+      "/report/": "/reports/",
+      "/automation": "/automations/",
+      "/automation/": "/automations/"
+    };
+
+    const target = redirects[window.location.pathname];
+
+    if (target) {
+      window.location.replace(target + window.location.search + window.location.hash);
+    } else {
+      window.location.replace("/#home");
+    }
+  </script>
+</body>
+</html>
