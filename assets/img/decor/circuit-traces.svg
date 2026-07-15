@@ -1,50 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" fill="none">
-  <g stroke="#28c4dd" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
-    <path d="M0 126H112L164 74H326L368 116H474" stroke-opacity=".28"/>
-    <path d="M56 202H204L252 154H422L470 202H618L672 148H786" stroke-opacity=".38"/>
-    <path d="M0 344H132L184 292H336V210H512L566 264H708" stroke-opacity=".24"/>
-    <path d="M164 600V512L218 458H394L448 404H588V330H766L820 276H958" stroke-opacity=".34"/>
-    <path d="M1200 104H1084L1030 158H908V246H772" stroke-opacity=".3"/>
-    <path d="M1200 318H1066L1012 264H928L874 318H738" stroke-opacity=".42"/>
-    <path d="M1200 492H1040L986 438H822L768 492H650" stroke-opacity=".25"/>
-    <path d="M302 0V48L350 96" stroke-opacity=".22"/>
-    <path d="M884 0V70L836 118" stroke-opacity=".26"/>
-    <path d="M1028 600V544L974 490" stroke-opacity=".24"/>
-    <path d="M102 430H260L304 386" stroke-opacity=".18" stroke-dasharray="3 10"/>
-    <path d="M720 82H918L968 132" stroke-opacity=".2" stroke-dasharray="3 10"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <style>
+    .trace { fill: none; stroke: #28c4dd; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .trace-soft { stroke-opacity: .18; }
+    .trace-mid { stroke-opacity: .28; }
+    .trace-bright { stroke-opacity: .38; }
+    .node { fill: #071522; stroke: #92e5f0; stroke-opacity: .42; stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .pad { fill: #28c4dd; fill-opacity: .26; }
+    .binary-text { fill: #92e5f0; font: 10px Consolas, monospace; letter-spacing: 3px; opacity: .13; }
+  </style>
+
+  <g class="trace trace-soft">
+    <path d="M0 108H148L196 156H348L396 204H510"/>
+    <path d="M0 178H112L166 232H306L354 280H472"/>
+    <path d="M0 270H88L142 324H274V398H436"/>
+    <path d="M0 376H154L208 430H360L414 484H516"/>
+    <path d="M0 526H104L154 576H326L378 628H486"/>
+    <path d="M0 676H126L174 724H340L392 776H530"/>
+    <path d="M54 900V814L106 762V694H218L270 642"/>
+    <path d="M152 900V840L204 788H356L406 738"/>
+    <path d="M1600 112H1452L1404 160H1252L1204 208H1090"/>
+    <path d="M1600 184H1484L1430 238H1292L1240 290H1124"/>
+    <path d="M1600 280H1512L1458 334H1326V406H1162"/>
+    <path d="M1600 388H1448L1394 442H1240L1188 494H1084"/>
+    <path d="M1600 538H1496L1444 590H1272L1222 640H1114"/>
+    <path d="M1600 690H1474L1426 738H1260L1208 790H1070"/>
+    <path d="M1546 900V824L1494 772V704H1382L1330 652"/>
+    <path d="M1448 900V850L1396 798H1244L1194 748"/>
+    <path d="M322 0V56L374 108H548L598 158"/>
+    <path d="M1278 0V56L1226 108H1052L1002 158"/>
+    <path d="M430 72H630L682 124H918L970 72H1170"/>
   </g>
-  <g fill="#071522" stroke="#92e5f0" stroke-width="1" vector-effect="non-scaling-stroke">
-    <circle cx="112" cy="126" r="4" stroke-opacity=".42"/>
-    <circle cx="326" cy="74" r="4" stroke-opacity=".34"/>
-    <circle cx="474" cy="116" r="5" stroke-opacity=".48"/>
-    <circle cx="204" cy="202" r="4" stroke-opacity=".42"/>
-    <circle cx="422" cy="154" r="5" stroke-opacity=".5"/>
-    <circle cx="618" cy="202" r="4" stroke-opacity=".36"/>
-    <circle cx="786" cy="148" r="5" stroke-opacity=".5"/>
-    <circle cx="184" cy="292" r="4" stroke-opacity=".32"/>
-    <circle cx="336" cy="210" r="5" stroke-opacity=".46"/>
-    <circle cx="708" cy="264" r="4" stroke-opacity=".38"/>
-    <circle cx="448" cy="404" r="5" stroke-opacity=".48"/>
-    <circle cx="588" cy="330" r="4" stroke-opacity=".38"/>
-    <circle cx="820" cy="276" r="5" stroke-opacity=".5"/>
-    <circle cx="1030" cy="158" r="4" stroke-opacity=".38"/>
-    <circle cx="908" cy="246" r="5" stroke-opacity=".48"/>
-    <circle cx="1012" cy="264" r="4" stroke-opacity=".42"/>
-    <circle cx="874" cy="318" r="5" stroke-opacity=".52"/>
-    <circle cx="986" cy="438" r="4" stroke-opacity=".36"/>
-    <circle cx="768" cy="492" r="5" stroke-opacity=".46"/>
+
+  <g class="trace trace-mid">
+    <path d="M0 226H178L228 176H384L434 126H570"/>
+    <path d="M0 438H102L154 386H292L344 334H500"/>
+    <path d="M0 604H174L224 554H388L438 504H568"/>
+    <path d="M76 900V784L128 732H236L286 682H452"/>
+    <path d="M1600 238H1422L1372 188H1216L1166 138H1030"/>
+    <path d="M1600 450H1498L1446 398H1308L1256 346H1100"/>
+    <path d="M1600 616H1426L1376 566H1212L1162 516H1032"/>
+    <path d="M1524 900V796L1472 744H1364L1314 694H1148"/>
+    <path d="M500 34H680L730 84H870L920 34H1100"/>
   </g>
-  <g fill="#28c4dd">
-    <rect x="40" y="120" width="12" height="12" rx="2" fill-opacity=".25"/>
-    <rect x="246" y="148" width="12" height="12" rx="2" fill-opacity=".28"/>
-    <rect x="560" y="258" width="12" height="12" rx="2" fill-opacity=".3"/>
-    <rect x="762" y="486" width="12" height="12" rx="2" fill-opacity=".24"/>
-    <rect x="1024" y="152" width="12" height="12" rx="2" fill-opacity=".28"/>
-    <rect x="1006" y="258" width="12" height="12" rx="2" fill-opacity=".3"/>
+
+  <g class="trace trace-bright">
+    <path d="M0 322H118L170 270H330L382 218H540"/>
+    <path d="M0 752H112L164 700H316L368 648H504"/>
+    <path d="M1600 334H1482L1430 282H1270L1218 230H1060"/>
+    <path d="M1600 764H1488L1436 712H1284L1232 660H1096"/>
+    <path d="M390 126H544L596 178H1004L1056 126H1210"/>
   </g>
-  <g fill="#92e5f0" fill-opacity=".2" font-family="Consolas, monospace" font-size="10" letter-spacing="3">
-    <text x="36" y="560">01001110 00110010 00101111 00110011</text>
-    <text x="858" y="58">10110010 01000001 01010101</text>
-    <text x="842" y="552">00100011 11001010 00010110</text>
+
+  <g class="trace trace-soft" stroke-dasharray="2 13">
+    <path d="M54 486H214L266 538H438"/>
+    <path d="M1162 548H1334L1386 496H1546"/>
+    <path d="M548 222H718"/>
+    <path d="M882 222H1052"/>
   </g>
+
+  <g>
+    <circle class="node" cx="148" cy="108" r="4"/><circle class="node" cx="348" cy="156" r="4"/>
+    <circle class="node" cx="178" cy="226" r="5"/><circle class="node" cx="384" cy="176" r="4"/>
+    <circle class="node" cx="118" cy="322" r="5"/><circle class="node" cx="330" cy="270" r="4"/>
+    <circle class="node" cx="154" cy="376" r="4"/><circle class="node" cx="360" cy="430" r="5"/>
+    <circle class="node" cx="174" cy="604" r="4"/><circle class="node" cx="388" cy="554" r="5"/>
+    <circle class="node" cx="112" cy="752" r="5"/><circle class="node" cx="316" cy="700" r="4"/>
+    <circle class="node" cx="1452" cy="112" r="4"/><circle class="node" cx="1252" cy="160" r="4"/>
+    <circle class="node" cx="1422" cy="238" r="5"/><circle class="node" cx="1216" cy="188" r="4"/>
+    <circle class="node" cx="1482" cy="334" r="5"/><circle class="node" cx="1270" cy="282" r="4"/>
+    <circle class="node" cx="1448" cy="388" r="4"/><circle class="node" cx="1240" cy="442" r="5"/>
+    <circle class="node" cx="1426" cy="616" r="4"/><circle class="node" cx="1212" cy="566" r="5"/>
+    <circle class="node" cx="1488" cy="764" r="5"/><circle class="node" cx="1284" cy="712" r="4"/>
+    <circle class="node" cx="544" cy="126" r="4"/><circle class="node" cx="1056" cy="126" r="4"/>
+    <circle class="node" cx="730" cy="84" r="4"/><circle class="node" cx="870" cy="84" r="4"/>
+  </g>
+
+  <g>
+    <rect class="pad" x="160" y="264" width="12" height="12" rx="2"/>
+    <rect class="pad" x="202" y="424" width="12" height="12" rx="2"/>
+    <rect class="pad" x="218" y="548" width="12" height="12" rx="2"/>
+    <rect class="pad" x="1424" y="276" width="12" height="12" rx="2"/>
+    <rect class="pad" x="1388" y="436" width="12" height="12" rx="2"/>
+    <rect class="pad" x="1370" y="560" width="12" height="12" rx="2"/>
+  </g>
+
+  <g class="binary-text">
+    <text x="40" y="82">01001110 00110010 00101111</text>
+    <text x="58" y="104">00110100 01010011 00010110</text>
+    <text x="54" y="814">01010011 01000101 01000011</text>
+    <text x="72" y="836">00101111 01001110 00110011</text>
+  </g>
+  <g class="binary-text binary-b">
+    <text x="1284" y="88">00110001 00110000 00110001</text>
+    <text x="1310" y="110">00110111 01000001 01010101</text>
+    <text x="1266" y="820">00100011 11001010 00010110</text>
+    <text x="1300" y="842">01001001 01001111 01010100</text>
+  </g>
+
 </svg>

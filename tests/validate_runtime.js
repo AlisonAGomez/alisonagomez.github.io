@@ -8,6 +8,7 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
 const script = read("script.js");
 const style = read("style.css");
 const circuitDecor = read("assets/img/decor/circuit-traces.svg");
+const circuitMotion = read("assets/img/decor/circuit-motion.svg");
 assert(!script.includes("typeNextFrame"), "Efeito de digitação não deveria existir.");
 assert(script.includes("Escape"), "Menu precisa fechar com Escape.");
 assert(script.includes('event.key !== "Tab"'), "Menu precisa conter o foco durante a navegação por teclado.");
@@ -25,6 +26,13 @@ assert(style.includes("circuit-traces.svg"), "Ambientação técnica de circuito
 assert(!style.includes("--grid-line"), "Grid técnico dominante não deveria permanecer.");
 assert(circuitDecor.includes("01001110"), "Textura binária sutil está ausente.");
 assert(circuitDecor.includes("<circle"), "Nós de conexão do circuito estão ausentes.");
+assert(style.includes("circuit-motion.svg"), "Camada animada de circuitos está ausente.");
+assert(circuitMotion.includes("@keyframes circuit-flow"), "Pulso animado das trilhas está ausente.");
+assert(circuitMotion.includes("@keyframes node-glow"), "Brilho animado dos nós está ausente.");
+assert(circuitMotion.includes("@keyframes binary-breathe"), "Variação sutil dos binários está ausente.");
+assert(circuitMotion.includes("@media (prefers-reduced-motion: reduce)"), "Asset animado não respeita movimento reduzido.");
+assert(Buffer.byteLength(circuitDecor, "utf8") < 12000, "Asset de circuitos ficou pesado demais.");
+assert(Buffer.byteLength(circuitMotion, "utf8") < 5000, "Asset animado ficou pesado demais.");
 assert(!style.includes("@keyframes glitch"), "Glitch pesado não deve ser introduzido.");
 
 const routeHelper = script.match(/function activeNavigationHashForPath\(pathname\) \{[\s\S]*?\n\}/);
