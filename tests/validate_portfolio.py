@@ -16,7 +16,12 @@ HTML_FILES = [
     ROOT / "projects" / "index.html",
     ROOT / "automations" / "index.html",
     ROOT / "reports" / "index.html",
+    ROOT / "cases" / "incidente-extensao-chrome" / "index.html",
+    ROOT / "cases" / "auditor-backups-dropbox" / "index.html",
+    ROOT / "cases" / "sinalyx" / "index.html",
+    ROOT / "cases" / "veonyx-arquitetura" / "index.html",
 ]
+CASE_FILES = HTML_FILES[-4:]
 JSON_FILES = [
     ROOT / "assets" / "projects" / "projects.json",
     ROOT / "assets" / "automations" / "automations.json",
@@ -31,7 +36,12 @@ class PortfolioParser(HTMLParser):
         self.ids: list[str] = []
         self.links: list[tuple[str, str]] = []
         self.images_without_alt: list[str] = []
+        self.images_without_dimensions: list[str] = []
         self.blank_links_without_rel: list[str] = []
+        self.h1_count = 0
+        self.title = ""
+        self.in_title = False
+        self.meta: dict[str, str] = {}
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         data = dict(attrs)
@@ -43,12 +53,31 @@ class PortfolioParser(HTMLParser):
             self.links.append((tag, data["href"] or ""))
         if tag in {"img", "script", "source"} and data.get("src"):
             self.links.append((tag, data["src"] or ""))
-        if tag == "img" and "alt" not in data:
-            self.images_without_alt.append(data.get("src") or "<sem src>")
+        if tag == "img":
+            if "alt" not in data:
+                self.images_without_alt.append(data.get("src") or "<sem src>")
+            if data.get("src") and (not data.get("width") or not data.get("height")):
+                self.images_without_dimensions.append(data.get("src") or "<sem src>")
         if tag == "a" and data.get("target") == "_blank":
             rel = set((data.get("rel") or "").split())
             if "noreferrer" not in rel:
                 self.blank_links_without_rel.append(data.get("href") or "<sem href>")
+        if tag == "h1":
+            self.h1_count += 1
+        if tag == "title":
+            self.in_title = True
+        if tag == "meta":
+            key = data.get("name") or data.get("property")
+            if key:
+                self.meta[key] = data.get("content") or ""
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "title":
+            self.in_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self.in_title:
+            self.title += data
 
 
 def local_target(html_file: Path, base_href: str, raw_url: str) -> Path | None:
@@ -57,7 +86,6 @@ def local_target(html_file: Path, base_href: str, raw_url: str) -> Path | None:
     parsed = urlparse(raw_url)
     if parsed.scheme or parsed.netloc:
         return None
-
     page_path = html_file.relative_to(ROOT).as_posix()
     page_url = f"https://portfolio.local/{page_path}"
     base_url = urljoin(page_url, base_href) if base_href else page_url
@@ -84,26 +112,53 @@ def referenced_assets(value: object) -> list[str]:
     return found
 
 
+def parse_html(path: Path, errors: list[str]) -> PortfolioParser | None:
+    if not path.exists():
+        errors.append(f"HTML ausente: {path.relative_to(ROOT)}")
+        return None
+    parser = PortfolioParser()
+    parser.feed(path.read_text(encoding="utf-8"))
+    rel = path.relative_to(ROOT)
+    duplicates = sorted({item for item in parser.ids if parser.ids.count(item) > 1})
+    if duplicates:
+        errors.append(f"IDs duplicados em {rel}: {duplicates}")
+    if parser.images_without_alt:
+        errors.append(f"Imagens sem alt em {rel}: {parser.images_without_alt}")
+    if parser.images_without_dimensions:
+        errors.append(f"Imagens sem dimensões em {rel}: {parser.images_without_dimensions}")
+    if parser.blank_links_without_rel:
+        errors.append(f"Links target=_blank sem noreferrer em {rel}: {parser.blank_links_without_rel}")
+    if parser.h1_count != 1:
+        errors.append(f"Quantidade de H1 inesperada em {rel}: {parser.h1_count}")
+    if not parser.title.strip():
+        errors.append(f"Title ausente em {rel}")
+    for tag, raw_url in parser.links:
+        target = local_target(path, parser.base_href, raw_url)
+        if target is not None and not target.exists():
+            errors.append(f"Referência local quebrada em {rel} ({tag}): {raw_url}")
+    return parser
+
+
 def main() -> int:
     errors: list[str] = []
-
+    parsed: dict[Path, PortfolioParser] = {}
     for html_file in HTML_FILES:
-        if not html_file.exists():
-            errors.append(f"HTML ausente: {html_file.relative_to(ROOT)}")
+        parser = parse_html(html_file, errors)
+        if parser:
+            parsed[html_file] = parser
+
+    for case_file in CASE_FILES:
+        parser = parsed.get(case_file)
+        if not parser:
             continue
-        parser = PortfolioParser()
-        parser.feed(html_file.read_text(encoding="utf-8"))
-        duplicates = sorted({item for item in parser.ids if parser.ids.count(item) > 1})
-        if duplicates:
-            errors.append(f"IDs duplicados em {html_file.relative_to(ROOT)}: {duplicates}")
-        if parser.images_without_alt:
-            errors.append(f"Imagens sem alt em {html_file.relative_to(ROOT)}: {parser.images_without_alt}")
-        if parser.blank_links_without_rel:
-            errors.append(f"Links target=_blank sem noreferrer em {html_file.relative_to(ROOT)}: {parser.blank_links_without_rel}")
-        for tag, raw_url in parser.links:
-            target = local_target(html_file, parser.base_href, raw_url)
-            if target is not None and not target.exists():
-                errors.append(f"Referência local quebrada em {html_file.relative_to(ROOT)} ({tag}): {raw_url}")
+        rel = case_file.relative_to(ROOT)
+        required = ["description", "og:title", "og:description", "og:url", "og:image", "twitter:card", "twitter:title", "twitter:description", "twitter:image"]
+        for key in required:
+            if not parser.meta.get(key):
+                errors.append(f"Metadado {key} ausente em {rel}")
+        content = case_file.read_text(encoding="utf-8")
+        if 'rel="canonical"' not in content or 'application/ld+json' not in content:
+            errors.append(f"Canonical ou dados estruturados ausentes em {rel}")
 
     for json_file in JSON_FILES:
         try:
@@ -112,27 +167,50 @@ def main() -> int:
             errors.append(f"JSON inválido em {json_file.relative_to(ROOT)}: {exc}")
             continue
         for raw_path in referenced_assets(data):
-            parsed = urlparse(raw_path)
-            if parsed.scheme or parsed.netloc:
+            parsed_url = urlparse(raw_path)
+            if parsed_url.scheme or parsed_url.netloc:
                 continue
-            target = ROOT / parsed.path.lstrip("/")
+            target = ROOT / parsed_url.path.lstrip("/")
             if not target.exists():
                 errors.append(f"Asset referenciado e ausente em {json_file.relative_to(ROOT)}: {raw_path}")
 
-    text_files = [path for path in ROOT.rglob("*") if path.is_file() and path.suffix.lower() in {".html", ".css", ".js", ".json", ".md", ".txt", ".xml"}]
-    removed_term = "bee" + "watts"
-    for path in text_files:
-        content = path.read_text(encoding="utf-8", errors="ignore")
-        if removed_term in content.lower():
-            errors.append(f"Referência residual ao projeto removido: {path.relative_to(ROOT)}")
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    required_home = [
+        "Suporte N1/N2/N3", "Infraestrutura", "Redes", "Segurança da Informação", "Automação",
+        "37", "5h → 30–60 min", "16", "PDF, CSV e JSON",
+        "cases/incidente-extensao-chrome/", "cases/auditor-backups-dropbox/", "cases/sinalyx/",
+    ]
+    for text in required_home:
+        if text not in home:
+            errors.append(f"Conteúdo obrigatório ausente na home: {text}")
+    case_positions = [
+        home.index("cases/incidente-extensao-chrome/"),
+        home.index("cases/auditor-backups-dropbox/"),
+        home.index("cases/sinalyx/"),
+    ]
+    if case_positions != sorted(case_positions):
+        errors.append("Ordem dos cases principais está incorreta.")
+    if 'id="typing"' in home or "typeNextFrame" in (ROOT / "script.js").read_text(encoding="utf-8"):
+        errors.append("Efeito de digitação foi reintroduzido.")
+    if re.search(r"\bdesenvolvedor(?:a|es)?\b", home, re.IGNORECASE):
+        errors.append("A home posiciona Alison como desenvolvedor.")
+
+    redirects = {
+        ROOT / "reports" / "index.html": "../cases/incidente-extensao-chrome/",
+        ROOT / "automations" / "index.html": "../cases/auditor-backups-dropbox/",
+        ROOT / "projects" / "index.html": "../cases/sinalyx/",
+    }
+    for path, route in redirects.items():
+        if route not in path.read_text(encoding="utf-8"):
+            errors.append(f"Compatibilidade de rota ausente em {path.relative_to(ROOT)}")
+
+    curriculum = ROOT / "assets" / "curriculo-alison-gomez.pdf"
+    if not curriculum.exists() or curriculum.stat().st_size < 50_000:
+        errors.append("Currículo canônico ausente ou parece ser placeholder.")
 
     incident_pdfs = list((ROOT / "assets" / "reports" / "extensao-maliciosa-chrome").glob("*.pdf"))
     if len(incident_pdfs) != 1:
         errors.append(f"Quantidade inesperada de PDFs do incidente: {len(incident_pdfs)}")
-
-    curriculum = ROOT / "assets" / "curriculo-alison-gomez.pdf"
-    if not curriculum.exists() or curriculum.stat().st_size < 50_000:
-        errors.append("Currículo canônico ausente ou ainda parece ser um placeholder.")
 
     hashes: dict[str, Path] = {}
     for pdf in ROOT.rglob("*.pdf"):
@@ -142,11 +220,18 @@ def main() -> int:
         else:
             hashes[digest] = pdf
 
-    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8") if (ROOT / "sitemap.xml").exists() else ""
-    if "sitemap" not in sitemap.lower() and "urlset" not in sitemap.lower():
-        errors.append("sitemap.xml ausente ou inválido.")
-    if not (ROOT / "robots.txt").exists():
-        errors.append("robots.txt ausente.")
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for route in ["incidente-extensao-chrome", "auditor-backups-dropbox", "sinalyx", "veonyx-arquitetura"]:
+        if route not in sitemap:
+            errors.append(f"Rota canônica ausente no sitemap: {route}")
+    if "Sitemap: https://alisonagomez.github.io/sitemap.xml" not in (ROOT / "robots.txt").read_text(encoding="utf-8"):
+        errors.append("robots.txt não referencia o sitemap.")
+
+    forbidden_names = ["PROMPT_FINAL_CODEX", "ESPECIFICACAO_PORTFOLIO", "referencias_visuais", ".tmp-v3-inspecao"]
+    tracked_paths = [path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file()]
+    for marker in forbidden_names:
+        if any(marker.lower() in path.lower() for path in tracked_paths):
+            errors.append(f"Material de trabalho dentro do site: {marker}")
 
     if errors:
         print("VALIDAÇÃO FALHOU")
@@ -156,9 +241,10 @@ def main() -> int:
 
     print("VALIDAÇÃO OK")
     print(f"- HTML: {len(HTML_FILES)} arquivos")
+    print(f"- Cases canônicos: {len(CASE_FILES)}")
     print(f"- JSON: {len(JSON_FILES)} arquivos")
     print(f"- PDFs únicos: {len(hashes)}")
-    print("- Links locais, assets, alt, rel, currículo e referências removidas: OK")
+    print("- Links locais, SEO, alt, dimensões, rotas antigas e posicionamento: OK")
     return 0
 
 

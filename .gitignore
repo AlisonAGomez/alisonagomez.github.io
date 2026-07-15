@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+screenshots/
+docs/capturas-v3/browser-interno/
+.lighthouseci/
+lighthouse-*.report.*
