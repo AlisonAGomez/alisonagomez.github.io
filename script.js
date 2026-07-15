@@ -25,12 +25,28 @@ function setMenuState(open, restoreFocus = false) {
 }
 
 if (menuToggle && navigation) {
+  const menuLinks = [...navigation.querySelectorAll("a")];
   menuToggle.addEventListener("click", () => {
     setMenuState(menuToggle.getAttribute("aria-expanded") !== "true", true);
   });
-  navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenuState(false)));
+  menuLinks.forEach((link) => link.addEventListener("click", () => setMenuState(false)));
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") setMenuState(false, true);
+    if (menuToggle.getAttribute("aria-expanded") !== "true") return;
+    if (event.key === "Escape") {
+      setMenuState(false, true);
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = [menuToggle, ...menuLinks];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900) setMenuState(false);
@@ -49,6 +65,12 @@ window.addEventListener("load", () => {
   window.requestAnimationFrame(() => window.requestAnimationFrame(() => anchor.scrollIntoView({ block: "start" })));
 });
 
+function activeNavigationHashForPath(pathname) {
+  const path = pathname.replace(/\/index\.html$/, "/");
+  if (path.startsWith("/cases/") || ["/projects/", "/reports/", "/automations/"].includes(path)) return "#cases";
+  return null;
+}
+
 function markCurrentNavigation() {
   if (!navigation) return;
   const links = [...navigation.querySelectorAll("a")];
@@ -56,21 +78,27 @@ function markCurrentNavigation() {
   const onHome = currentPath === "/" || currentPath === "";
 
   if (!onHome) {
-    links[0]?.setAttribute("aria-current", "page");
+    links.forEach((link) => link.removeAttribute("aria-current"));
+    const activeHash = activeNavigationHashForPath(currentPath);
+    links.find((link) => link.hash === activeHash)?.setAttribute("aria-current", "page");
     return;
   }
 
   const sectionLinks = links.filter((link) => link.hash && link.pathname === location.pathname);
   const sections = sectionLinks.map((link) => document.querySelector(link.hash)).filter(Boolean);
+  const setCurrentSection = (hash) => {
+    sectionLinks.forEach((link) => {
+      if (link.hash === hash) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  setCurrentSection(location.hash || "#home");
   if (!("IntersectionObserver" in window) || !sections.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
     if (!visible) return;
-    sectionLinks.forEach((link) => {
-      if (link.hash === `#${visible.target.id}`) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
-    });
+    setCurrentSection(`#${visible.target.id}`);
   }, { rootMargin: "-30% 0px -60%", threshold: [0, 0.15, 0.5] });
   sections.forEach((section) => observer.observe(section));
 }

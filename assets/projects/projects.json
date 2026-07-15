@@ -147,10 +147,10 @@
     "repository": "https://github.com/AlisonAGomez/veonyx",
     "repositoryLabel": "Ver no GitHub",
     "documentation": "assets/docs/veonyx/veonyx-relatorio-portfolio.pdf",
-    "preview": "assets/img/cases/veonyx/arquitetura.png",
+    "preview": "assets/img/cases/veonyx/arquitetura.webp",
     "gallery": [
       {
-        "src": "assets/img/cases/veonyx/arquitetura.png",
+        "src": "assets/img/cases/veonyx/arquitetura.webp",
         "alt": "Diagrama de arquitetura do VeoNyx",
         "title": "Arquitetura documentada",
         "description": "Diagrama real mantido no repositório atual do projeto."

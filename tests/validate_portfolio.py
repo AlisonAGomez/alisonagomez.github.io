@@ -8,6 +8,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlparse
 
+from PIL import Image
+
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML_FILES = [
@@ -22,10 +24,16 @@ HTML_FILES = [
     ROOT / "cases" / "veonyx-arquitetura" / "index.html",
 ]
 CASE_FILES = HTML_FILES[-4:]
+CATALOG_FILES = HTML_FILES[2:5]
 JSON_FILES = [
     ROOT / "assets" / "projects" / "projects.json",
     ROOT / "assets" / "automations" / "automations.json",
     ROOT / "assets" / "reports" / "reports.json",
+]
+FORBIDDEN_PUBLIC_PATHS = [
+    ROOT / "docs" / "capturas-v3",
+    ROOT / "docs" / "RELATORIO_VALIDACAO_V3.md",
+    ROOT / "docs" / "auditoria-portfolio-20260714.md",
 ]
 
 
@@ -97,6 +105,13 @@ def local_target(html_file: Path, base_href: str, raw_url: str) -> Path | None:
     return target
 
 
+def published_asset(raw_url: str) -> Path | None:
+    parsed = urlparse(raw_url)
+    if parsed.netloc and parsed.netloc != "alisonagomez.github.io":
+        return None
+    return ROOT / unquote(parsed.path).lstrip("/")
+
+
 def referenced_assets(value: object) -> list[str]:
     found: list[str] = []
     if isinstance(value, dict):
@@ -147,18 +162,40 @@ def main() -> int:
         if parser:
             parsed[html_file] = parser
 
+    required_meta = [
+        "description", "og:title", "og:description", "og:url", "og:image", "og:image:alt",
+        "twitter:card", "twitter:title", "twitter:description", "twitter:image",
+    ]
     for case_file in CASE_FILES:
         parser = parsed.get(case_file)
         if not parser:
             continue
         rel = case_file.relative_to(ROOT)
-        required = ["description", "og:title", "og:description", "og:url", "og:image", "twitter:card", "twitter:title", "twitter:description", "twitter:image"]
-        for key in required:
+        for key in required_meta:
             if not parser.meta.get(key):
                 errors.append(f"Metadado {key} ausente em {rel}")
         content = case_file.read_text(encoding="utf-8")
-        if 'rel="canonical"' not in content or 'application/ld+json' not in content:
-            errors.append(f"Canonical ou dados estruturados ausentes em {rel}")
+        if 'rel="canonical"' not in content:
+            errors.append(f"Canonical ausente em {rel}")
+        structured_data = re.findall(
+            r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+            content,
+            flags=re.DOTALL | re.IGNORECASE,
+        )
+        if not structured_data:
+            errors.append(f"Dados estruturados ausentes em {rel}")
+        for payload in structured_data:
+            try:
+                json.loads(payload)
+            except json.JSONDecodeError as exc:
+                errors.append(f"JSON-LD inválido em {rel}: {exc}")
+        og_image = published_asset(parser.meta.get("og:image", ""))
+        if not og_image or not og_image.exists():
+            errors.append(f"Imagem Open Graph ausente em {rel}")
+        else:
+            with Image.open(og_image) as image:
+                if image.size != (1200, 630):
+                    errors.append(f"Imagem Open Graph fora de 1200x630 em {rel}: {image.size}")
 
     for json_file in JSON_FILES:
         try:
@@ -190,10 +227,18 @@ def main() -> int:
     ]
     if case_positions != sorted(case_positions):
         errors.append("Ordem dos cases principais está incorreta.")
-    if 'id="typing"' in home or "typeNextFrame" in (ROOT / "script.js").read_text(encoding="utf-8"):
+    script = (ROOT / "script.js").read_text(encoding="utf-8")
+    if 'id="typing"' in home or "typeNextFrame" in script:
         errors.append("Efeito de digitação foi reintroduzido.")
     if re.search(r"\bdesenvolvedor(?:a|es)?\b", home, re.IGNORECASE):
         errors.append("A home posiciona Alison como desenvolvedor.")
+    if "case-card-featured" in home:
+        errors.append("Destaque permanente foi reintroduzido nos cards de cases.")
+    if 'links[0]?.setAttribute("aria-current"' in script:
+        errors.append("Navegação interna voltou a marcar sempre o primeiro link.")
+    for route in ["/cases/", "/projects/", "/reports/", "/automations/"]:
+        if route not in script:
+            errors.append(f"Rota não contemplada pela navegação ativa: {route}")
 
     redirects = {
         ROOT / "reports" / "index.html": "../cases/incidente-extensao-chrome/",
@@ -201,8 +246,18 @@ def main() -> int:
         ROOT / "projects" / "index.html": "../cases/sinalyx/",
     }
     for path, route in redirects.items():
-        if route not in path.read_text(encoding="utf-8"):
+        content = path.read_text(encoding="utf-8")
+        if route not in content:
             errors.append(f"Compatibilidade de rota ausente em {path.relative_to(ROOT)}")
+        if 'content="noindex,follow"' not in content:
+            errors.append(f"Catálogo sem noindex,follow em {path.relative_to(ROOT)}")
+        if "Catálogo técnico" not in content:
+            errors.append(f"Identificação de catálogo ausente em {path.relative_to(ROOT)}")
+
+    public_text = "\n".join(path.read_text(encoding="utf-8") for path in HTML_FILES)
+    for forbidden in ["Rota de compatibilidade", "Relatório completo, sem corte lateral"]:
+        if forbidden in public_text:
+            errors.append(f"Texto obsoleto ainda publicado: {forbidden}")
 
     curriculum = ROOT / "assets" / "curriculo-alison-gomez.pdf"
     if not curriculum.exists() or curriculum.stat().st_size < 50_000:
@@ -224,14 +279,37 @@ def main() -> int:
     for route in ["incidente-extensao-chrome", "auditor-backups-dropbox", "sinalyx", "veonyx-arquitetura"]:
         if route not in sitemap:
             errors.append(f"Rota canônica ausente no sitemap: {route}")
+    for catalog in ["/automations/", "/projects/", "/reports/"]:
+        if catalog in sitemap:
+            errors.append(f"Catálogo não canônico ainda presente no sitemap: {catalog}")
     if "Sitemap: https://alisonagomez.github.io/sitemap.xml" not in (ROOT / "robots.txt").read_text(encoding="utf-8"):
         errors.append("robots.txt não referencia o sitemap.")
 
+    for path in FORBIDDEN_PUBLIC_PATHS:
+        if path.exists():
+            errors.append(f"Artefato interno ainda presente na árvore pública: {path.relative_to(ROOT)}")
     forbidden_names = ["PROMPT_FINAL_CODEX", "ESPECIFICACAO_PORTFOLIO", "referencias_visuais", ".tmp-v3-inspecao"]
-    tracked_paths = [path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file()]
+    public_paths = [path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file() and ".git" not in path.parts]
     for marker in forbidden_names:
-        if any(marker.lower() in path.lower() for path in tracked_paths):
+        if any(marker.lower() in path.lower() for path in public_paths):
             errors.append(f"Material de trabalho dentro do site: {marker}")
+
+    old_architecture = ROOT / "assets" / "img" / "cases" / "veonyx" / "arquitetura.png"
+    webp_architecture = old_architecture.with_suffix(".webp")
+    if old_architecture.exists() or not webp_architecture.exists():
+        errors.append("Conversão da arquitetura VeoNyx para WebP não foi concluída.")
+    elif webp_architecture.stat().st_size > 250_000:
+        errors.append("WebP da arquitetura VeoNyx excede 250 KB.")
+    image_extensions = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+    for image in (ROOT / "assets" / "img").rglob("*"):
+        if image.is_file() and image.suffix.lower() in image_extensions and image.stat().st_size > 750_000:
+            errors.append(f"Imagem pública acima de 750 KB: {image.relative_to(ROOT)}")
+    thumbnail = ROOT / "assets" / "img" / "optimized" / "thumb-auditor.webp"
+    with Image.open(thumbnail) as image:
+        if image.size != (960, 540):
+            errors.append(f"Thumbnail do Auditor fora de 960x540: {image.size}")
+    if "Recorte do relatório consolidado com título, indicadores e prioridades da semana" not in home:
+        errors.append("Texto alternativo específico da nova thumbnail do Auditor está ausente.")
 
     if errors:
         print("VALIDAÇÃO FALHOU")
@@ -244,7 +322,7 @@ def main() -> int:
     print(f"- Cases canônicos: {len(CASE_FILES)}")
     print(f"- JSON: {len(JSON_FILES)} arquivos")
     print(f"- PDFs únicos: {len(hashes)}")
-    print("- Links locais, SEO, alt, dimensões, rotas antigas e posicionamento: OK")
+    print("- Links, SEO, OG 1200x630, rotas, mídia e artefatos internos: OK")
     return 0
 
 
