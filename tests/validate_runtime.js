@@ -27,6 +27,9 @@ assert(!style.includes("--grid-line"), "Grid técnico dominante não deveria per
 assert(circuitDecor.includes("01001110"), "Textura binária sutil está ausente.");
 assert(circuitDecor.includes("<circle"), "Nós de conexão do circuito estão ausentes.");
 assert(style.includes("circuit-motion.svg"), "Camada animada de circuitos está ausente.");
+assert(style.includes(".lab-diagram"), "Diagrama responsivo do laboratório está sem estilos.");
+assert(style.includes(".learning-track-grid"), "Grade de trilhas de estudo está sem estilos.");
+assert(style.includes(".credentials-grid"), "Grade de certificações está sem estilos.");
 assert(circuitMotion.includes("@keyframes circuit-flow"), "Pulso animado das trilhas está ausente.");
 assert(circuitMotion.includes("@keyframes node-glow"), "Brilho animado dos nós está ausente.");
 assert(circuitMotion.includes("@keyframes binary-breathe"), "Variação sutil dos binários está ausente.");
@@ -47,6 +50,7 @@ for (const route of [
 ]) {
   assert(activeNavigationHashForPath(route) === "#cases", `${route}: deveria marcar Cases.`);
 }
+assert(activeNavigationHashForPath("/labs/vmware-security-lab/") === "#laboratory", "Laboratório deveria marcar a seção Laboratório.");
 assert(activeNavigationHashForPath("/") === null, "A home deve usar a seção visível para definir o link ativo.");
 
 const cases = [
@@ -66,6 +70,13 @@ for (const file of cases) {
 
 const home = read("index.html");
 assert(!home.includes("case-card-featured"), "Destaque permanente não deve existir nos cards.");
+assert(home.includes("Análise e resposta rápida"), "Novo card de resposta a malware ausente.");
+assert(home.includes("Automação operacional"), "Novo card de automação operacional ausente.");
+assert(!home.includes("<strong>16</strong><span>páginas</span>"), "Card antigo de 16 páginas ainda existe.");
+assert(!home.includes("<strong>3</strong><span>formatos</span>"), "Card antigo de 3 formatos ainda existe.");
+assert(home.includes('id="laboratory"'), "Seção Laboratório ausente na home.");
+assert(home.includes("assets/img/certifications/ibsec-boas-praticas-sanitizado.webp"), "Evidência sanitizada IBSEC ausente.");
+assert(home.includes('rel="noopener noreferrer"'), "Links de prática precisam usar noopener e noreferrer.");
 assert(!home.includes("Relatório completo, sem corte lateral"), "Texto antigo do Auditor não deve ser publicado.");
 assert(home.includes("Recorte do relatório consolidado com título, indicadores e prioridades da semana"), "Nova thumbnail do Auditor sem alt específico.");
 
@@ -77,6 +88,15 @@ assert(auditor.includes("object-fit: contain") || read("style.css").includes("ob
 const chrome = read("cases/incidente-extensao-chrome/index.html");
 assert(chrome.includes("vetor inicial não confirmado"), "Limitação central do incidente não foi preservada.");
 assert(chrome.includes("16 páginas"), "Extensão do relatório não foi documentada.");
+
+const lab = read("labs/vmware-security-lab/index.html");
+for (const marker of ["Kali Linux", "Windows Server", "Ubuntu Server", "Windows 10", "pfSense"]) {
+  assert(lab.includes(marker), `Laboratório sem a VM ${marker}.`);
+}
+assert(lab.includes("Não são realizados testes contra terceiros"), "Política de uso controlado ausente.");
+assert(lab.includes('data-back-fallback="laboratory"'), "Retorno seguro do laboratório está ausente.");
+assert(lab.includes('rel="canonical"'), "Página do laboratório sem canonical.");
+assert(lab.includes('application/ld+json'), "Página do laboratório sem dados estruturados.");
 
 const oldRoutes = [
   ["reports/index.html", "incidente-extensao-chrome"],

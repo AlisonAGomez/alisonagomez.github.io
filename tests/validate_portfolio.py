@@ -22,8 +22,16 @@ HTML_FILES = [
     ROOT / "cases" / "auditor-backups-dropbox" / "index.html",
     ROOT / "cases" / "sinalyx" / "index.html",
     ROOT / "cases" / "veonyx-arquitetura" / "index.html",
+    ROOT / "labs" / "vmware-security-lab" / "index.html",
 ]
-CASE_FILES = HTML_FILES[-4:]
+CASE_FILES = [
+    ROOT / "cases" / "incidente-extensao-chrome" / "index.html",
+    ROOT / "cases" / "auditor-backups-dropbox" / "index.html",
+    ROOT / "cases" / "sinalyx" / "index.html",
+    ROOT / "cases" / "veonyx-arquitetura" / "index.html",
+]
+LAB_FILE = ROOT / "labs" / "vmware-security-lab" / "index.html"
+CANONICAL_FILES = CASE_FILES + [LAB_FILE]
 CATALOG_FILES = HTML_FILES[2:5]
 JSON_FILES = [
     ROOT / "assets" / "projects" / "projects.json",
@@ -166,7 +174,7 @@ def main() -> int:
         "description", "og:title", "og:description", "og:url", "og:image", "og:image:alt",
         "twitter:card", "twitter:title", "twitter:description", "twitter:image",
     ]
-    for case_file in CASE_FILES:
+    for case_file in CANONICAL_FILES:
         parser = parsed.get(case_file)
         if not parser:
             continue
@@ -214,7 +222,15 @@ def main() -> int:
     home = (ROOT / "index.html").read_text(encoding="utf-8")
     required_home = [
         "Suporte N1/N2/N3", "Infraestrutura", "Redes", "Segurança da Informação", "Automação",
-        "37", "5h → 30–60 min", "16", "PDF, CSV e JSON",
+        "37", "5h → 30–60 min", "Análise e resposta rápida", "Automação operacional",
+        "Laboratório e aprendizado contínuo", "VMware Security Lab",
+        "Kali Linux", "Windows Server", "Ubuntu Server", "Windows 10", "pfSense",
+        "Todos os testes são realizados em ambiente próprio, isolado e autorizado.",
+        "Active Directory e Windows", "Zabbix e Grafana", "Backup e recuperação",
+        "Análise de logs e Sinalyx", "Incidentes e troubleshooting",
+        "Boas Práticas de Cibersegurança", "Cisco Networking Academy", "Sebrae",
+        "https://profile.hackthebox.com/profile/019eda74-375c-7306-933e-654345605b06",
+        "https://tryhackme.com/p/almeidaalison",
         "cases/incidente-extensao-chrome/", "cases/auditor-backups-dropbox/", "cases/sinalyx/",
     ]
     for text in required_home:
@@ -234,11 +250,33 @@ def main() -> int:
         errors.append("A home posiciona Alison como desenvolvedor.")
     if "case-card-featured" in home:
         errors.append("Destaque permanente foi reintroduzido nos cards de cases.")
+    for obsolete_metric in ["<strong>16</strong><span>páginas</span>", "<strong>3</strong><span>formatos</span>"]:
+        if obsolete_metric in home:
+            errors.append(f"Card antigo ainda presente na home: {obsolete_metric}")
+    for safe_link in [
+        "https://profile.hackthebox.com/profile/019eda74-375c-7306-933e-654345605b06",
+        "https://tryhackme.com/p/almeidaalison",
+    ]:
+        pattern = rf'<a[^>]+href="{re.escape(safe_link)}"[^>]+target="_blank"[^>]+rel="noopener noreferrer"'
+        if not re.search(pattern, home):
+            errors.append(f"Link externo sem atributos seguros na home: {safe_link}")
     if 'links[0]?.setAttribute("aria-current"' in script:
         errors.append("Navegação interna voltou a marcar sempre o primeiro link.")
-    for route in ["/cases/", "/projects/", "/reports/", "/automations/"]:
+    for route in ["/cases/", "/labs/", "/projects/", "/reports/", "/automations/"]:
         if route not in script:
             errors.append(f"Rota não contemplada pela navegação ativa: {route}")
+
+    lab = LAB_FILE.read_text(encoding="utf-8")
+    required_lab = [
+        "VMware Security Lab", "Kali Linux", "Windows Server", "Ubuntu Server", "Windows 10", "pfSense",
+        "ambiente próprio, controlado, isolado e autorizado", "Não são realizados testes contra terceiros",
+        "Em implantação", "Estudo contínuo", "Documentado", "rel=\"canonical\"",
+    ]
+    for text in required_lab:
+        if text not in lab:
+            errors.append(f"Conteúdo obrigatório ausente na página do laboratório: {text}")
+    if 'href="../../#laboratory"' not in lab:
+        errors.append("Página do laboratório não possui retorno para a seção canônica da home.")
 
     redirects = {
         ROOT / "reports" / "index.html": "../cases/incidente-extensao-chrome/",
@@ -276,7 +314,7 @@ def main() -> int:
             hashes[digest] = pdf
 
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
-    for route in ["incidente-extensao-chrome", "auditor-backups-dropbox", "sinalyx", "veonyx-arquitetura"]:
+    for route in ["incidente-extensao-chrome", "auditor-backups-dropbox", "sinalyx", "veonyx-arquitetura", "vmware-security-lab"]:
         if route not in sitemap:
             errors.append(f"Rota canônica ausente no sitemap: {route}")
     for catalog in ["/automations/", "/projects/", "/reports/"]:
@@ -288,11 +326,19 @@ def main() -> int:
     for path in FORBIDDEN_PUBLIC_PATHS:
         if path.exists():
             errors.append(f"Artefato interno ainda presente na árvore pública: {path.relative_to(ROOT)}")
-    forbidden_names = ["PROMPT_FINAL_CODEX", "ESPECIFICACAO_PORTFOLIO", "referencias_visuais", ".tmp-v3-inspecao"]
+    forbidden_names = ["PROMPT_FINAL_CODEX", "ESPECIFICACAO_PORTFOLIO", "referencias_visuais", ".tmp-v3-inspecao", "REINTEGRACAO_CONTEUDO_PACK"]
     public_paths = [path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.is_file() and ".git" not in path.parts]
     for marker in forbidden_names:
         if any(marker.lower() in path.lower() for path in public_paths):
             errors.append(f"Material de trabalho dentro do site: {marker}")
+    if any(path.lower().endswith(".zip") for path in public_paths):
+        errors.append("Arquivo ZIP bruto encontrado na árvore pública.")
+    if any("certifica" in path.lower() and path.lower().endswith(".pdf") for path in public_paths):
+        errors.append("PDF bruto de certificado encontrado na árvore pública.")
+    sensitive_pattern = re.compile(r"\bCPF\s*(?:n[ºo]?\s*)?\d|código de autenticação|código do exame", re.IGNORECASE)
+    for path in HTML_FILES + [ROOT / "style.css", ROOT / "script.js"]:
+        if sensitive_pattern.search(path.read_text(encoding="utf-8")):
+            errors.append(f"Dado sensível ou identificador exposto em {path.relative_to(ROOT)}")
 
     old_architecture = ROOT / "assets" / "img" / "cases" / "veonyx" / "arquitetura.png"
     webp_architecture = old_architecture.with_suffix(".webp")
@@ -320,6 +366,7 @@ def main() -> int:
     print("VALIDAÇÃO OK")
     print(f"- HTML: {len(HTML_FILES)} arquivos")
     print(f"- Cases canônicos: {len(CASE_FILES)}")
+    print("- Laboratório canônico: 1")
     print(f"- JSON: {len(JSON_FILES)} arquivos")
     print(f"- PDFs únicos: {len(hashes)}")
     print("- Links, SEO, OG 1200x630, rotas, mídia e artefatos internos: OK")

@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Operação de infraestrutura, suporte N1/N2/N3, segurança defensiva e automação aplicada.">
   <meta name="twitter:image" content="https://alisonagomez.github.io/assets/img/social/portfolio-v3-1200x630.jpg">
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=56">
+  <link rel="stylesheet" href="style.css?v=57">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -56,6 +56,7 @@
         <a href="#cases">Cases</a>
         <a href="#experience">Experiência</a>
         <a href="#skills">Competências</a>
+        <a href="#laboratory">Laboratório</a>
         <a href="#about">Sobre</a>
         <a href="#contact">Contato</a>
       </nav>
@@ -103,8 +104,8 @@
         <div class="metrics-grid">
           <article class="metric"><strong>37</strong><span>empresas</span><p>incluídas na rotina de auditoria de backups.</p></article>
           <article class="metric"><strong>5h → 30–60 min</strong><span>tempo de conferência</span><p>redução na revisão de backups multiempresa.</p></article>
-          <article class="metric"><strong>16</strong><span>páginas</span><p>no relatório sanitizado de investigação de incidente.</p></article>
-          <article class="metric"><strong>3</strong><span>formatos</span><p>PDF, CSV e JSON para evidências, filtros e investigação.</p></article>
+          <article class="metric metric-textual"><strong>Análise e resposta rápida</strong><span>Identificação de malware</span><p>Investigação de persistência no Chrome, coleta de evidências, contenção da extensão maliciosa e definição da validação pós-correção.</p></article>
+          <article class="metric metric-textual"><strong>Automação operacional</strong><span>Melhoria de processos</span><p>Criação de scripts para reduzir atividades manuais, padronizar rotinas e tornar a operação mais rápida, confiável e auditável.</p></article>
         </div>
         <div class="method-band"><strong>Operação primeiro. Evidência sempre.</strong><span>Diagnóstico, automação segura, validação e documentação técnica.</span></div>
       </div>
@@ -207,6 +208,59 @@
       </div>
     </section>
 
+    <section class="section laboratory-section" id="laboratory" aria-labelledby="laboratory-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Prática e evolução técnica</p>
+          <h2 id="laboratory-title">Laboratório e aprendizado contínuo</h2>
+          <p>Ambientes próprios e estudos práticos usados para aprofundar redes, administração de sistemas, segurança defensiva, análise de logs e resposta a incidentes.</p>
+        </div>
+
+        <article class="lab-feature">
+          <div class="lab-feature-copy">
+            <span class="status status-done">Laboratório controlado</span>
+            <h3>VMware Security Lab</h3>
+            <p>Ambiente controlado no VMware com cinco máquinas virtuais para estudar redes, administração Windows e Linux, segurança defensiva, análise de logs e resposta a incidentes.</p>
+            <ul class="lab-vm-list" aria-label="Máquinas virtuais do laboratório">
+              <li>Kali Linux</li><li>Windows Server</li><li>Ubuntu Server</li><li>Windows 10</li><li>pfSense</li>
+            </ul>
+            <p class="lab-policy"><strong>Uso autorizado</strong> Todos os testes são realizados em ambiente próprio, isolado e autorizado.</p>
+            <a class="button button-primary" href="labs/vmware-security-lab/">Ver arquitetura do laboratório</a>
+          </div>
+
+          <div class="lab-diagram" role="img" aria-label="Diagrama público e sanitizado do laboratório VMware, com pfSense como gateway para Kali Linux, Windows Server, Windows 10 e Ubuntu Server">
+            <div class="diagram-source"><span>REDE CONTROLADA</span><strong>VMware</strong></div>
+            <div class="diagram-gateway"><span>GATEWAY</span><strong>pfSense</strong><small>Firewall · NAT · segmentação</small></div>
+            <div class="diagram-nodes">
+              <div class="diagram-node"><span>TESTES</span><strong>Kali Linux</strong></div>
+              <div class="diagram-node"><span>SERVIÇOS</span><strong>Windows Server</strong></div>
+              <div class="diagram-node"><span>ENDPOINT</span><strong>Windows 10</strong></div>
+              <div class="diagram-node"><span>LINUX</span><strong>Ubuntu Server</strong></div>
+            </div>
+            <p>Representação pública sem endereços, credenciais ou topologia sensível.</p>
+          </div>
+        </article>
+
+        <div class="track-heading"><span class="section-kicker">Trilhas de prática</span><h3>Estudo com escopo e estado explícitos</h3></div>
+        <div class="learning-track-grid">
+          <article class="track-card"><span class="status status-progress">Em implantação</span><h3>Active Directory e Windows</h3><p>Estudos de domínio, usuários, grupos, políticas, DNS, permissões, autenticação e hardening.</p></article>
+          <article class="track-card"><span class="status status-done">Ativo</span><h3>Segurança de rede com pfSense</h3><p>Regras de firewall, NAT, VPN, segmentação, DNS, logs e troubleshooting de conectividade.</p></article>
+          <article class="track-card"><span class="status status-neutral">Estudo contínuo</span><h3>Zabbix e Grafana</h3><p>Métricas, alertas, triggers, dashboards e investigação de indisponibilidade.</p></article>
+          <article class="track-card"><span class="status status-done">Documentado</span><h3>Backup e recuperação</h3><p>Auditoria, retenção, integridade, restauração, rclone, automação e geração de evidências.</p></article>
+          <article class="track-card"><span class="status status-progress">Em implantação</span><h3>Análise de logs e Sinalyx</h3><p>Parsing, normalização, janelas de análise, persistência e triagem técnica em dashboard.</p></article>
+          <article class="track-card"><span class="status status-neutral">Estudo contínuo</span><h3>Incidentes e troubleshooting</h3><p>Phishing, URLs e headers, coleta de evidências, contenção, VPN, firewall, DNS e conectividade.</p></article>
+        </div>
+
+        <div class="practice-band">
+          <div><p class="eyebrow">Prática hands-on</p><h3>Ambientes complementares de estudo</h3><p>Perfis usados para complementar estudos de redes, sistemas e segurança da informação, sem atribuição de ranking, pontos ou badges.</p></div>
+          <div class="practice-links">
+            <a href="https://profile.hackthebox.com/profile/019eda74-375c-7306-933e-654345605b06" target="_blank" rel="noopener noreferrer"><span>Hack The Box</span><strong>@alisongomez</strong></a>
+            <a href="https://tryhackme.com/p/almeidaalison" target="_blank" rel="noopener noreferrer"><span>TryHackMe</span><strong>almeidaalison</strong></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-muted" id="about" aria-labelledby="architecture-title">
       <div class="container">
         <div class="section-heading">
@@ -236,14 +290,47 @@
           <li><span>04</span><h3>Evidência</h3><p>Registrar logs, relatórios, decisões e resultados para revisão e continuidade.</p></li>
         </ol>
         <ul class="principles"><li>Foco em segurança</li><li>Automação com propósito</li><li>Documentação clara</li><li>Melhoria contínua</li></ul>
+        <p class="learning-note">Minha base vem do suporte e da infraestrutura. Uso laboratórios próprios, documentação e automação para transformar aprendizado em prática verificável, sempre separando o que já implementei do que ainda está em estudo.</p>
       </div>
     </section>
 
     <section class="section section-muted" aria-labelledby="education-title">
-      <div class="container education-grid">
+      <div class="container education-grid education-grid-single">
         <div><p class="eyebrow">Formação</p><h2 id="education-title">Base acadêmica e complementar</h2><p>Formação voltada ao desenvolvimento, análise e gestão de soluções em tecnologia da informação.</p></div>
         <article><span class="status status-progress">Em curso</span><h3>Bacharelado em Sistemas de Informação</h3><p>Fundação Hermínio Ometto (FHO) · 2023 - 2026</p></article>
-        <article><span class="status status-done">Formação complementar</span><h3>Cisco Networking Academy</h3><p>Redes, cibersegurança, defesa de rede e suporte ao cliente de TI.</p></article>
+      </div>
+    </section>
+
+    <section class="section credentials-section" aria-labelledby="credentials-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Evidências de formação</p>
+          <h2 id="credentials-title">Certificação e cursos complementares</h2>
+          <p>Credenciais verificadas nos documentos originais. As prévias públicas omitem CPF, QR Codes, códigos de autenticação e identificadores desnecessários.</p>
+        </div>
+        <div class="credentials-grid">
+          <article class="credential-card credential-primary">
+            <span class="status status-done">Certificação por exame</span>
+            <p class="credential-provider">IBSEC · Categoria Essencial</p>
+            <h3>Boas Práticas de Cibersegurança</h3>
+            <p>Certificação profissional obtida por exame de conhecimentos e habilidades, emitida em 29/06/2026 e válida até 29/06/2029.</p>
+            <details class="evidence-disclosure"><summary>Ver evidência sanitizada</summary><a class="credential-evidence" href="assets/img/certifications/ibsec-boas-praticas-sanitizado.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/ibsec-boas-praticas-sanitizado.webp" alt="Prévia sanitizada da certificação IBSEC Boas Práticas de Cibersegurança" width="1280" height="990" loading="lazy"><span>IBSEC · emissão em 29/06/2026</span></a></details>
+          </article>
+          <article class="credential-card">
+            <span class="status status-done">Cursos finalizados</span>
+            <p class="credential-provider">Cisco Networking Academy</p>
+            <h3>Redes, cibersegurança e suporte</h3>
+            <ul class="credential-list"><li>Conceitos Básicos de Redes</li><li>Introduction to Cybersecurity</li><li>IT Customer Support Basics</li></ul>
+            <details class="evidence-disclosure"><summary>Ver evidências</summary><div class="credential-evidence-grid"><a class="credential-evidence" href="assets/img/certifications/cisco-conceitos-basicos-redes.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/cisco-conceitos-basicos-redes.webp" alt="Certificado Cisco Conceitos Básicos de Redes" width="1280" height="867" loading="lazy"><span>Conceitos Básicos de Redes</span></a><a class="credential-evidence" href="assets/img/certifications/cisco-introduction-cybersecurity.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/cisco-introduction-cybersecurity.webp" alt="Certificado Cisco Introduction to Cybersecurity" width="1280" height="867" loading="lazy"><span>Introduction to Cybersecurity</span></a><a class="credential-evidence" href="assets/img/certifications/cisco-it-customer-support.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/cisco-it-customer-support.webp" alt="Certificado Cisco IT Customer Support Basics" width="1280" height="867" loading="lazy"><span>IT Customer Support Basics</span></a></div></details>
+          </article>
+          <article class="credential-card">
+            <span class="status status-done">Cursos finalizados</span>
+            <p class="credential-provider">Sebrae · jul. 2025</p>
+            <h3>Gestão, privacidade e comunicação</h3>
+            <ul class="credential-list"><li>Gestão Empresarial Integrada · 15 horas</li><li>LGPD: a sua empresa está preparada? · 2 horas</li><li>Inteligência Emocional · 15 horas</li></ul>
+            <details class="evidence-disclosure"><summary>Ver evidências sanitizadas</summary><div class="credential-evidence-grid"><a class="credential-evidence" href="assets/img/certifications/sebrae-gestao-empresarial-sanitizado.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/sebrae-gestao-empresarial-sanitizado.webp" alt="Prévia sanitizada do certificado Sebrae Gestão Empresarial Integrada" width="1280" height="904" loading="lazy"><span>Gestão Empresarial Integrada</span></a><a class="credential-evidence" href="assets/img/certifications/sebrae-lgpd-sanitizado.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/sebrae-lgpd-sanitizado.webp" alt="Prévia sanitizada do certificado Sebrae LGPD" width="1280" height="904" loading="lazy"><span>LGPD</span></a><a class="credential-evidence" href="assets/img/certifications/sebrae-inteligencia-emocional-sanitizado.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/certifications/sebrae-inteligencia-emocional-sanitizado.webp" alt="Prévia sanitizada do certificado Sebrae Inteligência Emocional" width="1280" height="904" loading="lazy"><span>Inteligência Emocional</span></a></div></details>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -254,13 +341,15 @@
           <a href="mailto:almeidaalison@hotmail.com"><span>E-mail</span><strong>almeidaalison@hotmail.com</strong></a>
           <a href="https://www.linkedin.com/in/alison-gomez-3b339a23a" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>alison-gomez-3b339a23a</strong></a>
           <a href="https://github.com/AlisonAGomez" target="_blank" rel="noreferrer"><span>GitHub</span><strong>AlisonAGomez</strong></a>
+          <a href="https://profile.hackthebox.com/profile/019eda74-375c-7306-933e-654345605b06" target="_blank" rel="noopener noreferrer"><span>Hack The Box</span><strong>@alisongomez</strong></a>
+          <a href="https://tryhackme.com/p/almeidaalison" target="_blank" rel="noopener noreferrer"><span>TryHackMe</span><strong>almeidaalison</strong></a>
           <p><span>Localização</span><strong>Rio Claro, SP · Brasil</strong></p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container"><span>© <span id="year">2026</span> Alison Gomez</span><nav aria-label="Links do rodapé"><a href="#cases">Cases</a><a href="#experience">Experiência</a><a href="#contact">Contato</a></nav><span>Operação · Segurança · Evidência</span></div></footer>
-  <script src="script.js?v=56" defer></script>
+  <footer class="site-footer"><div class="container"><span>© <span id="year">2026</span> Alison Gomez</span><nav aria-label="Links do rodapé"><a href="#cases">Cases</a><a href="#laboratory">Laboratório</a><a href="#experience">Experiência</a><a href="#contact">Contato</a></nav><span>Operação · Segurança · Evidência</span></div></footer>
+  <script src="script.js?v=57" defer></script>
 </body>
 </html>

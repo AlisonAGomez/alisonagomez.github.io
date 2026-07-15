@@ -67,6 +67,7 @@ window.addEventListener("load", () => {
 
 function activeNavigationHashForPath(pathname) {
   const path = pathname.replace(/\/index\.html$/, "/");
+  if (path.startsWith("/labs/")) return "#laboratory";
   if (path.startsWith("/cases/") || ["/projects/", "/reports/", "/automations/"].includes(path)) return "#cases";
   return null;
 }
@@ -114,10 +115,17 @@ const revealTargets = [...document.querySelectorAll([
   ".timeline-item",
   ".skill-card",
   ".tool-strip",
+  ".lab-feature",
+  ".lab-diagram",
+  ".track-card",
+  ".practice-band",
   ".project-card",
   ".process-grid > li",
   ".principles",
   ".education-grid > *",
+  ".credential-card",
+  ".learning-note",
+  ".vm-role",
   ".contact-grid > *",
   ".case-hero-grid > *",
   ".case-toc",
@@ -210,6 +218,6 @@ document.querySelectorAll("[data-back]").forEach((button) => {
     let sameOrigin = false;
     try { sameOrigin = Boolean(document.referrer) && new URL(document.referrer).origin === location.origin; } catch { sameOrigin = false; }
     if (sameOrigin && history.length > 1) history.back();
-    else location.href = `${location.origin}/#cases`;
+    else location.href = `${location.origin}/#${button.dataset.backFallback || "cases"}`;
   });
 });
