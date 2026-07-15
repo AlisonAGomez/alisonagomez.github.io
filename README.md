@@ -17,6 +17,7 @@ Nenhum merge ou deploy da V3 deve ser feito antes da aprovação visual.
 - `/cases/auditor-backups-dropbox/`
 - `/cases/sinalyx/`
 - `/cases/veonyx-arquitetura/`
+- `/labs/vmware-security-lab/`
 
 As rotas antigas em `reports/`, `automations/` e `projects/` continuam disponíveis e redirecionam os IDs principais.
 

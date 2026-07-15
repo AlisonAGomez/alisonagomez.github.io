@@ -70,7 +70,7 @@ for (const file of cases) {
 
 const home = read("index.html");
 assert(!home.includes("case-card-featured"), "Destaque permanente não deve existir nos cards.");
-assert(home.includes("Análise e resposta rápida"), "Novo card de resposta a malware ausente.");
+assert(home.includes("Análise e resposta a malware"), "Novo card de resposta a malware ausente.");
 assert(home.includes("Automação operacional"), "Novo card de automação operacional ausente.");
 assert(!home.includes("<strong>16</strong><span>páginas</span>"), "Card antigo de 16 páginas ainda existe.");
 assert(!home.includes("<strong>3</strong><span>formatos</span>"), "Card antigo de 3 formatos ainda existe.");

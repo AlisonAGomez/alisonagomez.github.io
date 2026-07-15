@@ -222,7 +222,7 @@ def main() -> int:
     home = (ROOT / "index.html").read_text(encoding="utf-8")
     required_home = [
         "Suporte N1/N2/N3", "Infraestrutura", "Redes", "Segurança da Informação", "Automação",
-        "37", "5h → 30–60 min", "Análise e resposta rápida", "Automação operacional",
+        "37", "5h → 30–60 min", "Análise e resposta a malware", "Automação operacional",
         "Laboratório e aprendizado contínuo", "VMware Security Lab",
         "Kali Linux", "Windows Server", "Ubuntu Server", "Windows 10", "pfSense",
         "Todos os testes são realizados em ambiente próprio, isolado e autorizado.",
