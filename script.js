@@ -104,6 +104,50 @@ function markCurrentNavigation() {
 }
 markCurrentNavigation();
 
+const revealTargets = [...document.querySelectorAll([
+  ".hero-copy",
+  ".hero-media",
+  ".section-heading",
+  ".metric",
+  ".method-band",
+  ".case-card",
+  ".timeline-item",
+  ".skill-card",
+  ".tool-strip",
+  ".project-card",
+  ".process-grid > li",
+  ".principles",
+  ".education-grid > *",
+  ".contact-grid > *",
+  ".case-hero-grid > *",
+  ".case-toc",
+  ".case-article > section",
+].join(","))];
+
+if (revealTargets.length) {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("motion-ready");
+  revealTargets.forEach((target) => {
+    const siblingIndex = [...(target.parentElement?.children || [])].indexOf(target);
+    target.classList.add("reveal-item");
+    target.style.setProperty("--reveal-delay", `${Math.min(Math.max(siblingIndex, 0), 3) * 45}ms`);
+  });
+
+  const showTarget = (target) => target.classList.add("is-visible");
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach(showTarget);
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        showTarget(entry.target);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: .08 });
+    revealTargets.forEach((target) => revealObserver.observe(target));
+  }
+}
+
 const toc = document.querySelector(".case-toc");
 if (toc && "IntersectionObserver" in window) {
   const links = [...toc.querySelectorAll("a[href^='#']")];

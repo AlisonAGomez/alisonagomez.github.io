@@ -6,6 +6,7 @@ const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "u
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 
 const script = read("script.js");
+const style = read("style.css");
 assert(!script.includes("typeNextFrame"), "Efeito de digitação não deveria existir.");
 assert(script.includes("Escape"), "Menu precisa fechar com Escape.");
 assert(script.includes('event.key !== "Tab"'), "Menu precisa conter o foco durante a navegação por teclado.");
@@ -14,6 +15,13 @@ assert(script.includes("showModal"), "Lightbox acessível não foi inicializado.
 assert(script.includes("aria-expanded"), "Estado acessível do menu não foi implementado.");
 assert(!script.includes('links[0]?.setAttribute("aria-current"'), "Página interna não pode marcar sempre o primeiro link.");
 assert(script.includes('setCurrentSection(location.hash || "#home")'), "Home precisa inicializar a seção ativa antes do observer.");
+assert(script.includes("const revealTargets"), "Reveal on scroll não foi inicializado.");
+assert(script.includes("entry.isIntersecting"), "Reveal precisa responder à entrada na viewport.");
+assert(script.includes('matchMedia("(prefers-reduced-motion: reduce)")'), "Motion precisa consultar a preferência de redução.");
+assert(style.includes(".motion-ready .reveal-item"), "Estados visuais do reveal estão ausentes.");
+assert(style.includes("@media (prefers-reduced-motion: reduce)"), "Fallback de movimento reduzido está ausente.");
+assert(style.includes("--grid-line"), "Ambientação técnica em grid está ausente.");
+assert(!style.includes("@keyframes glitch"), "Glitch pesado não deve ser introduzido.");
 
 const routeHelper = script.match(/function activeNavigationHashForPath\(pathname\) \{[\s\S]*?\n\}/);
 assert(routeHelper, "Função de navegação ativa por rota ausente.");
@@ -84,4 +92,4 @@ assert(!fs.existsSync(path.join(root, "assets/img/cases/veonyx/arquitetura.png")
 assert(read("cases/veonyx-arquitetura/index.html").includes("arquitetura.webp"), "Case VeoNyx não usa a mídia otimizada.");
 
 console.log("RUNTIME OK");
-console.log("- Menu, navegação ativa, cases, SEO, mídia e rotas antigas: OK");
+console.log("- Menu, navegação ativa, motion acessível, cases, SEO, mídia e rotas antigas: OK");
