@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" role="img" aria-label="NUKKIO">
+<defs><linearGradient id="red" x1="0" x2="1"><stop stop-color="#ffd7df"/><stop offset=".52" stop-color="#fc6d83"/><stop offset="1" stop-color="#f03751"/></linearGradient></defs>
+<rect width="900" height="340" fill="transparent"/>
+<path d="M55 52h92M55 52v48 M845 287h-92M845 287v-48" fill="none" stroke="#e84962" stroke-width="4" opacity=".66"/>
+<circle cx="85" cy="180" r="13" fill="none" stroke="#fd576c" stroke-width="5"/><circle cx="85" cy="180" r="4" fill="#fd576c"/>
+<text x="445" y="181" font-family="Arial,Helvetica,sans-serif" font-size="116" text-anchor="middle" font-weight="900" letter-spacing="5" fill="url(#red)">NUKKIO</text>
+<path d="M265 214h360" stroke="#a6374b" stroke-width="2" opacity=".7"/>
+<text x="445" y="253" font-family="Consolas,Courier New,monospace" font-size="23" text-anchor="middle" font-weight="600" letter-spacing="5" fill="#c29ca5">COMUNIDADES</text>
+</svg>
